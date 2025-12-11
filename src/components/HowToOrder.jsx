@@ -87,7 +87,7 @@ export default function HowToOrder() {
         className="text-center mt-14"
       >
         <a
-          href="https://wa.me/91xxxxxxxxxx"
+          href="https://wa.me/918290951295"
           target="_blank"
           className="inline-flex items-center gap-3 bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition"
         >

@@ -13,12 +13,12 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
         <div className="max-w-[1500px] mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-[90px]">
 
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="logo" className="w-12 h-12 object-contain" />
-              <span className="text-lg font-bold text-gray-800">Agarwal Rabdiwala</span>
+              <img src="/logo1.png" alt="logo" className="w-30 h-30 object-contain" />
+              {/* <span className="text-lg font-bold text-gray-800">Agarwal Rabdiwala</span> */}
             </Link>
 
             {/* DESKTOP MENU */}

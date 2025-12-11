@@ -3,11 +3,12 @@
 import { motion } from "framer-motion";
 import { Phone, Mail, Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-50 pt-16 pb-6 mt-20 border-t border-orange-100">
-      
+
       {/* TOP AREA */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -16,51 +17,79 @@ export default function Footer() {
         viewport={{ once: true }}
         className="max-w-7xl mx-auto px-6 text-center"
       >
-        
-        {/* Logo */}
         <Image
-          src="/logo.png"
+          src="/logo1.png"
           alt="Logo"
-          width={90}
-          height={90}
-          className="mx-auto mb-4"
+          width={100}
+          height={100}
+          className="mx-auto mb-4 w-40"
         />
 
-        {/* Email */}
-        <p className="text-gray-700 font-medium">
-          agarwalrabdiwala@gmail.com
+        <p className="text-gray-700 font-medium break-all">
+          sanjaysinghal265@gmail.com
         </p>
 
-        {/* Address */}
-        <div className="max-w-2xl mx-auto mt-10 text-gray-900 text-lg font-medium leading-relaxed">
-          Agarwal Rabdiwala, Railway Parking Area,  
+        <div className="max-w-xl mx-auto mt-6 text-gray-900 text-base md:text-lg font-medium leading-relaxed">
+          Agarwal Rabdiwala, Railway Parking Area,<br />
           Abu Road Railway Station, Rajasthan – 307026, India
         </div>
       </motion.div>
 
-      {/* CONTACT ROW */}
+      {/* IMPORTANT LINKS (MOBILE PERFECT) */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6 mt-10"
+      >
+        <div className="
+          flex flex-col gap-8 sm:flex-row flex-wrap 
+          justify-center items-center 
+       sm:gap-10 md:gap-10 
+          text-gray-700 text-sm font-medium
+          md:flex-row
+        ">
+          <Link href="/about-us" className="hover:text-orange-600 transition">About Us</Link>
+          <Link href="/privacy-policy" className="hover:text-orange-600 transition">Privacy & Policy</Link>
+          <Link href="/terms-conditions" className="hover:text-orange-600 transition">Terms & Conditions</Link>
+          <Link href="/disclaimer" className="hover:text-orange-600 transition">Disclaimer</Link>
+          <Link href="/refund-policy" className="hover:text-orange-600 transition">Return & Refund Policy</Link>
+        </div>
+      </motion.div>
+
+      {/* CONTACT ROW – NOW FULLY MOBILE RESPONSIVE */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9 }}
         viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-6"
+        className="
+          max-w-7xl mx-auto px-6 mt-12 
+          flex flex-col md:flex-row 
+          justify-between items-center 
+          gap-6 text-gray-700
+        "
       >
-        {/* Phone + Email */}
-        <div className="flex gap-6 items-center text-gray-700">
+        {/* CONTACT INFO MOBILE STACK */}
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center text-center sm:text-left">
           <div className="flex items-center gap-2">
             <Phone className="w-5 h-5 text-orange-600" />
-            <span>+91 81071 39044</span>
+            <span className="break-all cursor-pointer">
+              <a href="tel:+918107139044"> +91 8107139044 </a>
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
             <Mail className="w-5 h-5 text-orange-600" />
-            <span>agarwalrabdiwala@gmail.com</span>
+            <span className="break-all cursor-pointer">
+              <a href="mailto:agarwalrabdiwala@gmail.coms">agarwalrabdiwala@gmail.com</a>
+            </span>
           </div>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex gap-4">
+        {/* SOCIAL ICONS CENTER ON MOBILE */}
+        <div className="flex gap-4 justify-center">
           {[Facebook, Instagram, Youtube, MessageCircle].map((Icon, i) => (
             <motion.a
               key={i}
@@ -73,17 +102,18 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Copyright */}
+        {/* COPYRIGHT */}
         <div className="text-gray-700 text-center">
           ©2025 – <span className="font-semibold">AGARWAL RABDIWALA</span>
         </div>
       </motion.div>
 
-      {/* WHATSAPP FLOATING BUTTON */}
+      {/* WHATSAPP BUTTON (no change – already perfect) */}
       <a
-        href="https://wa.me/91xxxxxxxxxx"
+        href="https://wa.me/918107139044"
         target="_blank"
-        className="fixed bottom-6 right-6 bg-green-600 px-5 py-3 shadow-xl rounded-full text-white flex items-center gap-2 hover:bg-green-700 transition"
+        className="fixed bottom-6 right-6 bg-green-600 px-5 py-3 shadow-xl rounded-full 
+                   text-white flex items-center gap-2 hover:bg-green-700 transition"
       >
         <MessageCircle className="w-5 h-5" />
         How can I help you?
