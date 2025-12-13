@@ -20,8 +20,8 @@ export default function Home() {
     <>
     <AnnouncementBar />
     <Navbar />
-    <OfferToast/>
     <Hero />
+    <OfferToast/>
     <CouponMarquee/>
     <BestSellerMeals/>
     <HomeAbout />
