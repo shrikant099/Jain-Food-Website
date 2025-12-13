@@ -28,8 +28,9 @@ export default function OfferToast() {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 400, opacity: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 18 }}
-          className="fixed top-24 right-4 z-[999] 
-                     w-[92%] sm:w-[360px]"
+          className="fixed top-24 right-2 left-2 sm:left-auto sm:right-4 
+          w-auto sm:w-[360px] z-[999]"
+
         >
           <div className="bg-white rounded-2xl shadow-2xl 
                           border border-gray-200 p-4 relative">
