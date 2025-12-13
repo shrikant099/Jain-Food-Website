@@ -81,12 +81,12 @@ export default function Hero() {
                         onClick={() =>
                             document.getElementById("enquiry-section")?.scrollIntoView({ behavior: "smooth" })
                         }
-                        className="px-8 py-3 cursor-pointer rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition"
+                        className="px-5 py-5 cursor-pointer rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-md shadow-lg hover:shadow-xl transition"
                     >
                         Enquiry Now
                     </button>
 
-                    <button className="px-8 py-3 cursor-pointer font-bold rounded-xl bg-white hover:bg-gray-200 text-black font-semibold text-lg shadow-lg hover:shadow-xl transition">
+                    <button className="px-5 py-4 cursor-pointer font-bold rounded-xl bg-white hover:bg-gray-200 text-black font-semibold text-lg shadow-lg hover:shadow-xl transition">
                         <Link href={"/services/train-delivery"}> Order Now</Link>
                     </button>
                 </motion.div>
