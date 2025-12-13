@@ -21,7 +21,7 @@ export default function Home() {
     <AnnouncementBar />
     <Navbar />
     <Hero />
-    <OfferToast/>
+    {/* <OfferToast/> */}
     <CouponMarquee/>
     <BestSellerMeals/>
     <HomeAbout />

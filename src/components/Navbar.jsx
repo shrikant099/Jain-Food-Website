@@ -30,7 +30,8 @@ export default function Navbar() {
             : "bg-white shadow-sm"}
         `}
       >
-        <div className="max-w-[1500px] mx-auto px-6">
+        <div className="w-full max-w-screen-xl mx-auto px-4 md:px-6">
+
           <div className="flex items-center justify-between h-[90px]">
 
             {/* LOGO */}
