@@ -79,7 +79,7 @@ export default function EnquirySection() {
             className="flex flex-col justify-center"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Bulk Food Orders Made Simple
+            Order bulk food on train at Abu Road
             </h3>
 
             <p className="text-gray-600 mt-4 text-sm md:text-base leading-relaxed">

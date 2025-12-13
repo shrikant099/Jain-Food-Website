@@ -40,7 +40,7 @@ export default function MenuHeader() {
                         <div className="flex items-center gap-1 bg-green-100 
                             text-green-700 px-2 py-1 rounded-md text-sm font-semibold">
                             <Star className="w-4 h-4 fill-green-600" />
-                            4.6
+                            4.8
                         </div>
 
                         <p className="text-sm text-gray-600">

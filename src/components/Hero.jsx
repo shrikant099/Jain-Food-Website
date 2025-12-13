@@ -24,7 +24,7 @@ export default function Hero() {
 
   return (
     <section className="relative w-full min-h-[calc(100svh-80px)] overflow-hidden">
-      
+
       {/* Background Slideshow */}
       <div className="absolute inset-0">
         <AnimatePresence>
@@ -80,16 +80,16 @@ export default function Hero() {
           className="mt-8 flex flex-wrap justify-center gap-4"
         >
           <button
-            onClick={() =>
-              document
-                .getElementById("enquiry-section")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            // onClick={() =>
+            //   document
+            //     .getElementById("enquiry-section")
+            //     ?.scrollIntoView({ behavior: "smooth" })
+            // }
             className="px-6 py-4 rounded-xl bg-orange-600 
                        hover:bg-orange-700 text-white 
                        font-semibold shadow-lg transition"
           >
-            Enquiry Now
+            <a href="tel:+918290951295">&nbsp; Call Now &nbsp;</a>
           </button>
 
           <Link

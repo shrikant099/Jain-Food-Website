@@ -30,7 +30,7 @@ export default function MenuFAQ() {
         className="text-center  mt-10 mb-8"
       >
         <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
-          Delicious Menu
+          Menu
         </h2>
         <div className="mt-3 w-20 md:w-28 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto"></div>
       </motion.div>

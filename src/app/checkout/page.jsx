@@ -3,7 +3,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectCartItems } from "@/features/cart/selector";
 import { clearCart, addItem, removeItem } from "@/features/cart/cartSlice";
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 /* ================= COUPONS ================= */
@@ -45,21 +44,22 @@ const coupons = [
 export default function CheckoutPage() {
   const cart = useSelector(selectCartItems);
   const dispatch = useDispatch();
-
   const items = Object.values(cart);
+
+  /* ================= PRICE ================= */
   const subtotal = items.reduce(
     (acc, item) => acc + item.price * item.qty,
     0
   );
 
-  /* ================= COUPON STATE ================= */
+  /* ================= COUPON ================= */
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [discount, setDiscount] = useState(0);
 
   const applyCoupon = (coupon) => {
     if (subtotal < coupon.min) return;
 
-    let discountValue =
+    const discountValue =
       coupon.type === "percent"
         ? (subtotal * coupon.value) / 100
         : coupon.value;
@@ -73,7 +73,10 @@ export default function CheckoutPage() {
     setDiscount(0);
   };
 
-  const total = subtotal - discount;
+  /* ================= GST ================= */
+  const GST_RATE = 0.05;
+  const gstAmount = (subtotal - discount) * GST_RATE;
+  const total = subtotal - discount + gstAmount;
 
   /* ================= FORM ================= */
   const [form, setForm] = useState({
@@ -106,15 +109,13 @@ export default function CheckoutPage() {
     dispatch(clearCart());
   };
 
-  /* ================= COD POPUP ================= */
   const [showCODPopup, setShowCODPopup] = useState(false);
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-20">
-      {/* BACK */}
       <a
         href="/services/train-delivery"
-        className="inline-flex items-center gap-2 mb-6 bg-black text-white px-4 py-2 rounded-full"
+        className="inline-flex mb-6 bg-black text-white px-4 py-2 rounded-full"
       >
         ← Back to Menu
       </a>
@@ -122,9 +123,6 @@ export default function CheckoutPage() {
       <h1 className="text-3xl md:text-5xl font-extrabold text-center">
         Checkout
       </h1>
-      <p className="text-center text-gray-500 mt-2">
-        Fresh food delivered to your train seat
-      </p>
 
       <div className="mt-10 grid md:grid-cols-2 gap-10">
         {/* ================= ORDER SUMMARY ================= */}
@@ -143,7 +141,6 @@ export default function CheckoutPage() {
                 </p>
               </div>
 
-              {/* + - */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => dispatch(removeItem(item))}
@@ -162,69 +159,66 @@ export default function CheckoutPage() {
             </div>
           ))}
 
-          {/* SUBTOTAL */}
+          {/* PRICE BREAKUP */}
           <div className="flex justify-between mt-4 font-semibold">
             <span>Subtotal</span>
             <span>₹{subtotal}</span>
           </div>
 
-          {/* ================= COUPONS ================= */}
-          {subtotal >= 300 && (
-            <div className="mt-5 bg-orange-50 border rounded-xl p-4">
-              <h3 className="font-bold mb-3">Available Coupons</h3>
+          {/* COUPON SECTION (ALWAYS VISIBLE) */}
+          <div className="mt-5 bg-orange-50 border rounded-xl p-4">
+            <h3 className="font-bold mb-3">Available Coupons</h3>
 
-              <div className="space-y-3">
-                {coupons.map((c) => {
-                  const eligible = subtotal >= c.min;
-                  const applied = appliedCoupon?.code === c.code;
+            <div className="space-y-3">
+              {coupons.map((c) => {
+                const eligible = subtotal >= c.min;
+                const applied = appliedCoupon?.code === c.code;
 
-                  return (
-                    <div
-                      key={c.code}
-                      className={`flex justify-between items-center p-3 rounded-lg border
-                      ${eligible ? "bg-white" : "bg-gray-100 opacity-50"}`}
-                    >
-                      <div>
-                        <p className="font-semibold">{c.title}</p>
-                        <p className="text-xs text-gray-600">{c.desc}</p>
-                        <p className="text-xs text-gray-500">
-                          Min Order ₹{c.min}
-                        </p>
-                      </div>
-
-                      {applied ? (
-                        <button
-                          onClick={removeCoupon}
-                          className="text-red-600 font-semibold"
-                        >
-                          Remove
-                        </button>
-                      ) : (
-                        <button
-                          disabled={!eligible}
-                          onClick={() => applyCoupon(c)}
-                          className={`px-4 py-1.5 rounded-lg text-sm font-semibold
-                          ${
-                            eligible
-                              ? "bg-orange-600 text-white"
-                              : "bg-gray-300 cursor-not-allowed"
-                          }`}
-                        >
-                          Apply
-                        </button>
-                      )}
+                return (
+                  <div
+                    key={c.code}
+                    className={`flex justify-between items-center p-3 rounded-lg border
+                    ${eligible ? "bg-white" : "bg-gray-100 opacity-50"}`}
+                  >
+                    <div>
+                      <p className="font-semibold">{c.title}</p>
+                      <p className="text-xs text-gray-600">{c.desc}</p>
+                      <p className="text-xs text-gray-500">
+                        Min Order ₹{c.min}
+                      </p>
                     </div>
-                  );
-                })}
-              </div>
 
-              {appliedCoupon && (
-                <p className="mt-3 text-green-700 font-semibold">
-                  Coupon <b>{appliedCoupon.code}</b> applied 🎉
-                </p>
-              )}
+                    {applied ? (
+                      <button
+                        onClick={removeCoupon}
+                        className="text-red-600 font-semibold"
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <button
+                        disabled={!eligible}
+                        onClick={() => applyCoupon(c)}
+                        className={`px-4 py-1.5 rounded-lg text-sm font-semibold
+                        ${eligible
+                            ? "bg-orange-600 text-white"
+                            : "bg-gray-300 cursor-not-allowed"
+                          }`}
+                      >
+                        Apply
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          )}
+
+            {appliedCoupon && (
+              <p className="mt-3 text-green-700 font-semibold">
+                Coupon <b>{appliedCoupon.code}</b> applied 🎉
+              </p>
+            )}
+          </div>
 
           {discount > 0 && (
             <div className="flex justify-between mt-3 text-green-700 font-semibold">
@@ -232,6 +226,12 @@ export default function CheckoutPage() {
               <span>- ₹{discount.toFixed(0)}</span>
             </div>
           )}
+
+          {/* GST */}
+          <div className="flex justify-between mt-2 font-semibold text-gray-700">
+            <span>GST (5%)</span>
+            <span>₹{gstAmount.toFixed(0)}</span>
+          </div>
 
           <div className="flex justify-between mt-4 pt-4 border-t">
             <span className="text-lg font-bold">Final Amount</span>
@@ -281,20 +281,24 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      {/* COD POPUP */}
       {showCODPopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-xl text-center max-w-sm">
             <h2 className="font-bold text-lg">COD Not Available</h2>
             <p className="text-gray-600 mt-2">
               Cash on Delivery is disabled for orders above ₹1000.
-              Please choose Online Payment.
             </p>
             <button
               onClick={() => setShowCODPopup(false)}
               className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg"
             >
-              Okay
+              Okay Got It
+            </button>
+            <button
+
+              className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg"
+            >
+              <a href="tel:+918107139044">Call Now</a>
             </button>
           </div>
         </div>
@@ -318,7 +322,14 @@ function Input({ label, name, value, onChange }) {
   );
 }
 
-function PaymentOption({ label, value, selected, onChange, disabled, onDisabledClick }) {
+function PaymentOption({
+  label,
+  value,
+  selected,
+  onChange,
+  disabled,
+  onDisabledClick,
+}) {
   return (
     <label
       onClick={disabled ? onDisabledClick : undefined}
@@ -330,7 +341,7 @@ function PaymentOption({ label, value, selected, onChange, disabled, onDisabledC
         name="payment"
         value={value}
         checked={selected === value}
-        onChange={disabled ? () => {} : onChange}
+        onChange={disabled ? () => { } : onChange}
         disabled={disabled}
       />
       <span>{label}</span>
