@@ -1,16 +1,35 @@
+import AnnouncementBar from "@/components/AnnouncementBar";
+import CouponMarquee from "@/components/CoupunMarquee";
+import EnquirySection from "@/components/Enquiry";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import HomeAbout from "@/components/HomeAbout";
+import HowItWorks from "@/components/HowItWork";
 import HowToOrder from "@/components/HowToOrder";
-import MealsSection from "@/components/MealsSection";
+import LiveOrdersCarousel from "@/components/LiveOrdersCarousel";
+import BestSellerMeals from "@/components/MealsSection";
 import Navbar from "@/components/Navbar";
+import OfferToast from "@/components/OfferToast";
+
+import ReviewCarousel from "@/components/ReviewCarousel";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
+    <AnnouncementBar />
     <Navbar />
+    <OfferToast/>
     <Hero />
-    <MealsSection/>
+    <CouponMarquee/>
+    <BestSellerMeals/>
+    <HomeAbout />
+    <HowItWorks />
+    <EnquirySection />
+    <WhyChooseUs />
+    <ReviewCarousel />
+    <LiveOrdersCarousel/>
     <Footer />
     </>
   );

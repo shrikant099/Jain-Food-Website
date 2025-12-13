@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
     const images = [
@@ -73,10 +74,20 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="mt-8"
+                    className="mt-8 flex gap-5"
                 >
-                    <button className="px-8 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition">
-                        Order Now
+
+                    <button
+                        onClick={() =>
+                            document.getElementById("enquiry-section")?.scrollIntoView({ behavior: "smooth" })
+                        }
+                        className="px-8 py-3 cursor-pointer rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition"
+                    >
+                        Enquiry Now
+                    </button>
+
+                    <button className="px-8 py-3 cursor-pointer font-bold rounded-xl bg-white hover:bg-gray-200 text-black font-semibold text-lg shadow-lg hover:shadow-xl transition">
+                        <Link href={"/services/train-delivery"}> Order Now</Link>
                     </button>
                 </motion.div>
             </div>
