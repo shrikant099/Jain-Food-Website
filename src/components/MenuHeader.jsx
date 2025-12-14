@@ -13,7 +13,7 @@ export default function MenuHeader() {
         <div className="bg-white border-b border-gray-200">
 
             {/* TOP INFO */}
-            <div className="max-w-7xl mx-auto px-4 py-4 flex gap-4">
+            <div className="max-w-7xl mx-auto px-1 py-1 flex gap-4">
                 <div className="w-[110px] h-[110px] relative rounded-xl overflow-hidden ">
                     <Image
                         src="/logo1.png"
@@ -26,11 +26,11 @@ export default function MenuHeader() {
                 {/* RIGHT CONTENT */}
                 <div className="flex-1">
 
-                    <h1 className="text-lg md:text-2xl font-bold text-gray-900">
+                    <h1 className="text-[15px] md:text-2xl font-bold text-gray-900">
                         Agarwal Rabdiwala
                     </h1>
 
-                    <p className="text-sm text-gray-600">
+                    <p className="text-[12px] md:text-[18px] sm:text-[15px] text-gray-600">
                         Abu Road Railway Station • Train & Home Delivery
                     </p>
 
@@ -39,7 +39,7 @@ export default function MenuHeader() {
 
                         <div className="flex items-center gap-1 bg-green-100 
                             text-green-700 px-2 py-1 rounded-md text-sm font-semibold">
-                            <Star className="w-4 h-4 fill-green-600" />
+                            <Star className="w-3 h-3 fill-green-600" />
                             4.8
                         </div>
 

@@ -5,14 +5,14 @@ import Image from "next/image";
 
 export default function AboutUs() {
   return (
-    <section className="bg-white w-full">
+    <section className="bg-white mt-10 w-full">
 
       <div className="relative w-full flex justify-center bg-black">
         <div className="relative w-full max-w-[1500px] h-[420px] md:h-[500px] lg:h-[560px] xl:h-[600px] overflow-hidden">
 
           {/* HERO BACKGROUND IMAGE */}
           <Image
-            src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1800&q=90"
+            src="/about/about-us-heroimage.png"
             alt="About Banner"
             fill
             className="object-cover object-center scale-[1.15] md:scale-100 transition-all"
@@ -20,7 +20,7 @@ export default function AboutUs() {
           />
 
           {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
 
           {/* RADIAL ORANGE GLOW */}
           <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/25 blur-[120px] rounded-full opacity-60"></div>

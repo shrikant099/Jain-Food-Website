@@ -21,7 +21,7 @@ export default function MenuFAQ() {
 
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-8xl mx-auto px-1 sm:px-2 md:px-4">
       <MenuHeader />
       {/* HEADING */}
       <motion.div
@@ -86,7 +86,7 @@ export default function MenuFAQ() {
                             width={70}
                             height={70}
                             alt={item.name}
-                            className="rounded-xl object-cover shadow-md w-[65px] h-[65px] 
+                            className="rounded-xl object-cover shadow-md w-[75px] h-[75px] 
                                        md:w-[100px] md:h-[100px]"
                           />
 
@@ -95,7 +95,7 @@ export default function MenuFAQ() {
                               {item.name}
                             </p>
                             {item.desc && (
-                              <p className="text-gray-600 text-xs md:text-sm mt-1">
+                              <p className="text-gray-600 text-[11px] md:text-sm mt-1">
                                 {item.desc}
                               </p>
                             )}

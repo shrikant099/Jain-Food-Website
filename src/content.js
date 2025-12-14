@@ -85,9 +85,9 @@ export const menuCategories = [
         items: [
             {
                 name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
-                desc: "Seasonal veg + dal fry/tadka + rice + 3 chapati + gulab jamun + salad + pickle",
+                desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
                 price: 800,
-                img: "https://images.unsplash.com/photo-1604908177522-0403f8e4d6c5?auto=format&w=700&q=80"
+                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
             },
             {
                 name: "Veg Special Thali (5 Nos)",
@@ -99,7 +99,7 @@ export const menuCategories = [
                 name: "Aloo Paratha Curd Combo (5 Nos)",
                 desc: "2pc aloo paratha + curd + salad + pickle",
                 price: 450,
-                img: "https://images.unsplash.com/photo-1601050690597-df5095e9df10?auto=format&w=700&q=80"
+                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
             },
             {
                 name: "Mini Thali (3 Nos) + 3Pc Gulab Jamun",
@@ -111,13 +111,13 @@ export const menuCategories = [
                 name: "Jain Mini Thali (5 Nos) + 5Pc Gulab Jamun",
                 desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
                 price: 800,
-                img: "https://images.unsplash.com/photo-1626082921461-9a3cd908aa8f?auto=format&w=700&q=80"
+                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
             },
             {
                 name: "Jain Special Thali (3 Nos)",
                 desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
                 price: 1200,
-                img: "https://images.unsplash.com/photo-1631700737054-f5f6227263de?auto=format&w=700&q=80"
+                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
             }
         ]
     },

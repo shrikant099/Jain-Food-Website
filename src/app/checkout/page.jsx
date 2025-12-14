@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCartItems } from "@/features/cart/selector";
 import { clearCart, addItem, removeItem } from "@/features/cart/cartSlice";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
+import { useRouter } from "next/navigation";
 
-/* ================= COUPONS ================= */
 const coupons = [
   {
     title: "10% OFF on Train Food Orders",
@@ -45,12 +47,9 @@ export default function CheckoutPage() {
   const cart = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const items = Object.values(cart);
-
+  const router = useRouter();
   /* ================= PRICE ================= */
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
+  const subtotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   /* ================= COUPON ================= */
   const [appliedCoupon, setAppliedCoupon] = useState(null);
@@ -77,6 +76,7 @@ export default function CheckoutPage() {
   const GST_RATE = 0.05;
   const gstAmount = (subtotal - discount) * GST_RATE;
   const total = subtotal - discount + gstAmount;
+  const [status, setStatus] = useState("idle");
 
   /* ================= FORM ================= */
   const [form, setForm] = useState({
@@ -92,7 +92,17 @@ export default function CheckoutPage() {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const submitOrder = () => {
+  const submitOrder = async (e) => {
+    e.preventDefault();
+
+    const itemsText = items
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
+      )
+      .join("\n");
+
+
     if (
       !form.name ||
       !form.phone ||
@@ -101,12 +111,84 @@ export default function CheckoutPage() {
       !form.coach ||
       !form.seat
     ) {
-      alert("Please fill all passenger details");
+      setStatus("error");
       return;
     }
 
-    alert("Order placed successfully!");
-    dispatch(clearCart());
+    if (total.toFixed(0) < 99) {
+      setStatus("lessThan99");
+      return;
+    }
+
+    setStatus("loading");
+    try {
+      await emailjs.send(
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID_ORDER,
+        {
+          name: form.name,
+          phone: form.phone,
+          train: form.train,
+          pnr: form.pnr,
+          coach: form.coach,
+          seat: form.seat,
+          payment: form.payment.toUpperCase(),
+
+          // Order Details
+          items: itemsText,
+          subtotal: subtotal.toFixed(0),
+          discount: discount.toFixed(0),
+          gst: gstAmount.toFixed(0),
+          total: total.toFixed(0),
+        },
+        PUBLIC_KEY
+      );
+
+      // Order Object For Store Session Storage
+      const orderData = {
+        customer: {
+          name: form.name,
+          phone: form.phone,
+          train: form.train,
+          pnr: form.pnr,
+          coach: form.coach,
+          seat: form.seat,
+          payment: form.payment.toUpperCase(),
+        },
+        items: items.map((item) => ({
+          name: item.name,
+          qty: item.qty,
+          price: item.price,
+          total: item.price * item.qty,
+        })),  
+        price: {
+          subtotal: subtotal.toFixed(0),
+          discount: discount.toFixed(0),
+          gst: gstAmount.toFixed(0),
+          total: total.toFixed(0),
+        },
+        orderId: `TC${Date.now()}`,
+        orderDate: new Date().toLocaleString("en-IN"),
+      }
+
+      setStatus("success");
+      setForm({
+        name: "",
+        phone: "",
+        pnr: "",
+        coach: "",
+        seat: "",
+        payment: "",
+        train: "",
+      });
+      sessionStorage.setItem("orderData", JSON.stringify(orderData));
+      dispatch(clearCart());
+
+      router.push("/thank-you")
+    } catch (error) {
+      console.log(`Error Place Order: ${error}`);
+      setStatus("error");
+    }
   };
 
   const [showCODPopup, setShowCODPopup] = useState(false);
@@ -246,12 +328,42 @@ export default function CheckoutPage() {
           <h2 className="text-xl font-bold mb-4">Passenger Details</h2>
 
           <div className="grid gap-4">
-            <Input label="Full Name" name="name" value={form.name} onChange={handleChange} />
-            <Input label="Mobile Number" name="phone" value={form.phone} onChange={handleChange} />
-            <Input label="Train Number" name="train" value={form.train} onChange={handleChange} />
-            <Input label="PNR Number" name="pnr" value={form.pnr} onChange={handleChange} />
-            <Input label="Coach" name="coach" value={form.coach} onChange={handleChange} />
-            <Input label="Seat" name="seat" value={form.seat} onChange={handleChange} />
+            <Input
+              label="Full Name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+            />
+            <Input
+              label="Mobile Number"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+            />
+            <Input
+              label="Train Number"
+              name="train"
+              value={form.train}
+              onChange={handleChange}
+            />
+            <Input
+              label="PNR Number"
+              name="pnr"
+              value={form.pnr}
+              onChange={handleChange}
+            />
+            <Input
+              label="Coach"
+              name="coach"
+              value={form.coach}
+              onChange={handleChange}
+            />
+            <Input
+              label="Seat"
+              name="seat"
+              value={form.seat}
+              onChange={handleChange}
+            />
           </div>
 
           <h3 className="mt-6 font-semibold">Payment Method</h3>
@@ -274,10 +386,35 @@ export default function CheckoutPage() {
 
           <button
             onClick={submitOrder}
-            className="w-full mt-6 bg-orange-600 text-white py-3 rounded-xl font-bold"
+            disabled={status === "loading"}
+            className={`w-full mt-6 bg-orange-600 text-white py-3 rounded-xl font-bold ${status === "loading"
+              ? "bg-orange-400 cursor-not-allowed"
+              : "bg-orange-600 text-white"
+              }`}
           >
-            Place Order
+            {status === "loading" ? "Loading..." : "Place Order"}
           </button>
+
+          {/* STATUS MESSAGE */}
+          {status === "success" && (
+            <p className="text-green-600 mt-4 text-lg font-medium">
+              ✅ Enquiry sent successfully. Our team will contact you soon.
+            </p>
+          )}
+
+          {/* Error Message */}
+          {status === "error" && (
+            <p className="text-red-600 mt-4 text-lg  font-medium">
+              ❌ Please fill all details or try again.
+            </p>
+          )}
+          {/* Error Message */}
+          {status === "lessThan99" && (
+            <p className="text-red-600 mt-4 text-lg font-medium">
+              ❌ Your Order Amount is Less Than 99 Minimum order is grater than
+              99
+            </p>
+          )}
         </div>
       </div>
 
@@ -294,10 +431,7 @@ export default function CheckoutPage() {
             >
               Okay Got It
             </button>
-            <button
-
-              className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg"
-            >
+            <button className="mt-4 w-full bg-orange-600 text-white py-2 rounded-lg">
               <a href="tel:+918107139044">Call Now</a>
             </button>
           </div>
@@ -334,7 +468,10 @@ function PaymentOption({
     <label
       onClick={disabled ? onDisabledClick : undefined}
       className={`flex items-center gap-3 border px-3 py-2 rounded-lg mt-2
-      ${disabled ? "opacity-50 bg-gray-100" : "hover:bg-orange-50 cursor-pointer"}`}
+      ${disabled
+          ? "opacity-50 bg-gray-100"
+          : "hover:bg-orange-50 cursor-pointer"
+        }`}
     >
       <input
         type="radio"
