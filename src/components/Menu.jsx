@@ -111,7 +111,7 @@ export default function MenuFAQ() {
                             whileTap={{ scale: 0.9 }}
                             whileHover={{ scale: 1.05 }}
                             onClick={() => dispatch(addItem(item))}
-                            className="px-3 py-1.5 md:px-6 md:py-2 border border-orange-600 
+                            className="px-3 ml-4 py-1.5 md:px-6 md:py-2 border border-orange-600 
                                        rounded-lg text-orange-600 text-sm md:text-lg font-semibold
                                        hover:bg-orange-600 hover:text-white transition"
                           >

@@ -6,6 +6,7 @@ import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "@/features/cart/selector";
+import { AnimatedOrderButton } from "./AnimateOrderButton";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +38,11 @@ export default function Navbar() {
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-2">
               <img src="/logo1.png" alt="logo" className="w-24 h-auto object-contain" />
+            </Link> 
+            <Link href="/services/train-delivery" className="md:hidden">
+              <button className="order-btn">
+                Order Now
+              </button>
             </Link>
 
             {/* DESKTOP MENU */}
@@ -67,7 +73,7 @@ export default function Navbar() {
 
             {/* DESKTOP RIGHT ICONS */}
             <div className="hidden md:flex items-center gap-6">
-              <Search className="w-6 h-6 text-gray-800 cursor-pointer hover:text-orange-600" />
+              {/* <Search className="w-6 h-6 text-gray-800 cursor-pointer hover:text-orange-600" /> */}
 
               <Link href="/checkout" className="relative">
                 <ShoppingCart className="w-6 h-6 text-gray-800 hover:text-orange-600 cursor-pointer" />
@@ -135,6 +141,7 @@ export default function Navbar() {
 
               {/* MOBILE CART */}
               <div className="flex items-center gap-5 pt-3">
+
                 <Search className="w-6 h-6 text-gray-700" />
                 <Link href="/checkout" className="relative">
                   <ShoppingCart className="w-6 h-6 text-gray-800" />

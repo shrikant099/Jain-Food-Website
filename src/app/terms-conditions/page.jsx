@@ -4,10 +4,12 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function TermsConditionsPage() {
   return (
     <>
+    <AnnouncementBar/>
       <Navbar />
 
       <section className="relative w-full bg-black text-white py-28 md:py-36 flex justify-center overflow-hidden">

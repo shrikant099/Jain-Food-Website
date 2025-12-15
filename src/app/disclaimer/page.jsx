@@ -4,9 +4,11 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import React from 'react'
 import { motion } from "framer-motion"
+import AnnouncementBar from '@/components/AnnouncementBar';
 const page = () => {
     return (
         <>
+        <AnnouncementBar/>
             <Navbar />
             {/* HERO SECTION */}
             <section className="relative w-full bg-black text-white py-24 md:py-32 flex justify-center">

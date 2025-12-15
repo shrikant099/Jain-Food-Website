@@ -160,7 +160,7 @@ export default function CheckoutPage() {
           qty: item.qty,
           price: item.price,
           total: item.price * item.qty,
-        })),  
+        })),
         price: {
           subtotal: subtotal.toFixed(0),
           discount: discount.toFixed(0),
@@ -339,31 +339,46 @@ export default function CheckoutPage() {
               name="phone"
               value={form.phone}
               onChange={handleChange}
+              maxLength={10}
+              pattern={/[^0-9]/g}
             />
             <Input
               label="Train Number"
               name="train"
               value={form.train}
               onChange={handleChange}
+              maxLength={5}
+              pattern={/[^0-9]/g}
             />
+
             <Input
               label="PNR Number"
               name="pnr"
               value={form.pnr}
               onChange={handleChange}
+              maxLength={10}
+              pattern={/[^0-9]/g}
             />
+
             <Input
               label="Coach"
               name="coach"
               value={form.coach}
               onChange={handleChange}
+              maxLength={5}
+              pattern={/[^a-zA-Z0-9]/g}
             />
+
             <Input
               label="Seat"
               name="seat"
               value={form.seat}
               onChange={handleChange}
+              maxLength={3}
+              pattern={/[^0-9]/g}
             />
+
+
           </div>
 
           <h3 className="mt-6 font-semibold">Payment Method</h3>
@@ -380,6 +395,7 @@ export default function CheckoutPage() {
           <PaymentOption
             label="Online Payment (Razorpay)"
             value="razorpay"
+            disabled={true}
             selected={form.payment}
             onChange={handleChange}
           />
@@ -442,19 +458,40 @@ export default function CheckoutPage() {
 }
 
 /* ================= SMALL COMPONENTS ================= */
-function Input({ label, name, value, onChange }) {
+function Input({ label, name, value, onChange, maxLength, pattern }) {
+  const handleInput = (e) => {
+    let val = e.target.value;
+
+    // allow only pattern if provided
+    if (pattern) {
+      val = val.replace(pattern, "");
+    }
+
+    if (maxLength) {
+      val = val.slice(0, maxLength);
+    }
+
+    onChange({
+      target: {
+        name,
+        value: val,
+      },
+    });
+  };
+
   return (
     <div>
       <label className="font-semibold block mb-1">{label}</label>
       <input
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={handleInput}
         className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500 outline-none"
       />
     </div>
   );
 }
+
 
 function PaymentOption({
   label,

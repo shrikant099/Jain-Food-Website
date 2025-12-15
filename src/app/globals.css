@@ -1,6 +1,52 @@
 @import "tailwindcss";
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* ORDER NOW ANIMATED BORDER BUTTON */
+.order-btn {
+  position: relative;
+  padding: 10px 14px;
+  background: #c05c38;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.order-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 5px solid goldenrod;
+  animation: border-move 2.5s linear infinite;
+}
+
+/* Border animation */
+@keyframes border-move {
+  0% {
+    clip-path: inset(0 100% 100% 0);
   }
-  
+
+  25% {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  75% {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 100% 100% 0);
+  }
+}

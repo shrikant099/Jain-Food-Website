@@ -4,10 +4,12 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function RefundPolicyPage() {
   return (
     <>
+    <AnnouncementBar/>
       <Navbar />
 
       {/* =============================== */}

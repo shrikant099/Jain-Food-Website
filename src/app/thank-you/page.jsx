@@ -47,7 +47,7 @@ export default function ThankYouPage() {
                     </div>
 
                     {/* ORDER META */}
-                    <div className="bg-white rounded-2xl shadow p-6 grid grid-cols-2 gap-4 text-sm">
+                    <div className="bg-white rounded-2xl shadow p-6 grid grid-cols-3 gap-4 text-sm">
                         <div>
                             <p className="text-gray-500">Order ID</p>
                             <p className="font-semibold">{order.orderId}</p>
@@ -55,6 +55,10 @@ export default function ThankYouPage() {
                         <div>
                             <p className="text-gray-500">Order Date</p>
                             <p className="font-semibold">{order.orderDate}</p>
+                        </div>
+                        <div>
+                            <p className="text-gray-500">Order Status</p>
+                            <p className="font-semibold text-green-600">Placed</p>
                         </div>
                     </div>
 

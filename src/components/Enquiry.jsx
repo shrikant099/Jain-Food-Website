@@ -183,8 +183,24 @@ export default function EnquirySection() {
 }
 
 /* SMALL COMPONENTS */
-
 function FormField({ label, name, value, onChange, type = "text" }) {
+  const handleInput = (e) => {
+    let val = e.target.value;
+
+    // 🔒 Mobile number lock (10 digits only)
+    if (name === "phone") {
+      val = val.replace(/\D/g, "");   // sirf numbers
+      if (val.length > 10) return;    // 10 se zyada allow nahi
+    }
+
+    onChange({
+      target: {
+        name,
+        value: val,
+      },
+    });
+  };
+
   return (
     <div>
       <label className="block font-semibold mb-1">{label}</label>
@@ -192,13 +208,15 @@ function FormField({ label, name, value, onChange, type = "text" }) {
         type={type}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={handleInput}
+        inputMode={name === "phone" ? "numeric" : undefined}
         className="w-full px-4 py-3 rounded-xl border border-gray-300
         focus:ring-2 focus:ring-orange-500 outline-none"
       />
     </div>
   );
 }
+
 
 function Highlight({ text }) {
   return (

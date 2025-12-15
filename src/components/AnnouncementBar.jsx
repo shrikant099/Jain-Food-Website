@@ -36,7 +36,7 @@ export default function AnnouncementBar() {
                         <a href="tel:+918290951295" className="text-gray-800 font-semibold text-[10px] sm:text-sm md:text-[15px]">
                             +91 8290951295
                         </a>
-                        <span className="hidden md:inline-block text-gray-500 text-sm">| 24/7 Food Delivery</span>
+                        <span className="hidden md:inline-block text-gray-500 text-sm">| Bulk Order Enquiry</span>
                     </div>
 
                     {/* RIGHT */}

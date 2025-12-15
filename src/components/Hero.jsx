@@ -7,12 +7,13 @@ import Link from "next/link";
 
 export default function Hero() {
   const images = [
-    "/home/heroimage.png"
+    "https://res.cloudinary.com/dhxo0zx5u/image/upload/1420_width_px_height_430px_homepage_qgsquj"
   ];
 
   const [index, setIndex] = useState(0);
   return (
-    <section className="relative w-full min-h-[calc(100svh-80px)] overflow-hidden">
+    <section className="relative mt-10 w-full h-[390px] sm:h-[390px] md:h-[380px] lg:h-[430px] overflow-hidden">
+
 
       {/* Background Slideshow */}
       <div className="absolute inset-0">
@@ -31,17 +32,13 @@ export default function Hero() {
               fill
               priority
               sizes="100vw"
-              className="object-cover brightness-[0.55]"
+              className="object-center  brightness-[0.55]"
             />
           </motion.div>
         </AnimatePresence>
-      </div>
+      <div className="relative z-10 flex min-h-[600px] flex-col items-center justify-center text-center px-5">
 
-      {/* Content */}
-      <div className="relative z-10 flex min-h-[calc(100svh-80px)] flex-col 
-                      items-center justify-center text-center px-5">
-
-        <motion.h1
+        {/* <motion.h1
           initial={{ y: -40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -60,7 +57,7 @@ export default function Hero() {
           className="text-white/90 max-w-2xl mt-6 text-lg md:text-xl drop-shadow-xl"
         >
           Hygienic, delicious and sattvic Jain meals delivered hot & fresh at any railway station.
-        </motion.p>
+        </motion.p> */}
 
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -91,6 +88,9 @@ export default function Hero() {
           </Link>
         </motion.div>
       </div>
+      </div>
+
+      {/* Content */}
     </section>
   );
 }
