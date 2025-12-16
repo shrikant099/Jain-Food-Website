@@ -26,20 +26,28 @@ const coupons = [
     code: "BULK15",
   },
   {
-    title: "₹50 OFF on Train Meals",
+    title: "₹150 OFF on Train Food Orders",
+    desc: "Perfect for group & family travel",
+    min: 1000,
+    type: "percent",
+    value: 15,
+    code: "BULK150",
+  },
+  {
+    title: "₹75 OFF on Train Meals",
     desc: "Limited time railway offer",
     min: 499,
     type: "flat",
-    value: 50,
-    code: "HAPPY50",
+    value: 75,
+    code: "HAPPY75",
   },
   {
-    title: "₹35 OFF for Students",
+    title: "₹50 OFF for Students",
     desc: "Budget friendly meals",
     min: 350,
     type: "flat",
-    value: 35,
-    code: "STUD35",
+    value: 50,
+    code: "STUD50",
   },
 ];
 
@@ -87,6 +95,7 @@ export default function CheckoutPage() {
     coach: "",
     seat: "",
     payment: "cod",
+    note: ""
   });
 
   const handleChange = (e) =>
@@ -133,6 +142,7 @@ export default function CheckoutPage() {
           coach: form.coach,
           seat: form.seat,
           payment: form.payment.toUpperCase(),
+          note: form.note || "No special instructions",
 
           // Order Details
           items: itemsText,
@@ -154,6 +164,7 @@ export default function CheckoutPage() {
           coach: form.coach,
           seat: form.seat,
           payment: form.payment.toUpperCase(),
+          note: form.note
         },
         items: items.map((item) => ({
           name: item.name,
@@ -180,6 +191,7 @@ export default function CheckoutPage() {
         seat: "",
         payment: "",
         train: "",
+        note:""
       });
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
       dispatch(clearCart());
@@ -380,6 +392,30 @@ export default function CheckoutPage() {
 
 
           </div>
+
+          {/* OPTIONAL INSTRUCTION / NOTE */}
+          <div className="">
+            <label className="font-semibold p-1 mt-5 block mb-1">
+              Optional Instructions (Max 100 characters)
+            </label>
+            <textarea
+              name="note"
+              value={form.note}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  note: e.target.value.slice(0, 100),
+                })
+              }
+              rows={3}
+              placeholder="Any special instruction (optional)"
+              className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              {form.note.length}/100 characters
+            </p>
+          </div>
+
 
           <h3 className="mt-6 font-semibold">Payment Method</h3>
 

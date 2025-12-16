@@ -20,7 +20,7 @@ const Page = async ({ params }) => {
         {serviceType === "train-delivery" && (
           <MenuFAQ />
         )}
-        {serviceType === "home-delivery" && (
+        {serviceType === "Bulk-order-in-train" && (
           <MenuFAQ />
         )}
       </div>

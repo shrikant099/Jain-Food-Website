@@ -1,96 +1,49 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
 export default function Hero() {
-  const images = [
-    "https://res.cloudinary.com/dhxo0zx5u/image/upload/1420_width_px_height_430px_homepage_qgsquj"
-  ];
-
-  const [index, setIndex] = useState(0);
   return (
-    <section className="relative mt-10 w-full h-[390px] sm:h-[390px] md:h-[380px] lg:h-[430px] overflow-hidden">
+    <section className="w-full mt-10">
 
-
-      {/* Background Slideshow */}
-      <div className="absolute inset-0">
-        <AnimatePresence>
-          <motion.div
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={images[index]}
-              alt="Fresh Jain Food"
-              fill
-              priority
-              sizes="100vw"
-              className="object-center  brightness-[0.55]"
-            />
-          </motion.div>
-        </AnimatePresence>
-      <div className="relative z-10 flex min-h-[600px] flex-col items-center justify-center text-center px-5">
-
-        {/* <motion.h1
-          initial={{ y: -40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-white text-4xl md:text-6xl font-extrabold drop-shadow-lg"
-        >
-          Fresh & Pure Jain Food
-          <span className="block text-orange-400 mt-2">
-            Delivered Right In Your Train
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          className="text-white/90 max-w-2xl mt-6 text-lg md:text-xl drop-shadow-xl"
-        >
-          Hygienic, delicious and sattvic Jain meals delivered hot & fresh at any railway station.
-        </motion.p> */}
+      <div className="relative w-full overflow-hidden">
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 flex flex-wrap justify-center gap-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-full"
         >
-          <button
-            // onClick={() =>
-            //   document
-            //     .getElementById("enquiry-section")
-            //     ?.scrollIntoView({ behavior: "smooth" })
-            // }
-            className="px-6 py-4 rounded-xl bg-orange-600 
-                       hover:bg-orange-700 text-white 
-                       font-semibold shadow-lg transition"
-          >
-            <a href="tel:+918290951295">&nbsp; Call Now &nbsp;</a>
-          </button>
 
+          <Image
+            src="/home/mbi.png"
+            alt="Order Food in Train"
+            width={1920}
+            height={900}
+            priority
+            className="w-full h-auto object-contain"
+          />
+        </motion.div>
+        {/* CTA BUTTONS – DESKTOP ONLY */}
+        <div className="hidden md:flex absolute bottom-15 left-1/2 -translate-x-1/2 gap-6 z-10">
+          
+          <a
+            href="tel:+918290951295"
+            className="px-8 py-4 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-xl transition"
+          >
+            
+            Call Now
+          </a>
           <Link
             href="/services/train-delivery"
-            className="px-6 py-4 rounded-xl bg-white 
-                       hover:bg-gray-200 text-black 
-                       font-semibold shadow-lg transition"
+            className="px-8 py-4 rounded-xl bg-white hover:bg-gray-100 text-black font-semibold shadow-xl transition"
           >
+            
             Order Now
           </Link>
-        </motion.div>
+        </div>
       </div>
-      </div>
-
-      {/* Content */}
     </section>
   );
 }

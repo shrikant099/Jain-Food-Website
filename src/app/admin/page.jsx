@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function AdminPage() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [deleteId, setDeleteId] = useState(null); 
+  const [deleteId, setDeleteId] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
   const router = useRouter();
@@ -95,21 +95,22 @@ export default function AdminPage() {
             </div>
 
             <div className="flex flex-col md:flex-row">
-              <div className="md:w-[40%] h-56 md:h-auto overflow-hidden">
+              <div className="md:w-[40%] h-56 md:h-72 overflow-hidden">
                 <img
                   src={blog.image}
                   alt={blog.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
-
               <div className="p-6 md:w-[60%] flex flex-col justify-center">
                 <h2 className="text-xl font-semibold mb-3">
                   {blog.title}
                 </h2>
-                <p className="text-gray-600 line-clamp-4">
-                  {blog.content}
-                </p>
+                <div
+                  className="prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: blog.content }}
+                />
+
               </div>
             </div>
           </motion.div>

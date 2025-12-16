@@ -38,10 +38,14 @@ export default function Navbar() {
             {/* LOGO */}
             <Link href="/" className="flex items-center gap-2">
               <img src="/logo1.png" alt="logo" className="w-24 h-auto object-contain" />
-            </Link> 
+            </Link>
             <Link href="/services/train-delivery" className="md:hidden">
               <button className="order-btn">
                 Order Now
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </button>
             </Link>
 
@@ -62,13 +66,14 @@ export default function Navbar() {
                 {/* DROPDOWN MENU */}
                 <div className="absolute top-10 left-0 w-44 bg-white border shadow-md rounded-md 
                   opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
-                  <DropdownItem href="/services/home-delivery">Home Delivery</DropdownItem>
+                  <DropdownItem href="/services/train-delivery">Bulk Order in Train</DropdownItem>
                   <DropdownItem href="/services/train-delivery">Train Delivery</DropdownItem>
                 </div>
               </div>
 
               <NavItem href="/blogs">Blogs</NavItem>
               <NavItem href="/privacy-policy">Privacy & Policy</NavItem>
+
             </div>
 
             {/* DESKTOP RIGHT ICONS */}
@@ -125,8 +130,8 @@ export default function Navbar() {
                       transition={{ duration: 0.25 }}
                       className="ml-4 space-y-2 overflow-hidden"
                     >
-                      <MobileItem href="/services/home-delivery" setIsOpen={setIsOpen}>
-                        Home Delivery
+                      <MobileItem href="/services/train-delivery" setIsOpen={setIsOpen}>
+                        Bulk Order in Train
                       </MobileItem>
                       <MobileItem href="/services/train-delivery" setIsOpen={setIsOpen}>
                         Train Delivery
@@ -141,8 +146,6 @@ export default function Navbar() {
 
               {/* MOBILE CART */}
               <div className="flex items-center gap-5 pt-3">
-
-                <Search className="w-6 h-6 text-gray-700" />
                 <Link href="/checkout" className="relative">
                   <ShoppingCart className="w-6 h-6 text-gray-800" />
                   {count > 0 && (

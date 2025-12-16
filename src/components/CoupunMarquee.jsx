@@ -11,22 +11,28 @@ const coupons = [
     code: "FLAT10",
   },
   {
+    title: "₹150 OFF on Train Food Orders",
+    desc: "Valid till 31 Dec 2025",
+    mov: "Min Order ₹1000",
+    code: "FLAT150",
+  },
+  {
     title: "15% OFF on Bulk Orders",
     desc: "Perfect for group & family travel",
     mov: "Min Order ₹2500",
     code: "BULK15",
   },
   {
-    title: "₹50 OFF on Train Meals",
+    title: "₹75 OFF on Train Meals",
     desc: "Limited time railway offer",
-    mov: "Min Order ₹499",
-    code: "HAPPY50",
+    mov: "Min Order ₹500",
+    code: "HAPPY75",
   },
   {
-    title: "₹35 OFF for Students",
+    title: "₹50 OFF for Students",
     desc: "Budget friendly meals",
     mov: "Min Order ₹350",
-    code: "STUD35",
+    code: "STUD50",
   },
 ];
 

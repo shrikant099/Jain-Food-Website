@@ -38,7 +38,7 @@ export default function AdminSidebar({ open, setOpen }) {
           onClick={() => setOpen(false)}
           className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-orange-50"
         >
-         
+
           Blogs
         </Link>
       </nav>
@@ -47,7 +47,9 @@ export default function AdminSidebar({ open, setOpen }) {
       <div className="absolute bottom-4 w-full px-4">
         <button className="flex items-center gap-3 text-red-600">
           <LogOut size={18} />
-          Logout
+          <Link className="cursor-pointer" href="/" >
+            Logout
+          </Link>
         </button>
       </div>
     </aside>

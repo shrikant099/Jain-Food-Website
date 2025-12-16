@@ -9,9 +9,6 @@ export async function GET(req, { params }) {
 
     try {
         const { id } = await params;
-        console.log(id);
-        
-
         const blog = await Blog.findById(id);
 
         if (!blog) {
@@ -63,23 +60,54 @@ export async function DELETE(req, context) {
 // Upadte Blogs
 export async function PUT(req, context) {
     await connectDb();
+
     try {
         const { id } = await context.params;
-        console.log(id)
         const formData = await req.formData();
+
         const title = formData.get("title");
         const content = formData.get("content");
         const image = formData.get("image");
+        const category = formData.get("category");
+        const description = formData.get("description");
+        const metaTitle = formData.get("metaTitle");
+        const metaDescription = formData.get("metaDescription");
+        const metaKeywords = formData.get("metaKeywords"); // comma separated
 
         const blog = await Blog.findById(id);
         if (!blog) {
-            return NextResponse.json({ error: "Blog not found" }, { status: 404 })
+            return NextResponse.json(
+                { error: "Blog not found" },
+                { status: 404 }
+            );
         }
 
-        if (title) blog.title = title;
-        if (content) blog.content = content;
+        /* ========= BASIC FIELDS ========= */
+        if (title && title !== blog.title) {
+            blog.title = title;
 
-        // update image (if new image sent)
+            // slug update ONLY if title changed
+            blog.slug = title
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+        }
+
+        if (content) blog.content = content;
+        if (category) blog.category = category;
+        if (description) blog.description = description;
+        if (metaTitle !== null) blog.metaTitle = metaTitle;
+        if (metaDescription !== null) blog.metaDescription = metaDescription;
+
+        /* ========= META KEYWORDS ========= */
+        if (metaKeywords !== null) {
+            blog.metaKeywords = metaKeywords
+                ? metaKeywords.split(",").map(k => k.trim())
+                : [];
+        }
+
+        /* ========= IMAGE LOGIC (UNTOUCHED) ========= */
         if (image && typeof image !== "string") {
             const bytes = await image.arrayBuffer();
             const buffer = Buffer.from(bytes);
@@ -88,20 +116,24 @@ export async function PUT(req, context) {
                 cloudinary.uploader.upload_stream(
                     { folder: "agarwal_blogs" },
                     (err, result) => {
-                        if (err) reject(err)
-                        resolve(result)
+                        if (err) reject(err);
+                        resolve(result);
                     }
-                ).end(buffer)
-            })
+                ).end(buffer);
+            });
+
             blog.image = uploadResult.secure_url;
         }
+
         await blog.save();
+
         return NextResponse.json(
             { message: "Blog updated successfully", success: true },
             { status: 200 }
         );
 
     } catch (error) {
+        console.error("Update Blog Error:", error);
         return NextResponse.json(
             { error: "Error updating blog" },
             { status: 500 }

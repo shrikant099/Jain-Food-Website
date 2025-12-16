@@ -1,4 +1,6 @@
+
 import AnnouncementBar from "@/components/AnnouncementBar";
+import ContactSection from "@/components/ContactUsSection";
 import CouponMarquee from "@/components/CoupunMarquee";
 import EnquirySection from "@/components/Enquiry";
 import Footer from "@/components/Footer";
@@ -10,10 +12,8 @@ import LiveOrdersCarousel from "@/components/LiveOrdersCarousel";
 import BestSellerMeals from "@/components/MealsSection";
 import Navbar from "@/components/Navbar";
 import OfferToast from "@/components/OfferToast";
-
 import ReviewCarousel from "@/components/ReviewCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -29,6 +29,7 @@ export default function Home() {
     <EnquirySection />
     <WhyChooseUs />
     <ReviewCarousel />
+    <ContactSection/>
     <LiveOrdersCarousel/>
     <Footer />
     </>

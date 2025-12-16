@@ -5,61 +5,57 @@ import Image from "next/image";
 
 export default function AboutUs() {
   return (
-    <section className="bg-white mt-10 w-full">
+    <section className="w-full mt-10 bg-white">
 
-      <div className="relative w-full flex justify-center bg-black">
-        <div className="relative w-full max-w-[1500px] h-[420px] md:h-[500px] lg:h-[560px] xl:h-[600px] overflow-hidden">
+      {/* ============================== */}
+      {/* ABOUT HERO (NEW – FULL WIDTH)  */}
+      {/* ============================== */}
 
-          {/* HERO BACKGROUND IMAGE */}
-          <Image
-            src="/about/about-us-heroimage.png"
-            alt="About Banner"
-            fill
-            className="object-cover object-center scale-[1.15] md:scale-100 transition-all"
-            priority
+      <div className="relative w-full overflow-hidden">
+
+        {/* FULL WIDTH IMAGE */}
+        <Image
+          src="/about/about-us-heroImage.png"
+          alt="About Agarwal Rabdiwala"
+          width={1920}
+          height={900}
+          priority
+          className="w-full h-auto object-contain"
+        />
+
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-black/35"></div>
+
+        {/* GRADIENT DEPTH */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70"></div>
+
+        {/* HERO CONTENT */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+        >
+          <h1 className="text-2xl md:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-lg">
+            About Agarwal Rabdiwala
+          </h1>
+
+          {/* ORANGE UNDERLINE */}
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 180 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="h-[3px] sm:h-[3px] md:h-[4px] lg:h-[5px] bg-gradient-to-r from-orange-400 to-orange-600 rounded-full mt-4"
           />
 
-          {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-black/30"></div>
-
-          {/* RADIAL ORANGE GLOW */}
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/25 blur-[120px] rounded-full opacity-60"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70"></div>
-
-          {/* HERO TEXT CONTENT */}
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
-          >
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold text-white max-w-[1000px] mx-auto drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">
-              About Agarwal Rabdiwala
-            </h1>
-
-            {/* UNDERLINE ANIMATION */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: 180 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="h-[4px] bg-gradient-to-r from-orange-400 to-orange-600 rounded-full mt-3"
-            />
-
-            {/* SUBTEXT */}
-            <motion.p
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-              className="mt-6 text-lg md:text-xl text-orange-100 font-semibold max-w-[900px] mx-auto drop-shadow"
-            >
-              Giving Fresh, Hygienic & Delicious Meals Since 2017
-            </motion.p>
-          </motion.div>
-        </div>
+          <p className="mt-4 text-[14px] md:text-xl text-orange-100 font-semibold max-w-[900px]">
+            Giving Fresh, Hygienic & Delicious Meals Since 2017
+          </p>
+        </motion.div>
       </div>
 
       {/* ============================== */}
-      {/* WHITE CONTENT SECTION BELOW    */}
+      {/* ABOUT CONTENT (UNCHANGED)      */}
       {/* ============================== */}
 
       <div className="w-full flex justify-center">
@@ -89,11 +85,11 @@ export default function AboutUs() {
             </h2>
 
             <p className="mt-4">
-              We started this outlet with the purpose of giving the authentic taste of rabdi. Our <b>famous signature dish Rabdi</b> is loved by locals and passers by alike, and our Veg Thalis—both single and bulk orders—have become a favorite for passengers who crave homemade-style meals while having a journey in trains.
+              We started this outlet with the purpose of giving the authentic taste of rabdi. Our <b>famous signature dish Rabdi</b> is loved by locals and passers by alike.
             </p>
 
             <p className="mt-4">
-              With over <b>20,000+ successful food deliveries in trains</b> and a proud <b>partnership with IRCTT</b>, we continue to serve train passengers with the flavourful, tasty meals.
+              With over <b>20,000+ successful food deliveries in trains</b> and a proud <b>partnership with IRCTTC</b>, we continue to serve train passengers.
             </p>
           </motion.div>
 
@@ -109,11 +105,7 @@ export default function AboutUs() {
             </h2>
 
             <p className="mt-4">
-              Our goal at Agarwal Rabdiwala is to serve every train passenger, whether they are traveling alone or with a group, vegetarian meals that are as good as what you would get at a restaurant and are safe to eat.
-            </p>
-
-            <p className="mt-4">
-              We think that good food can make a long train ride more enjoyable. That’s why we put freshness first: all of our meals are made with fresh ingredients and cooked right before your train arrives.
+              Our goal is to serve vegetarian meals that are safe, fresh, and restaurant-quality.
             </p>
           </motion.div>
 
@@ -127,8 +119,7 @@ export default function AboutUs() {
             <h2 className="text-2xl font-bold text-orange-600">TASTE</h2>
 
             <p className="mt-4">
-              From learning mistakes we are now at some level to ensure taste in our dinings and at train seats.
-              Recipes that are based on traditional way of cooking by the best cooks of Abu Road with a little bit of local flavor.
+              Recipes based on traditional cooking by the best cooks of Abu Road with local flavour.
             </p>
           </motion.div>
 
@@ -139,20 +130,12 @@ export default function AboutUs() {
             transition={{ duration: 0.7, delay: 0.25 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-bold text-orange-600">CUSTOMER SATISFACTION</h2>
+            <h2 className="text-2xl font-bold text-orange-600">
+              CUSTOMER SATISFACTION
+            </h2>
 
             <p className="mt-4">
-              It has been 8 years of delivering the best taste to our beloved customers and passengers in train.
-              So each and every time we ensure that everything should be fine and delightful for customers.
-            </p>
-
-            <p className="mt-4">
-              Many people trust us (Agarwal Rabdiwala). Food safety officers check our store regularly to make sure it is clean and safe.
-            </p>
-
-            <p className="mt-4">
-              Our bulk food delivery service is very popular with groups: families, student groups, and pilgrims choose us.
-              Affordable bulk meals start from ₹100, and we deliver customizable bulk meals.
+              8 years of delivering the best taste with food safety and hygiene.
             </p>
           </motion.div>
 

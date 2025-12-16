@@ -6,47 +6,105 @@ body {
   overflow-x: hidden;
 }
 
-
-/* ORDER NOW ANIMATED BORDER BUTTON */
+/* ORDER NOW – PREMIUM ANIMATED BORDER */
 .order-btn {
   position: relative;
-  padding: 10px 14px;
-  background: #c05c38;
+  padding: 12px 18px;
+  background: #ea580c;
+  /* same as bg-orange-600 */
   color: #fff;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 14px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   overflow: hidden;
 }
 
-.order-btn::before {
-  content: "";
+/* COMMON BORDER STYLE */
+.order-btn span {
   position: absolute;
-  inset: 0;
-  border: 5px solid goldenrod;
-  animation: border-move 2.5s linear infinite;
+  background: linear-gradient(90deg,
+      transparent,
+      yellow,
+      green);
 }
 
-/* Border animation */
-@keyframes border-move {
+/* TOP BORDER */
+.order-btn span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  animation: move-top 2.5s linear infinite;
+}
+
+/* RIGHT BORDER */
+.order-btn span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  animation: move-right 2.5s linear infinite;
+  animation-delay: 0.6s;
+}
+
+/* BOTTOM BORDER */
+.order-btn span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 5px;
+  animation: move-bottom 2.5s linear infinite;
+  animation-delay: 1.2s;
+}
+
+/* LEFT BORDER */
+.order-btn span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  animation: move-left 2.5s linear infinite;
+  animation-delay: 1.8s;
+}
+
+/* ANIMATIONS */
+@keyframes move-top {
   0% {
-    clip-path: inset(0 100% 100% 0);
-  }
-
-  25% {
-    clip-path: inset(0 0 100% 0);
-  }
-
-  50% {
-    clip-path: inset(0 0 0 0);
-  }
-
-  75% {
-    clip-path: inset(100% 0 0 0);
+    left: -100%;
   }
 
   100% {
-    clip-path: inset(0 100% 100% 0);
+    left: 100%;
+  }
+}
+
+@keyframes move-right {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes move-bottom {
+  0% {
+    right: -100%;
+  }
+
+  100% {
+    right: 100%;
+  }
+}
+
+@keyframes move-left {
+  0% {
+    bottom: -100%;
+  }
+
+  100% {
+    bottom: 100%;
   }
 }

@@ -17,7 +17,7 @@ export default function HomeAbout() {
           className="relative w-full h-72 md:h-96 rounded-3xl overflow-hidden shadow-xl"
         >
           <Image
-            src="/about/mobilephoto.png"
+            src="/about/mobilePhoto.png"
             alt="Agarwal Rabdiwala"
             fill
             className="object-cover"

@@ -15,9 +15,6 @@ export default function ThankYouPage() {
             setOrder(JSON.parse(storedOrder));
         }
     }, []);
-    console.log(order);
-
-
 
     if (!order) {
         return (

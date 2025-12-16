@@ -18,7 +18,7 @@ export default function HowItWorks() {
                     How It Works
                 </h2>
                 <p className="text-gray-600 mt-2 text-lg">
-                    Order fresh Jain meals in just 3 simple steps
+                    Order fresh meals in just 3 simple steps
                 </p>
                 <div className="w-24 h-2 bg-orange-500 rounded-full mx-auto mt-4"></div>
             </motion.div>

@@ -13,8 +13,8 @@ export default function MenuHeader() {
         <div className="bg-white border-b border-gray-200">
 
             {/* TOP INFO */}
-            <div className="max-w-7xl mx-auto px-1 py-1 flex gap-4">
-                <div className="w-[110px] h-[110px] relative rounded-xl overflow-hidden ">
+            <div className="max-w-7xl items-center mx-auto px-1 py-1 flex gap-4">
+                <div className="w-[110px] h-[100px] relative rounded-xl overflow-hidden ">
                     <Image
                         src="/logo1.png"
                         alt="Agarwal Rabdiwala"
@@ -35,7 +35,7 @@ export default function MenuHeader() {
                     </p>
 
                     {/* RATING + MIN ORDER */}
-                    <div className="flex items-center gap-4 mt-2">
+                    <div className="flex items-center  gap-4 mt-4">
 
                         <div className="flex items-center gap-1 bg-green-100 
                             text-green-700 px-2 py-1 rounded-md text-sm font-semibold">
@@ -53,7 +53,7 @@ export default function MenuHeader() {
             {/* TAGS */}
             <div className="max-w-7xl mx-auto px-4 pb-4 flex gap-3">
 
-                <div className="flex gap-3 mb-4">
+                <div className="flex mt-5 gap-3 mb-4">
                     <button
                         onClick={() => setActive("veg")}
                         className={`px-4 py-1 cursor-pointer rounded-full border font-semibold text-sm
