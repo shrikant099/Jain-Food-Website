@@ -1,163 +1,104 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
-const blogs = [
-    {
-        id: 1,
-        title: "Train Food Delivery: A New Comfort for Indian Travelers",
-        image:
-            "/home/chilli-paneer.png",
-        desc: `
-Traveling by train in India has always been an experience filled with stories,
-long journeys and memorable moments. However, food availability has often been
-a concern for passengers, especially for those looking for hygienic and Jain
-meal options.
-
-Train food delivery services have completely changed this experience. Now,
-freshly prepared Jain meals can be delivered directly to your seat at selected
-stations. This ensures purity, hygiene, and convenience, allowing travelers to
-enjoy their journey without worrying about outside food or station vendors.
-    `,
-    },
-    {
-        id: 2,
-        title: "Why Jain Food is the Healthiest Choice During Travel",
-        image:
-            "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1400&q=80",
-        desc: `
-Jain food is known for its sattvic nature, simplicity, and focus on purity.
-During travel, when digestion and hygiene are major concerns, Jain meals
-become the safest and healthiest option.
-
-Prepared without onion, garlic, or root vegetables, Jain food is light on the
-stomach and rich in nutrition. When delivered fresh during train journeys or
-at home, it provides comfort, taste, and peace of mind for families, elders,
-and frequent travelers alike.
-    `,
-    },
-    {
-        id: 3,
-        title: "Home Delivery of Fresh Jain Meals: Taste Meets Convenience",
-        image:
-            "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=1400&q=80",
-        desc: `
-With changing lifestyles, home food delivery has become a necessity rather than
-a luxury. For Jain families, finding food that matches their dietary values can
-be challenging.
-
-Home delivery of Jain meals ensures freshly cooked food reaches your doorstep
-without compromising on taste or tradition. Whether it is a daily meal or a
-special occasion, having access to trusted Jain food delivery services brings
-both comfort and reliability.
-    `,
-    },
-    {
-        id: 4,
-        title: "Benefits of Ordering Food Online for Train Journeys",
-        image:
-            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80",
-        desc: `
-Online food ordering for trains is no longer just a convenience—it is becoming
-the preferred choice for smart travelers. With pre-booking options, transparent
-pricing, and assured hygiene, passengers can enjoy quality meals on long routes.
-
-For Jain travelers, this service ensures access to pure vegetarian meals without
-compromise. Timely delivery, secure packaging, and consistent quality make
-online train food delivery a reliable solution for modern travel needs.
-    `,
-    },
-    /* 🔥 NEW BLOG 5 */
-    {
-        id: 5,
-        title: "How Hygienic Food Delivery Improves Long Train Journeys",
-        image:
-            "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1400&q=80",
-        desc: `
-Long-distance train journeys can be tiring, especially when food quality is
-uncertain. Hygienic food delivery services ensure that meals are prepared in
-clean kitchens, packed securely, and delivered fresh at the right time.
-
-For families, elderly passengers, and Jain travelers, hygiene is not just a
-preference—it is a necessity. Choosing a trusted food delivery service for
-train journeys significantly improves comfort, health, and overall travel
-experience.
-    `,
-    },
-    {
-        id: 6,
-        title: "Why Pre-Ordering Food for Trains is a Smart Choice",
-        image:
-            "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1400&q=80",
-        desc: `
-    Pre-ordering food for train journeys eliminates last-minute stress and unhealthy
-    choices. By booking meals in advance, passengers can plan their dining according
-    to station stops, meal preferences, and dietary needs.
-    
-    For Jain food lovers, pre-ordering ensures availability of pure vegetarian meals
-    without compromise. It also guarantees timely delivery, fixed pricing, and peace
-    of mind throughout the journey, making it a smart and reliable travel decision.
-        `,
-    },
-];
-
 export default function BlogsPage() {
+    const [blogs, setBlogs] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(() => {
+        fetch(`/api/blogs?page=${page}&limit=4`)
+            .then(res => res.json())
+            .then(data => {
+                setBlogs(data.blogs);
+                setTotalPages(data.totalPages);
+            });
+    }, [page]);
+
     return (
         <section className="max-w-7xl mx-auto px-4 py-24">
 
-            {/* PAGE HEADER */}
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="text-center mb-20"
-            >
-                <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900">
-                    Our Food Delivery <span className="text-orange-600">Stories</span>
-
+            {/* HEADER */}
+            <div className="text-center mb-20">
+                <h1 className="text-4xl md:text-6xl font-extrabold">
+                    Our <span className="text-orange-600">Blogs</span>
                 </h1>
-                <p className="text-gray-600 mt-6 max-w-3xl mx-auto text-lg leading-relaxed">
-                    Explore detailed insights about Jain food delivery for trains and homes.
-                    Learn how hygienic meals, convenience, and tradition come together to
-                    create a better dining experience for travelers and families.
+                <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    Jain food delivery, health & travel insights.
                 </p>
-            </motion.div>
+            </div>
 
-            {/* BLOG SECTIONS */}
-            <div className="space-y-28">
-                {blogs.map((blog, i) => (
+            {/* BLOG LIST */}
+            <div className="space-y-24">
+                {blogs.map(blog => (
                     <motion.div
-                        key={blog.id}
-                        initial={{ opacity: 0, y: 60 }}
+                        key={blog._id}
+                        initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7 }}
-                        className={`grid md:grid-cols-2 gap-12 items-center ${i % 2 !== 0 ? "md:flex-row-reverse" : ""
-                            }`}
+                        className="grid md:grid-cols-2 gap-12 items-center"
                     >
                         {/* IMAGE */}
-                        <div className="relative h-[320px] md:h-[420px] rounded-3xl overflow-hidden shadow-xl">
+                        <div className="relative h-[320px] rounded-3xl overflow-hidden">
                             <Image
                                 src={blog.image}
                                 alt={blog.title}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover"
                             />
                         </div>
 
                         {/* CONTENT */}
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                            <p className="text-sm text-orange-600 font-semibold mb-2">
+                                {blog.category}
+                            </p>
+
+                            <h2 className="text-3xl font-bold">
                                 {blog.title}
                             </h2>
 
-                            <div className="mt-6 text-gray-700 text-base md:text-lg leading-relaxed whitespace-pre-line">
-                                {blog.desc}
-                            </div>
+                            <p className="mt-4 text-gray-700">
+                                {blog.description}
+                            </p>
+
+                            <Link
+                                href={`/blogs/${blog.slug}`}
+                                className="inline-block mt-6 text-orange-600 font-semibold"
+                            >
+                                View More →
+                            </Link>
                         </div>
                     </motion.div>
                 ))}
+            </div>
+
+            {/* PAGINATION */}
+            <div className="flex justify-center gap-4 mt-20">
+                <button
+                    disabled={page === 1}
+                    onClick={() => setPage(p => p - 1)}
+                    className="px-4 py-2 border rounded disabled:opacity-40"
+                >
+                    Prev
+                </button>
+
+                <span className="px-4 py-2 font-semibold">
+                    {page} / {totalPages}
+                </span>
+
+                <button
+                    disabled={page === totalPages}
+                    onClick={() => setPage(p => p + 1)}
+                    className="px-4 py-2 border rounded disabled:opacity-40"
+                >
+                    Next
+                </button>
             </div>
         </section>
     );

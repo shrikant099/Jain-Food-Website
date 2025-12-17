@@ -62,6 +62,8 @@ export default function CheckoutPage() {
   /* ================= COUPON ================= */
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [discount, setDiscount] = useState(0);
+  const [couponOpen, setCouponOpen] = useState(false);
+
 
   const applyCoupon = (coupon) => {
     if (subtotal < coupon.min) return;
@@ -191,7 +193,7 @@ export default function CheckoutPage() {
         seat: "",
         payment: "",
         train: "",
-        note:""
+        note: ""
       });
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
       dispatch(clearCart());
@@ -259,60 +261,84 @@ export default function CheckoutPage() {
             <span>₹{subtotal}</span>
           </div>
 
-          {/* COUPON SECTION (ALWAYS VISIBLE) */}
-          <div className="mt-5 bg-orange-50 border rounded-xl p-4">
-            <h3 className="font-bold mb-3">Available Coupons</h3>
+          {/* COUPON FAQ (SMOOTH DROPDOWN) */}
+          <div className="mt-5 mb-10 border rounded-xl overflow-hidden">
 
-            <div className="space-y-3">
-              {coupons.map((c) => {
-                const eligible = subtotal >= c.min;
-                const applied = appliedCoupon?.code === c.code;
+            {/* FAQ HEADER */}
+            <button
+              onClick={() => setCouponOpen(!couponOpen)}
+              className="w-full flex justify-between items-center px-4 py-3 bg-orange-50"
+            >
+              <h3 className="font-bold text-lg">Available Coupons</h3>
+              <span
+                className={`text-2xl font-bold transition-transform duration-300 ${couponOpen ? "rotate-180" : ""
+                  }`}
+              >
+                +
+              </span>
+            </button>
 
-                return (
-                  <div
-                    key={c.code}
-                    className={`flex justify-between items-center p-3 rounded-lg border
-                    ${eligible ? "bg-white" : "bg-gray-100 opacity-50"}`}
-                  >
-                    <div>
-                      <p className="font-semibold">{c.title}</p>
-                      <p className="text-xs text-gray-600">{c.desc}</p>
-                      <p className="text-xs text-gray-500">
-                        Min Order ₹{c.min}
-                      </p>
+            {/* FAQ BODY (SMOOTH) */}
+            <div
+              className={`transition-all duration-500 ease-in-out overflow-hidden
+  ${couponOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}
+            >
+              <div className="p-4 bg-white space-y-3">
+
+                {coupons.map((c) => {
+                  const eligible = subtotal >= c.min;
+                  const applied = appliedCoupon?.code === c.code;
+
+                  return (
+                    <div
+                      key={c.code}
+                      className={`flex justify-between items-start gap-3 p-3 rounded-lg border
+          ${eligible ? "bg-white" : "bg-gray-100 opacity-60"}`}
+                    >
+                      {/* LEFT */}
+                      <div>
+                        <p className="font-semibold">{c.title}</p>
+                        <p className="text-xs text-gray-600">{c.desc}</p>
+                        <p className="text-xs text-gray-500">
+                          Min Order ₹{c.min}
+                        </p>
+                      </div>
+
+                      {/* RIGHT */}
+                      {applied ? (
+                        <button
+                          onClick={removeCoupon}
+                          className="text-red-600 text-sm font-semibold"
+                        >
+                          Remove
+                        </button>
+                      ) : (
+                        <button
+                          disabled={!eligible}
+                          onClick={() => applyCoupon(c)}
+                          className={`px-4 py-1.5 rounded-lg text-sm font-semibold
+              ${eligible
+                              ? "bg-orange-600 text-white"
+                              : "bg-gray-300 cursor-not-allowed"
+                            }`}
+                        >
+                          Apply
+                        </button>
+                      )}
                     </div>
+                  );
+                })}
 
-                    {applied ? (
-                      <button
-                        onClick={removeCoupon}
-                        className="text-red-600 font-semibold"
-                      >
-                        Remove
-                      </button>
-                    ) : (
-                      <button
-                        disabled={!eligible}
-                        onClick={() => applyCoupon(c)}
-                        className={`px-4 py-1.5 rounded-lg text-sm font-semibold
-                        ${eligible
-                            ? "bg-orange-600 text-white"
-                            : "bg-gray-300 cursor-not-allowed"
-                          }`}
-                      >
-                        Apply
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
+                {appliedCoupon && (
+                  <p className="text-green-700 font-semibold pt-2">
+                    Coupon <b>{appliedCoupon.code}</b> applied 🎉
+                  </p>
+                )}
+              </div>
             </div>
-
-            {appliedCoupon && (
-              <p className="mt-3 text-green-700 font-semibold">
-                Coupon <b>{appliedCoupon.code}</b> applied 🎉
-              </p>
-            )}
           </div>
+
+
 
           {discount > 0 && (
             <div className="flex justify-between mt-3 text-green-700 font-semibold">
@@ -396,7 +422,7 @@ export default function CheckoutPage() {
           {/* OPTIONAL INSTRUCTION / NOTE */}
           <div className="">
             <label className="font-semibold p-1 mt-5 block mb-1">
-              Optional Instructions (Max 100 characters)
+              Optional Instructions (Max 150 characters)
             </label>
             <textarea
               name="note"
@@ -404,7 +430,7 @@ export default function CheckoutPage() {
               onChange={(e) =>
                 setForm({
                   ...form,
-                  note: e.target.value.slice(0, 100),
+                  note: e.target.value.slice(0, 150),
                 })
               }
               rows={3}
@@ -412,7 +438,7 @@ export default function CheckoutPage() {
               className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500 outline-none resize-none"
             />
             <p className="text-sm text-gray-500 mt-1">
-              {form.note.length}/100 characters
+              {form.note.length}/150 characters
             </p>
           </div>
 

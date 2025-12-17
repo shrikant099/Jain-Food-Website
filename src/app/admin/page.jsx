@@ -18,7 +18,7 @@ export default function AdminPage() {
       try {
         const res = await fetch("/api/blogs", { cache: "no-store" });
         const data = await res.json();
-        setBlogs(data);
+        setBlogs(data.blogs);
       } catch (err) {
         console.error(err);
       } finally {

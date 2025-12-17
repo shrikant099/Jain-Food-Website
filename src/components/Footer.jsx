@@ -1,122 +1,125 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Phone, Mail, Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 pt-16 pb-6 mt-20 border-t border-orange-100">
+    <footer className="bg-gray-50 border-t border-orange-100 mt-20">
 
-      {/* TOP AREA */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 text-center"
-      >
-        <Image
-          src="/logo1.png"
-          alt="Logo"
-          width={100}
-          height={100}
-          className="mx-auto mb-4 w-40"
-        />
+      <div className="max-w-7xl mx-auto px-5 py-14">
 
-        <p className="text-gray-700 font-medium break-all">
-          sanjaysinghal265@gmail.com
-        </p>
+        {/* ===== MAIN GRID ===== */}
+        <div
+          className="
+            grid place-items-center grid-cols-2 gap-15 text-sm text-gray-700
+            md:grid-cols-4 md:gap-10
+          "
+        >
 
-        <div className="max-w-xl mx-auto mt-6 text-gray-900 text-base md:text-lg font-medium leading-relaxed">
-          Agarwal Rabdiwala, Railway Parking Area,<br />
-          Abu Road Railway Station, Rajasthan – 307026, India
-        </div>
-      </motion.div>
+          {/* LOGO + DESC */}
+          <div className="flex flex-col items-start">
+            <Image
+              src="/logo1.png"
+              alt="Agarwal Rabdiwala"
+              width={150}
+              height={60}
+              className="mb-3"
+            />
 
-      {/* IMPORTANT LINKS (MOBILE PERFECT) */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 mt-10"
-      >
-        <div className="
-          flex flex-col gap-8 sm:flex-row flex-wrap 
-          justify-center items-center 
-       sm:gap-10 md:gap-10 
-          text-gray-700 text-sm font-medium
-          md:flex-row
-        ">
-          <Link href="/about-us" className="hover:text-orange-600 transition">About Us</Link>
-          <Link href="/privacy-policy" className="hover:text-orange-600 transition">Privacy & Policy</Link>
-          <Link href="/terms-conditions" className="hover:text-orange-600 transition">Terms & Conditions</Link>
-          <Link href="/disclaimer" className="hover:text-orange-600 transition">Disclaimer</Link>
-          <Link href="/refund-policy" className="hover:text-orange-600 transition">Return & Refund Policy</Link>
-        </div>
-      </motion.div>
-
-      {/* CONTACT ROW – NOW FULLY MOBILE RESPONSIVE */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9 }}
-        viewport={{ once: true }}
-        className="
-          max-w-7xl mx-auto px-6 mt-12 
-          flex flex-col md:flex-row 
-          justify-between items-center 
-          gap-6 text-gray-700
-        "
-      >
-        {/* CONTACT INFO MOBILE STACK */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center text-center sm:text-left">
-          <div className="flex items-center gap-2">
-            <Phone className="w-5 h-5 text-orange-600" />
-            <span className="break-all cursor-pointer">
-              <a href="tel:+918107139044"> +91 8107139044 </a>
-            </span>
+            <p className="leading-relaxed max-w-[220px] md:max-w-[260px]">
+              Serving fresh and hygienic pure vegetarian meals in trains since 2017.
+              Agarwal Rabdiwala delivers restaurant-quality food right to your train seat.
+            </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Mail className="w-5 h-5 text-orange-600" />
-            <span className="break-all cursor-pointer">
-              <a href="mailto:agarwalrabdiwala@gmail.coms">agarwalrabdiwala@gmail.com</a>
-            </span>
+          {/* IMPORTANT LINKS */}
+          <div>
+            <h4 className="font-semibold text-orange-600 mb-3">
+              Important Links
+            </h4>
+            <ul className="space-y-2">
+              <li><Link href="/terms-conditions">Terms & Conditions</Link></li>
+              <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+              <li><Link href="/disclaimer">Disclaimer</Link></li>
+              <li><Link href="/refund-policy">Refund Policy</Link></li>
+            </ul>
+          </div>
+
+          {/* QUICK LINKS */}
+          <div className="p-0">
+
+
+            <div>
+              <h4 className="font-semibold  text-orange-600 mb-3">
+                Quick Links
+              </h4>
+              <ul className="space-y-2">
+                <li><Link href="/about-us">About Us</Link></li>
+                <li><Link href="/services/train-delivery">Bulk Order Enquiry</Link></li>
+                <li><Link href="/blogs">Blogs</Link></li>
+              </ul>
+            </div>
+          </div>
+          {/* RAILWAY INFO */}
+          <div>
+            <h4 className="font-semibold text-orange-600 mb-3">
+              Indian Railway Info.
+            </h4>
+            <ul className="space-y-2">
+              <li><Link href="#">PNR Status Check</Link></li>
+              <li><Link href="#">Train Coach Position</Link></li>
+              <li><Link href="#">IRCTC Train Schedule</Link></li>
+            </ul>
           </div>
         </div>
 
-        {/* SOCIAL ICONS CENTER ON MOBILE */}
-        <div className="flex gap-4 justify-center">
-          {[Facebook, Instagram, Youtube, MessageCircle].map((Icon, i) => (
-            <motion.a
-              key={i}
-              whileHover={{ scale: 1.15 }}
-              className="bg-white shadow p-3 rounded-xl hover:bg-orange-50 transition"
-              href="#"
-            >
-              <Icon className="w-5 h-5 text-orange-600" />
-            </motion.a>
-          ))}
-        </div>
+        {/* ===== CONTACT ===== */}
+        <div className="mt-14 flex flex-col items-center gap-4 text-gray-700">
 
-        {/* COPYRIGHT */}
-        <div className="text-gray-700 text-center">
-          ©2025 – <span className="font-semibold">AGARWAL RABDIWALA</span>
-        </div>
-      </motion.div>
+          <div className="flex flex-col gap-3 items-center">
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-orange-600" />
+              <a href="tel:+918107139044">+91 8107139044</a>
+            </div>
 
-      {/* WHATSAPP BUTTON (no change – already perfect) */}
+            <div className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-orange-600" />
+              <a href="mailto:agarwalrabdiwala@gmail.com">
+                agarwalrabdiwala@gmail.com
+              </a>
+            </div>
+          </div>
+
+          {/* SOCIAL */}
+          <div className="flex gap-4 mt-2">
+            {[Facebook, Instagram, Youtube].map((Icon, i) => (
+              <a
+                key={i}
+                href="#"
+                className="bg-white p-3 rounded-xl shadow hover:bg-orange-50 transition"
+              >
+                <Icon className="w-5 h-5 text-orange-600" />
+              </a>
+            ))}
+          </div>
+
+          <div className="text-xs text-gray-600 mt-2">
+            © 2025 – <b>AGARWAL RABDIWALA</b>
+          </div>
+        </div>
+      </div>
+
+      {/* WHATSAPP */}
       <a
         href="https://wa.me/918107139044"
         target="_blank"
-        className="fixed bottom-6 right-6 bg-green-600 px-5 py-3 shadow-xl rounded-full 
-                   text-white flex items-center gap-2 hover:bg-green-700 transition"
+        className="fixed bottom-6 right-6 bg-green-600 px-4 py-3 rounded-full shadow-lg 
+                   text-white flex items-center gap-2"
       >
         <MessageCircle className="w-5 h-5" />
-        How can I help you?
+        Help
       </a>
     </footer>
   );

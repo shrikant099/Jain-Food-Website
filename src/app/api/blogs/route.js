@@ -75,12 +75,40 @@ export async function POST(req) {
 };
 
 // Get Blog
-export async function GET() {
-    await connectDb();
-    try {
-        const blogs = await Blog.find().sort({ createdAt: -1 });
-        return NextResponse.json(blogs);
-    } catch (error) {
-        return NextResponse.json({ error: `Failed To Fetch Blogs: ${error}` }, { status: 500 })
+
+export async function GET(req) {
+  await connectDb();
+
+  try {
+    const { searchParams } = new URL(req.url);
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 4;
+    const slug = searchParams.get("slug");
+
+    // SINGLE BLOG
+    if (slug) {
+      const blog = await Blog.findOne({ slug });
+      return NextResponse.json(blog);
     }
+
+    // BLOG LIST
+    const skip = (page - 1) * limit;
+    const total = await Blog.countDocuments();
+
+    const blogs = await Blog.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    return NextResponse.json({
+      blogs,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch blogs" },
+      { status: 500 }
+    );
+  }
 }

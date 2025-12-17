@@ -1,72 +1,56 @@
 "use client";
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useEffect, useRef } from "react";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import List from "@editorjs/list";
+import Paragraph from "@editorjs/paragraph";
 
-export default function BlogEditor({ value, onChange }) {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: value,
+export default function BlogEditorContent({ onChange }) {
+  const editorRef = useRef(null);
 
-    // 🔥 THIS IS THE FIX
-    immediatelyRender: false,
+  useEffect(() => {
+    if (!editorRef.current) {
+      const editor = new EditorJS({
+        holder: "editorjs",
+        placeholder: "Write your blog content here...",
+        tools: {
+          header: {
+            class: Header,
+            inlineToolbar: true,
+            config: {
+              levels: [2, 3, 4],
+              defaultLevel: 2,
+            },
+          },
+          list: {
+            class: List,
+            inlineToolbar: true,
+          },
+          paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+          },
+        },
+        async onChange() {
+          const data = await editor.save();
+          onChange(data);
+        },
+      });
 
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
-    },
-    editorProps: {
-      attributes: {
-        class:
-          "prose max-w-none min-h-[200px] focus:outline-none p-4",
-      },
-    },
-  });
+      editorRef.current = editor;
+    }
 
-  if (!editor) return null;
+    // ✅ CLEANUP (NO destroy)
+    return () => {
+      editorRef.current = null;
+    };
+  }, []);
 
   return (
-    <div className="border rounded-lg bg-white">
-      <Toolbar editor={editor} />
-      <EditorContent editor={editor} />
-    </div>
-  );
-}
-
-function Toolbar({ editor }) {
-  return (
-    <div className="flex gap-2 border-b p-2 flex-wrap">
-      <Btn
-        active={editor.isActive("bold")}
-        onClick={() => editor.chain().focus().toggleBold().run()}
-      >
-        B
-      </Btn>
-      <Btn
-        active={editor.isActive("italic")}
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-      >
-        I
-      </Btn>
-      <Btn onClick={() => editor.chain().focus().toggleBulletList().run()}>
-        • List
-      </Btn>
-      <Btn onClick={() => editor.chain().focus().toggleOrderedList().run()}>
-        1. List
-      </Btn>
-    </div>
-  );
-}
-
-function Btn({ children, onClick, active }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`px-3 py-1 border rounded ${
-        active ? "bg-orange-600 text-white" : "bg-gray-100"
-      }`}
-    >
-      {children}
-    </button>
+    <div
+      id="editorjs"
+      className="border rounded-lg p-4 bg-white min-h-[300px]"
+    />
   );
 }

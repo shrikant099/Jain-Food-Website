@@ -87,37 +87,37 @@ export const menuCategories = [
                 name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
                 desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
                 price: 800,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/veg special thali.png"
             },
             {
                 name: "Veg Special Thali (5 Nos)",
                 desc: "Paneer butter masala + mix veg + dal fry/tadka + jeera rice + 3 butter chapati + curd + salad + pickle + gulab jamun",
                 price: 1150,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/Veg mini thali.png"
             },
             {
                 name: "Aloo Paratha Curd Combo (5 Nos)",
                 desc: "2pc aloo paratha + curd + salad + pickle",
                 price: 450,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/maharaja thali.png"
             },
             {
                 name: "Mini Thali (3 Nos) + 3Pc Gulab Jamun",
                 desc: "Seasonal veg + dal fry/tadka + rice + 3 chapati + gulab jamun + salad + pickle",
                 price: 480,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Jain Mini Thali (5 Nos) + 5Pc Gulab Jamun",
                 desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
                 price: 800,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Jain Special Thali (3 Nos)",
                 desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
                 price: 1200,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/maharaja thali.png"
             }
         ]
     },
@@ -130,31 +130,31 @@ export const menuCategories = [
                 name: "Veg Mini Thali",
                 desc: "Seasonal veg + dal fry/tadka + rice + chapati + gulab jamun + salad + pickle",
                 price: 179,
-                img: "https://images.unsplash.com/photo-1604908554045-027ab2b9b80b?auto=format&w=700&q=80"
+                img: "/menu/thalis/Veg mini thali.png"
             },
             {
                 name: "Jain Mini Thali",
                 desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
                 price: 179,
-                img: "https://images.unsplash.com/photo-1626082921461-9a3cd908aa8f?auto=format&w=700&q=80"
+                img: "/menu/thalis/jain mini thali.png"
             },
             {
                 name: "Special Thali",
                 desc: "Paneer butter masala + mix veg + dal fry + jeera rice + butter chapati + curd + salad + pickle + gulab jamun",
                 price: 249,
-                img: "https://images.unsplash.com/photo-1631700737054-f5f6227263de?auto=format&w=700&q=80"
+                img: "/menu/thalis/veg special thali.png"
             },
             {
                 name: "Jain Special Thali",
                 desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
                 price: 259,
-                img: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&w=700&q=80"
+                img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Maharaja Thali",
                 desc: "Paneer butter masala + mix veg + jeera rice + dal fry + butter chapati + gulab jamun + papad + salad + pickle",
                 price: 279,
-                img: "https://images.unsplash.com/photo-1600628422011-bc1cf434cbe0?auto=format&w=700&q=80"
+                img: "/menu/thalis/maharaja thali.png"
             }
         ]
     },
@@ -240,16 +240,16 @@ export const menuCategories = [
         name: "Main Course",
         items: [
             { name: "Paneer Butter Masala", desc: "500ml", price: 290, img: "/menu/main-course/Paneer-masala.png" },
-            { name: "Matar Paneer", desc: "500ml", price: 290, img: "https://images.unsplash.com/photo-1605475128022-9f3a7848fbd9?auto=format&w=700&q=80" },
+            { name: "Matar Paneer", desc: "500ml", price: 290, img: "/menu/main-course/matar paneer.png" },
             { name: "Palak Paneer", desc: "500ml", price: 290, img: "/menu/main-course/Palak-Paneer.png" },
-            { name: "Shahi Paneer", desc: "500ml", price: 290, img: "https://images.unsplash.com/photo-1609941791281-17bf3cf19103?auto=format&w=700&q=80" },
-            { name: "Mix Veg", desc: "500ml", price: 190, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&w=700&q=80" },
+            { name: "Shahi Paneer", desc: "500ml", price: 290, img: "/menu/main-course/shahi paneer.png" },
+            { name: "Mix Veg", desc: "500ml", price: 190, img: "/menu/main-course/shahi paneer.png" },
             { name: "Chana Masala", desc: "500ml", price: 190, img: "/menu/main-course/aloo-chole.png" },
-            { name: "Aloo Dum", desc: "500ml", price: 190, img: "https://images.unsplash.com/photo-1630396596997-84b9c7c95a01?auto=format&w=700&q=80" },
-            { name: "Aloo Jeera", desc: "500ml", price: 162, img: "https://images.unsplash.com/photo-1630396596997-84b9c7c95a01?auto=format&w=700&q=80" },
-            { name: "Aloo Matar", desc: "500ml", price: 190, img: "/menu/main-course/Aloo-fry.png" },
-            { name: "Dal Fry", desc: "500ml", price: 162, img: "https://images.unsplash.com/photo-1630396596997-84b9c7c95a01?auto=format&w=700&q=80" },
-            { name: "Dal Makhani", desc: "500ml", price: 170, img: "https://images.unsplash.com/photo-1630396596997-84b9c7c95a01?auto=format&w=700&q=80" }
+            { name: "Aloo Dum", desc: "500ml", price: 190, img: "/menu/main-course/aloo dum.png" },
+            { name: "Aloo Jeera", desc: "500ml", price: 162, img: "/menu/main-course/jeera aloo.png" },
+            { name: "Aloo Matar", desc: "500ml", price: 190, img: "/menu/main-course/aloo matar.png" },
+            { name: "Dal Fry", desc: "500ml", price: 162, img: "/menu/main-course/dal fry.png" },
+            { name: "Dal Makhani", desc: "500ml", price: 170, img: "/menu/main-course/dal makhni.png" }
         ]
     },
 
@@ -282,9 +282,9 @@ export const menuCategories = [
     {
         name: "Curd & Raita",
         items: [
-            { name: "Curd", desc: "250ml", price: 62, img: "https://images.unsplash.com/photo-1604908177522-0403f8e4d6c5?auto=format&w=700&q=80" },
-            { name: "Veg Raita", desc: "250ml", price: 80, img: "https://images.unsplash.com/photo-1604908177522-0403f8e4d6c5?auto=format&w=700&q=80" },
-            { name: "Butter Milk", desc: "500ml", price: 45, img: "https://images.unsplash.com/photo-1621996346565-e76e3c3a8e02?auto=format&w=700&q=80" }
+            { name: "Curd", desc: "250ml", price: 62, img: "/menu/curd-raita/plain curd.png" },
+            { name: "Veg Raita", desc: "250ml", price: 80, img: "/menu/curd-raita/Veg raita.png" },
+            { name: "Butter Milk", desc: "500ml", price: 45, img: "/menu/curd-raita/butter milk.png" }
         ]
     },
 
@@ -292,11 +292,11 @@ export const menuCategories = [
     {
         name: "Abu Road Famous",
         items: [
-            { name: "Makhaniya Lassi", desc: "300ml", price: 76, img: "https://images.unsplash.com/photo-1621996346565-e76e3c3a8e02?auto=format&w=700&q=80" },
-            { name: "Nakshatra Rabdi", desc: "100gm cup", price: 67, img: "https://images.unsplash.com/photo-1589307071180-327f20bf7083?auto=format&w=700&q=80" },
-            { name: "Khaman Dhokla", desc: "Full plate", price: 60, img: "https://images.unsplash.com/photo-1640159784836-9a60f7ce2499?auto=format&w=700&q=80" },
-            { name: "Jalebi", desc: "100gm", price: 60, img: "https://images.unsplash.com/photo-1598511728194-d63ff67a5ff1?auto=format&w=700&q=80" },
-            { name: "Gulab Jamun", desc: "1pc", price: 25, img: "https://images.unsplash.com/photo-1598511728194-d63ff67a5ff1?auto=format&w=700&q=80" }
+            { name: "Makhaniya Lassi", desc: "300ml", price: 76, img: "/menu/abu-road/Makhaniya Lassi.png" },
+            { name: "Nakshatra Rabdi", desc: "100gm cup", price: 67, img: "/menu/abu-road/Rabdi cup.png" },
+            { name: "Khaman Dhokla", desc: "Full plate", price: 60, img: "/menu/abu-road/khaman dhokla.png" },
+            { name: "Jalebi", desc: "100gm", price: 60, img: "/menu/abu-road/Jalebi.png" },
+            { name: "Gulab Jamun", desc: "1pc", price: 25, img: "/menu/abu-road/Gulab jamun.png" }
         ]
     },
 
@@ -317,10 +317,10 @@ export const menuCategories = [
     {
         name: "Sandwich & Burgers",
         items: [
-            { name: "Veg Grill Sandwich", desc: "3 slice", price: 119, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&w=700&q=80" },
-            { name: "Aloo Masala Sandwich", desc: "3 slice", price: 100, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&w=700&q=80" },
-            { name: "Veg Cheese Grill Sandwich", desc: "3 slice", price: 119, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&w=700&q=80" },
-            { name: "Aloo Tikki Veg Burger", desc: "1pc", price: 100, img: "https://images.unsplash.com/photo-1601050690597-5a9af3d8e60e?auto=format&w=700&q=80" }
+            { name: "Veg Grill Sandwich", desc: "3 slice", price: 119, img: "/menu/sandwich-burger/Veg Grill Sandwich.png" },
+            { name: "Aloo Masala Sandwich", desc: "3 slice", price: 100, img: "/menu/sandwich-burger/Aloo masala sandwich.png" },
+            { name: "Veg Cheese Grill Sandwich", desc: "3 slice", price: 119, img: "/menu/sandwich-burger/Veg cheese grill sandwich.png" },
+            { name: "Aloo Tikki Veg Burger", desc: "1pc", price: 100, img: "/menu/sandwich-burger/Aloo tiki veg burger.png" }
         ]
     },
 
@@ -338,10 +338,10 @@ export const menuCategories = [
     {
         name: "Sweet · Papad · Salad",
         items: [
-            { name: "Rasagulla", desc: "2pc", price: 45, img: "https://images.unsplash.com/photo-1598511728194-d63ff67a5ff1?auto=format&w=700&q=80" },
-            { name: "Green Salad", desc: "1pc", price: 58, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&w=700&q=80" },
-            { name: "Roasted Papad", desc: "1pc", price: 19, img: "https://images.unsplash.com/photo-1640159784836-9a60f7ce2499?auto=format&w=700&q=80" },
-            { name: "Papad Fry", desc: "1pc", price: 29, img: "https://images.unsplash.com/photo-1640159784836-9a60f7ce2499?auto=format&w=700&q=80" }
+            { name: "Rasagulla", desc: "2pc", price: 45, img: "/menu/salad-papad/Rasagulla.png" },
+            { name: "Green Salad", desc: "1pc", price: 58, img: "/menu/salad-papad/Green salad.png" },
+            { name: "Roasted Papad", desc: "1pc", price: 19, img: "/menu/salad-papad/Roasted Papad.png" },
+            { name: "Papad Fry", desc: "1pc", price: 29, img: "/menu/salad-papad/Fry Papad.png" }
         ]
     },
 
@@ -349,14 +349,14 @@ export const menuCategories = [
     {
         name: "Jain Special",
         items: [
-            { name: "Jain Mini Thali", desc: "Channa + dal fry + rice + chapati + salad + pickle", price: 165, img: "https://images.unsplash.com/photo-1626082921461-9a3cd908aa8f?auto=format&w=700&q=80" },
-            { name: "Jain Special Thali", desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + papad + gulab jamun", price: 230, img: "https://images.unsplash.com/photo-1626082921461-9a3cd908aa8f?auto=format&w=700&q=80" },
-            { name: "Jain Channa Masala + Roti", desc: "Channa masala + roti + salad + pickle", price: 150, img: "https://images.unsplash.com/photo-1589307001375-e3b6f1f1b2c8?auto=format&w=700&q=80" },
-            { name: "Jain Paneer Masala + Roti", desc: "Paneer masala + roti + salad + pickle", price: 170, img: "https://images.unsplash.com/photo-1605475128022-9f3a7848fbd9?auto=format&w=700&q=80" },
-            { name: "Jain Mix Veg + Roti", desc: "Mix veg + roti + salad + pickle", price: 150, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&w=700&q=80" },
-            { name: "Jain Dal Fry + Rice", desc: "Dal fry + jeera rice + salad + pickle", price: 150, img: "https://images.unsplash.com/photo-1621996346565-e76e3c3a8e02?auto=format&w=700&q=80" },
-            { name: "Jain Pizza", desc: "8 inches", price: 220, img: "https://images.unsplash.com/photo-1548365328-8b8b19d1bb3b?auto=format&w=700&q=80" },
-            { name: "Jain Veg Noodles", desc: "500ml", price: 150, img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&w=700&q=80" }
+            { name: "Jain Mini Thali", desc: "Channa + dal fry + rice + chapati + salad + pickle", price: 165, img: "/menu/jain-special/Jain mini thali.png" },
+            { name: "Jain Special Thali", desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + papad + gulab jamun", price: 230, img: "/menu/jain-special/Jain special thali.png" },
+            { name: "Jain Channa Masala + Roti", desc: "Channa masala + roti + salad + pickle", price: 150, img: "/menu/jain-special/jain channa masala with roti.png" },
+            { name: "Jain Paneer Masala + Roti", desc: "Paneer masala + roti + salad + pickle", price: 170, img: "/menu/jain-special/Jain paneer masala with roti.png" },
+            { name: "Jain Mix Veg + Roti", desc: "Mix veg + roti + salad + pickle", price: 150, img: "/menu/jain-special/Jain mix veg with roti.png" },
+            { name: "Jain Dal Fry + Rice", desc: "Dal fry + jeera rice + salad + pickle", price: 150, img: "/menu/jain-special/Jain dal fry with rice.png" },
+            { name: "Jain Pizza", desc: "8 inches", price: 220, img: "/menu/jain-special/Jain veg cheese pizza.png" },
+            { name: "Jain Veg Noodles", desc: "500ml", price: 150, img: "/menu/jain-special/Jain Chowmein.png" }
         ]
     }
 ];
