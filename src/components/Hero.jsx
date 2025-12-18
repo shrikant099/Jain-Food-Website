@@ -33,8 +33,9 @@ export default function Hero() {
           <p
             className="
               mt-4
+          
               text-[#FFEAD5]
-              text-[12px]
+              text-[11px]
               sm:text-base
               md:text-lg
               leading-relaxed
@@ -60,7 +61,7 @@ export default function Hero() {
             src="/home/mbi.png"
             alt="Order Train Food & Meals at Abu Road Railway Station"
             width={1920}
-            height={900}
+            height={950}
             priority
             className="w-full h-auto object-contain"
           />
