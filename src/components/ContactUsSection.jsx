@@ -16,12 +16,22 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
+          {/* H2 – SEO OPTIMIZED */}
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">
-            Contact <span className="text-orange-600">Us</span>
+            Contact <span className="text-orange-600">Agarwal Rabdiwala</span> – Train Food at Abu Road
           </h2>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Get in touch with Agarwal Rabdiwala for bulk orders, train food delivery,
-            or any general enquiry.
+
+          {/* SEO TEXT */}
+          <p className="mt-3 text-gray-600 max-w-3xl mx-auto">
+            Get in touch with Agarwal Rabdiwala for{" "}
+            <a
+              href="/bulk-order"
+              className="text-orange-600 font-medium underline"
+            >
+              bulk train food orders
+            </a>
+            , daily meal delivery, or general enquiries at{" "}
+            <strong>Abu Road Railway Station</strong>.
           </p>
         </motion.div>
 
@@ -43,6 +53,7 @@ export default function ContactSection() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-full border-0"
+              title="Agarwal Rabdiwala Abu Road Railway Station"
             ></iframe>
           </motion.div>
 
@@ -54,20 +65,24 @@ export default function ContactSection() {
             viewport={{ once: true }}
             className="bg-white rounded-2xl shadow-lg p-8 md:p-10 flex flex-col justify-center"
           >
+            {/* BUSINESS NAME */}
             <h3 className="text-2xl font-bold text-gray-800">
               Agarwal <span className="text-orange-600">Rabdiwala</span>
             </h3>
 
+            {/* SEO DESCRIPTION */}
             <p className="mt-4 text-gray-600 leading-relaxed">
-              Serving fresh, hygienic and pure vegetarian meals at Abu Road
-              Railway Station. Trusted by thousands of train passengers since 2017.
+              Agarwal Rabdiwala is a trusted IRCTC food partner providing
+              fresh, hygienic and pure vegetarian Jain meals at{" "}
+              <strong>Abu Road Railway Station</strong>. We have been serving
+              train passengers reliably since 2017.
             </p>
 
-            {/* CONTACT INFO */}
+            {/* NAP DETAILS */}
             <div className="mt-6 space-y-4 text-gray-700">
               <p>
-                📍 <b>Location:</b> Railway Parking Area, Abu Road Railway Station,
-                Rajasthan
+                📍 <b>Address:</b> Railway Parking Area, Abu Road Railway Station,
+                Rajasthan, India
               </p>
               <p>
                 📞 <b>Phone:</b>{" "}

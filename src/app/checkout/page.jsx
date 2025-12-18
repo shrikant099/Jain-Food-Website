@@ -133,6 +133,7 @@ export default function CheckoutPage() {
 
     setStatus("loading");
     try {
+
       await emailjs.send(
         EMAIL_SERVICE_ID,
         EMAIL_TEMPLATE_ID_ORDER,

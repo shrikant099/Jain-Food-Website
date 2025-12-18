@@ -30,14 +30,14 @@ export default function EnquirySection() {
 
     try {
       await emailjs.send(
-        EMAIL_SERVICE_ID,     // 👈 YOUR SERVICE ID
-        EMAIL_TEMPLATE_ID_ENQUIRY,    // 👈 YOUR TEMPLATE ID
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID_ENQUIRY,
         {
           name: form.name,
           phone: form.phone,
           message: form.message,
         },
-        PUBLIC_KEY       // 👈 YOUR PUBLIC KEY
+        PUBLIC_KEY
       );
 
       setStatus("success");
@@ -63,19 +63,32 @@ export default function EnquirySection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
+          {/* H2 – Correct */}
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            Bulk Order Enquiry
+            Bulk Order Enquiry for Train Food
           </h2>
-          <p className="text-gray-600 mt-2">
-            Planning food for groups or train passengers? We’re here to help.
+
+          {/* SEO text */}
+          <p className="text-gray-600 mt-3 max-w-3xl mx-auto">
+            Looking to place a{" "}
+            <a
+              href="/bulk-order"
+              className="text-orange-600 font-medium underline"
+            >
+              bulk food order for trains
+            </a>{" "}
+            at <strong>Abu Road Railway Station</strong>? Agarwal Rabdiwala
+            provides hygienic vegetarian & Jain meals for group travel, events
+            and passengers.
           </p>
+
           <div className="w-20 h-1 bg-orange-500 rounded-full mx-auto mt-4" />
         </motion.div>
 
         {/* MAIN GRID */}
         <div className="grid md:grid-cols-2 gap-10 items-start">
 
-          {/* LEFT → FORM */}
+          {/* LEFT – FORM */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -108,7 +121,7 @@ export default function EnquirySection() {
                   rows={4}
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your bulk order requirement..."
+                  placeholder="Tell us about your bulk train food requirement..."
                   className="w-full px-4 py-3 rounded-xl border border-gray-300
                   focus:ring-2 focus:ring-orange-500 outline-none resize-none"
                 />
@@ -127,7 +140,6 @@ export default function EnquirySection() {
                 {status === "loading" ? "Sending Enquiry..." : "Submit Enquiry"}
               </motion.button>
 
-              {/* STATUS MESSAGE */}
               {status === "success" && (
                 <p className="text-green-600 text-sm font-medium">
                   ✅ Enquiry sent successfully. Our team will contact you soon.
@@ -142,7 +154,7 @@ export default function EnquirySection() {
             </form>
           </motion.div>
 
-          {/* RIGHT → CONTENT (RESTORED ✔) */}
+          {/* RIGHT – SEO CONTENT */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -151,31 +163,27 @@ export default function EnquirySection() {
             className="flex flex-col justify-center"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Order bulk food on train at Abu Road
+              Bulk train food delivery at Abu Road
             </h3>
 
             <p className="text-gray-600 mt-4 leading-relaxed">
-              Looking to place a bulk food order for train passengers or group travel?
+              Agarwal Rabdiwala specializes in preparing fresh, hygienic
+              vegetarian & Jain meals for bulk orders delivered directly to
+              trains at Abu Road.
             </p>
 
             <p className="text-gray-600 mt-3 leading-relaxed">
-              At <span className="font-semibold">Agarwal Rabdiwala</span>, we prepare
-              fresh vegetarian & Jain meals with hygienic packaging and reliable
-              on-time delivery at
-              <span className="font-semibold"> Abu Road Railway Station</span>.
-            </p>
-
-            <p className="text-gray-600 mt-3 leading-relaxed">
-              Share your requirement and our team will help you plan everything smoothly.
+              Whether it’s group travel, tour operators or events, our team
+              ensures timely preparation and reliable delivery at{" "}
+              <strong>Abu Road Railway Station</strong>.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Highlight text="Freshly Cooked Meals" />
-              <Highlight text="Jain & Vegetarian Options" />
-              <Highlight text="Reliable Train Delivery" />
+              <Highlight text="Bulk Orders for Trains" />
+              <Highlight text="Jain & Vegetarian Meals" />
+              <Highlight text="Reliable Delivery at Abu Road" />
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
@@ -187,10 +195,9 @@ function FormField({ label, name, value, onChange, type = "text" }) {
   const handleInput = (e) => {
     let val = e.target.value;
 
-    // 🔒 Mobile number lock (10 digits only)
     if (name === "phone") {
-      val = val.replace(/\D/g, "");   // sirf numbers
-      if (val.length > 10) return;    // 10 se zyada allow nahi
+      val = val.replace(/\D/g, "");
+      if (val.length > 10) return;
     }
 
     onChange({
@@ -216,7 +223,6 @@ function FormField({ label, name, value, onChange, type = "text" }) {
     </div>
   );
 }
-
 
 function Highlight({ text }) {
   return (

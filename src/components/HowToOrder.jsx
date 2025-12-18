@@ -2,30 +2,11 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle, Train, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function HowToOrder() {
-  const steps = [
-    {
-      icon: <MessageCircle className="w-10 h-10 text-orange-600" />,
-      title: "Send Us a WhatsApp Message",
-      desc: "Just send your Train Number, Journey Date, Coach and Seat Number on WhatsApp — and we immediately begin processing your order.",
-    },
-    {
-      icon: <Train className="w-10 h-10 text-orange-600" />,
-      title: "Choose Your Pure Jain Meal",
-      desc: "We will share our fresh, hygienic, and 100% onion–garlic–free Jain menu on WhatsApp. Pick your favourite items effortlessly.",
-    },
-    {
-      icon: <CheckCircle className="w-10 h-10 text-orange-600" />,
-      title: "Get Hot Food on Your Seat",
-      desc: "Your food is prepared fresh as per your train timing and delivered hot, pure and on time — directly at your seat.",
-    },
-  ];
-
   return (
-    <section className="relative py-20 bg-white">
-      
-      {/* Heading */}
+    <section className="py-20 bg-white">
       <motion.h2
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -33,68 +14,56 @@ export default function HowToOrder() {
         viewport={{ once: true }}
         className="text-center text-4xl md:text-5xl font-extrabold text-gray-900"
       >
-        How to Order on WhatsApp
+        How to Order Train Food on WhatsApp
       </motion.h2>
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9 }}
-        viewport={{ once: true }}
-        className="text-center text-gray-600 max-w-2xl mx-auto mt-4 text-lg"
-      >
-        Get fresh, pure Jain food delivered to your train seat in just a few simple steps.
-      </motion.p>
+      <p className="text-center text-gray-600 max-w-2xl mx-auto mt-4 text-lg">
+        Order fresh vegetarian & Jain meals easily via WhatsApp and get hot food
+        delivered at your train seat at Abu Road Railway Station.
+      </p>
 
-      {/* Steps */}
       <div className="max-w-7xl mx-auto px-6 mt-14 grid md:grid-cols-3 gap-10">
-        {steps.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className="bg-gray-50 rounded-2xl shadow-md p-8 text-center hover:shadow-xl transition group border border-orange-100"
-          >
-            <div className="flex justify-center mb-5">
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                transition={{ type: 'spring', stiffness: 180 }}
-                className="p-4 bg-orange-100 rounded-full shadow-sm"
-              >
-                {item.icon}
-              </motion.div>
-            </div>
-
-            <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-orange-600 transition">
-              {item.title}
-            </h3>
-
-            <p className="text-gray-600 mt-3 leading-relaxed">
-              {item.desc}
-            </p>
-          </motion.div>
+        {[
+          {
+            icon: <MessageCircle className="w-10 h-10 text-orange-600" />,
+            title: "Send Order Details on WhatsApp",
+            desc: "Share your train number, journey date, coach and seat number with us on WhatsApp.",
+          },
+          {
+            icon: <Train className="w-10 h-10 text-orange-600" />,
+            title: "Choose Your Meal",
+            desc: "Select from our hygienic vegetarian & Jain menu prepared fresh daily.",
+          },
+          {
+            icon: <CheckCircle className="w-10 h-10 text-orange-600" />,
+            title: "Enjoy Food at Your Seat",
+            desc: "Get hot, fresh food delivered on time at Abu Road Railway Station.",
+          },
+        ].map((step, i) => (
+          <div key={i} className="bg-gray-50 rounded-2xl shadow-md p-8 text-center border border-orange-100">
+            <div className="flex justify-center mb-5">{step.icon}</div>
+            <h3 className="text-2xl font-semibold">{step.title}</h3>
+            <p className="text-gray-600 mt-3">{step.desc}</p>
+          </div>
         ))}
       </div>
 
-      {/* WhatsApp CTA */}
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="text-center mt-14"
-      >
+      <div className="text-center mt-14 flex justify-center gap-4 flex-wrap">
         <a
           href="https://wa.me/918290951295"
           target="_blank"
-          className="inline-flex items-center gap-3 bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition"
+          className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg transition"
         >
-          <MessageCircle className="w-6 h-6" /> Order Now on WhatsApp
+          Order Now on WhatsApp
         </a>
-      </motion.div>
 
+        <Link
+          href="/contact"
+          className="bg-white border px-8 py-4 rounded-xl text-lg font-semibold"
+        >
+          Contact Us
+        </Link>
+      </div>
     </section>
   );
 }

@@ -8,7 +8,7 @@ export default function HomeAbout() {
     <section className="py-20 bg-gray-50 px-4 flex justify-center">
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
 
-        {/* LEFT SIDE IMAGE */}
+        {/* LEFT IMAGE */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -18,13 +18,13 @@ export default function HomeAbout() {
         >
           <Image
             src="/about/mobilePhoto.png"
-            alt="Agarwal Rabdiwala"
+            alt="Agarwal Rabdiwala Train Food Delivery at Abu Road"
             fill
             className="object-cover"
           />
         </motion.div>
 
-        {/* RIGHT SIDE CONTENT */}
+        {/* RIGHT CONTENT */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -32,31 +32,40 @@ export default function HomeAbout() {
           viewport={{ once: true }}
           className="space-y-6"
         >
+          {/* H2 – Correct hierarchy */}
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug">
             About <span className="text-orange-600">Agarwal Rabdiwala</span>
           </h2>
 
+          {/* SEO TEXT */}
           <p className="text-gray-700 text-lg leading-relaxed">
-            Serving fresh, hygienic and pure vegetarian Jain meals since 2017
-            at Abu Road Railway Station. We prepare every meal with love,
-            tradition and cleanliness — delivering hot food directly to your
-            train seat.
+            <strong>Agarwal Rabdiwala</strong> is a trusted IRCTC food partner
+            providing fresh, hygienic and pure vegetarian Jain meals at{" "}
+            <strong>Abu Road Railway Station</strong>. Since 2017, we have been
+            delivering quality <a href="/services/train-delivery" className="text-orange-600 font-medium underline">
+              train food
+            </a>{" "}
+            directly to passengers’ seats.
           </p>
 
           <p className="text-gray-700 leading-relaxed">
-            Known for our <b>authentic Rabdi</b> and <b>premium veg thalis</b>,
-            we have served <b>20,000+ passengers</b> and partnered proudly with 
-            <b> IRCTC</b>. Our focus is simple — taste, purity and customer delight.
+            Famous for our <strong>authentic Rabdi</strong>, premium veg thalis
+            and timely delivery, we have proudly served over{" "}
+            <strong>20,000+ train passengers</strong>. We also specialize in{" "}
+            <a href="/bulk-order" className="text-orange-600 font-medium underline">
+              bulk food orders for trains
+            </a>{" "}
+            including group travel and events.
           </p>
 
-          {/* BUTTON */}
+          {/* CTA */}
           <motion.a
             href="/about-us"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="inline-block mt-4 px-8 py-3 bg-orange-600 text-white font-semibold rounded-xl shadow-lg hover:bg-orange-700 transition"
           >
-            Read More
+            Read More About Us
           </motion.a>
         </motion.div>
       </div>
