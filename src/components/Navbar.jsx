@@ -99,7 +99,7 @@ export default function Navbar() {
               className="md:hidden bg-white shadow-md px-6 py-4 space-y-3"
             >
               <MobileItem href="/" setIsOpen={setIsOpen}>Home</MobileItem>
-              <MobileItem href="/menu" setIsOpen={setIsOpen}>Menu</MobileItem>
+              <MobileItem href="/services/train-delivery" setIsOpen={setIsOpen}>Menu</MobileItem>
               <MobileItem href="/about-us" setIsOpen={setIsOpen}>About Us</MobileItem>
               <MobileItem href="/contact" setIsOpen={setIsOpen}>Contact</MobileItem>
 

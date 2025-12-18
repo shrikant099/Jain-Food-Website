@@ -34,7 +34,7 @@ export default function Hero() {
             className="
               mt-4
               text-[#FFEAD5]
-              text-sm
+              text-[12px]
               sm:text-base
               md:text-lg
               leading-relaxed
@@ -67,7 +67,7 @@ export default function Hero() {
         </motion.div>
 
         {/* CTA BUTTONS */}
-        <div className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 gap-6 z-30">
+        <div className="hidden sm:hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 gap-6 z-30">
           <a
             href="tel:+918290951295"
             className="px-8 py-4 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-xl transition"
