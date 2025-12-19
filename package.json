@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-     "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.31.0",
@@ -19,6 +19,7 @@
     "@tiptap/starter-kit": "^3.13.0",
     "cloudinary": "^2.8.0",
     "clsx": "^2.1.1",
+    "crypto": "^1.0.1",
     "framer-motion": "^12.23.25",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.556.0",

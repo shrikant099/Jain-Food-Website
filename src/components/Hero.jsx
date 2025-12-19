@@ -12,43 +12,7 @@ export default function Hero() {
         {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/55 z-10"></div>
 
-        {/* SEO TEXT */}
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-5">
-          <h1
-            className="
-              text-[#FFF7ED]
-              text-2xl
-              sm:text-3xl
-              md:text-5xl
-              font-extrabold
-              leading-tight
-              md:leading-snug
-              max-w-4xl
-              drop-shadow-2xl
-            "
-          >
-            Order Train Food & Meals at Abu Road
-          </h1>
-
-          <p
-            className="
-              mt-4
-          
-              text-[#FFEAD5]
-              text-[11px]
-              sm:text-base
-              md:text-lg
-              leading-relaxed
-              md:leading-loose
-              max-w-3xl
-              drop-shadow-xl
-            "
-          >
-            Fresh, hygienic vegetarian & Jain meals delivered directly to your
-            train seat at Abu Road Railway Station by Agarwal Rabdiwala –
-            a trusted IRCTC food partner.
-          </p>
-        </div>
+  
 
         {/* HERO IMAGE */}
         <motion.div

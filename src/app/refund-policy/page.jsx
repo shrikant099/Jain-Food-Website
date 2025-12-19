@@ -107,7 +107,7 @@ export default function RefundPolicyPage() {
                 title: "3. Return Policy",
                 points: [
                   "Since we sell consumable food products, returns are not applicable once the order is delivered.",
-                  "However, refund or replacement may be considered in the following cases:"
+                  "However, refund may be considered in the following cases:"
                 ],
                 subPoints: [
                   "Wrong item delivered",
@@ -140,7 +140,7 @@ export default function RefundPolicyPage() {
                 title: "5. Refund Processing Time",
                 points: [
                   "All approved refunds shall be processed to the original payment method only.",
-                  "Refunds are generally initiated within 5–7 business days after approval.",
+                  "Refunds are generally credited within 5–7 business days after approval.",
                   "We are not responsible for delays caused by banks or payment gateway partners."
                 ]
               },
@@ -186,6 +186,12 @@ export default function RefundPolicyPage() {
                 points: [
                   "This Policy shall be governed by and construed in accordance with the laws of India.",
                   "All disputes shall be subject to the exclusive jurisdiction of the courts of Abu Road, Rajasthan."
+                ]
+              },
+              {
+                title: "Shipping",
+                points: [
+                  "All order will be deliverd within 35-45 minutes of estimated arrival time (EAT) of train at abu road station.",
                 ]
               }
             ].map((section, index) => (

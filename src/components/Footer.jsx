@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-gray-50 border-t border-orange-100 mt-20">
       <div className="max-w-7xl mx-auto px-5 py-14">
 
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-10 text-sm text-gray-700">
+        <div className="grid items-center md:grid-cols-4 grid-cols-2 gap-10 text-sm text-gray-700">
 
           {/* LOGO + SEO TEXT */}
           <div>
@@ -88,7 +88,7 @@ export default function Footer() {
         href="https://wa.me/918107139044"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-600 px-4 py-3 rounded-full shadow-lg text-white flex items-center gap-2"
+        className="fixed bottom-20 right-6 bg-green-600 px-4 py-3 rounded-full shadow-lg text-white flex items-center gap-2"
       >
         <MessageCircle size={18} />
         Help

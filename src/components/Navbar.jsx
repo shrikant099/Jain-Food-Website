@@ -69,6 +69,19 @@ export default function Navbar() {
               <NavItem href="/privacy-policy">Privacy Policy</NavItem>
             </div>
 
+            <div className="block sm:hidden md:hidden lg:hidden">
+              <div className="order-btn">
+                <Link href="/services/train-delivery">
+                Order Now
+                </Link>
+        
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
             {/* CART */}
             <div className="hidden md:flex items-center gap-6">
               <Link href="/checkout" className="relative">

@@ -87,8 +87,9 @@ export default function CheckoutPage() {
   const gstAmount = (subtotal - discount) * GST_RATE;
   const total = subtotal - discount + gstAmount;
   const [status, setStatus] = useState("idle");
-
+  const [paymentError, setPaymentError] = useState("");
   /* ================= FORM ================= */
+  const [showCODPopup, setShowCODPopup] = useState(false);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -103,6 +104,7 @@ export default function CheckoutPage() {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // COD Payment 
   const submitOrder = async (e) => {
     e.preventDefault();
 
@@ -134,28 +136,30 @@ export default function CheckoutPage() {
     setStatus("loading");
     try {
 
-      await emailjs.send(
-        EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID_ORDER,
-        {
-          name: form.name,
-          phone: form.phone,
-          train: form.train,
-          pnr: form.pnr,
-          coach: form.coach,
-          seat: form.seat,
-          payment: form.payment.toUpperCase(),
-          note: form.note || "No special instructions",
 
-          // Order Details
-          items: itemsText,
-          subtotal: subtotal.toFixed(0),
-          discount: discount.toFixed(0),
-          gst: gstAmount.toFixed(0),
-          total: total.toFixed(0),
-        },
-        PUBLIC_KEY
-      );
+      //  Sending Order Detail on Email
+      // await emailjs.send(
+      //   EMAIL_SERVICE_ID,
+      //   EMAIL_TEMPLATE_ID_ORDER,
+      //   {
+      //     name: form.name,
+      //     phone: form.phone,
+      //     train: form.train,
+      //     pnr: form.pnr,
+      //     coach: form.coach,
+      //     seat: form.seat,
+      //     payment: form.payment.toUpperCase(),
+      //     note: form.note || "No special instructions",
+
+      //     // Order Details
+      //     items: itemsText,
+      //     subtotal: subtotal.toFixed(0),
+      //     discount: discount.toFixed(0),
+      //     gst: gstAmount.toFixed(0),
+      //     total: total.toFixed(0),
+      //   },
+      //   PUBLIC_KEY
+      // );
 
       // Order Object For Store Session Storage
       const orderData = {
@@ -185,6 +189,17 @@ export default function CheckoutPage() {
         orderDate: new Date().toLocaleString("en-IN"),
       }
 
+
+      // Fetch Whatsapp APi
+      const res = await fetch("/api/whatsapp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
+
+      const data = await res.json();
+      console.log("WhatsApp API response:", data);
+
       setStatus("success");
       setForm({
         name: "",
@@ -206,7 +221,86 @@ export default function CheckoutPage() {
     }
   };
 
-  const [showCODPopup, setShowCODPopup] = useState(false);
+  // Phone Pay Payment 
+  const handlePhonePePayment = async () => {
+    if (
+      !form.name ||
+      !form.phone ||
+      !form.train ||
+      !form.pnr ||
+      !form.coach ||
+      !form.seat
+    ) {
+      setStatus("error");
+      return;
+    }
+
+    if (total.toFixed(0) < 99) {
+      setStatus("lessThan99");
+      return;
+    }
+
+    // 🔑 IMPORTANT: order data temporary save
+    const pendingOrder = {
+      customer: {
+        name: form.name,
+        phone: form.phone,
+        train: form.train,
+        pnr: form.pnr,
+        coach: form.coach,
+        seat: form.seat,
+        payment: "PHONEPE",
+        note: form.note,
+      },
+      items: items.map((item) => ({
+        name: item.name,
+        qty: item.qty,
+        price: item.price,
+        total: item.price * item.qty,
+      })),
+      price: {
+        subtotal: subtotal.toFixed(0),
+        discount: discount.toFixed(0),
+        gst: gstAmount.toFixed(0),
+        total: total.toFixed(0),
+      },
+      orderId: `TP${Date.now()}`,
+      orderDate: new Date().toLocaleString("en-IN"),
+    };
+
+    // 🔐 temporary store
+    sessionStorage.setItem(
+      "pendingPhonePeOrder",
+      JSON.stringify(pendingOrder)
+    );
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/phonepe/pay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: total.toFixed(0),
+          mobile: form.phone,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data?.data?.instrumentResponse?.redirectInfo?.url) {
+        window.location.href =
+          data.data.instrumentResponse.redirectInfo.url;
+      } else {
+        setStatus("paymentError");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("paymentError");
+    }
+  };
+
+
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-20">
@@ -456,23 +550,29 @@ export default function CheckoutPage() {
           />
 
           <PaymentOption
-            label="Online Payment (Razorpay)"
-            value="razorpay"
-            disabled={true}
+            label="Online Payment (PhonePe / UPI)"
+            value="phonepe"
             selected={form.payment}
             onChange={handleChange}
           />
 
           <button
-            onClick={submitOrder}
+            onClick={(e) => {
+              if (form.payment === "cod") {
+                submitOrder(e);
+              } else if (form.payment === "phonepe") {
+                handlePhonePePayment();
+              }
+            }}
             disabled={status === "loading"}
             className={`w-full mt-6 bg-orange-600 text-white py-3 rounded-xl font-bold ${status === "loading"
               ? "bg-orange-400 cursor-not-allowed"
-              : "bg-orange-600 text-white"
+              : ""
               }`}
           >
-            {status === "loading" ? "Loading..." : "Place Order"}
+            {status === "loading" ? "Redirecting..." : "Place Order"}
           </button>
+
 
           {/* STATUS MESSAGE */}
           {status === "success" && (
@@ -480,6 +580,13 @@ export default function CheckoutPage() {
               ✅ Enquiry sent successfully. Our team will contact you soon.
             </p>
           )}
+
+          {paymentError && (
+            <p className="text-red-600 mt-4 text-lg font-medium">
+              ❌ {paymentError}
+            </p>
+          )}
+
 
           {/* Error Message */}
           {status === "error" && (

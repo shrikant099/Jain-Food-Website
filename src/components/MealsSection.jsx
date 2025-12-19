@@ -17,7 +17,7 @@ export default function BestSellerMeals() {
 
   return (
     <section className="py-20 bg-gray-50">
-      <h2 className="text-center text-4xl font-extrabold text-gray-900">Best Seller Meals</h2>
+      <h1 className="text-center text-4xl font-extrabold text-gray-900">Best Seller Meals</h1>
       <p className="text-center text-gray-600 max-w-2xl mx-auto mt-2">
         Our most loved, fresh & hygienic Jain-friendly meals.
       </p>

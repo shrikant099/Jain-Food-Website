@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ThankYouHeader() {
   return (
@@ -9,12 +10,14 @@ export default function ThankYouHeader() {
 
         {/* LOGO */}
         <div className="w-22 h-22 relative shrink-0">
-          <Image
-            src="/logo1.png"   
-            alt="Agarwal Rabdiwala"
-            fill
-            className="object-contain"
-          />
+          <Link href={"/"} className="cursor-pointer">
+            <Image
+              src="/logo1.png"
+              alt="Agarwal Rabdiwala"
+              fill
+              className="object-contain"
+            />
+          </Link>
         </div>
 
         {/* BRAND NAME */}
