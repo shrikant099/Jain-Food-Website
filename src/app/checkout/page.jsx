@@ -51,6 +51,15 @@ const coupons = [
   },
 ];
 
+
+let orderCounter = 1;
+function generateOrderId() {
+  const id = `#AR07344${orderCounter}`;
+  orderCounter += 1;
+  return id;
+}
+
+
 export default function CheckoutPage() {
   const cart = useSelector(selectCartItems);
   const dispatch = useDispatch();
@@ -185,7 +194,7 @@ export default function CheckoutPage() {
           gst: gstAmount.toFixed(0),
           total: total.toFixed(0),
         },
-        orderId: `TC${Date.now()}`,
+        orderId: generateOrderId(),
         orderDate: new Date().toLocaleString("en-IN"),
       }
 
@@ -198,7 +207,6 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
-      console.log("WhatsApp API response:", data);
 
       setStatus("success");
       setForm({
@@ -264,7 +272,7 @@ export default function CheckoutPage() {
         gst: gstAmount.toFixed(0),
         total: total.toFixed(0),
       },
-      orderId: `TP${Date.now()}`,
+      orderId: generateOrderId(),
       orderDate: new Date().toLocaleString("en-IN"),
     };
 

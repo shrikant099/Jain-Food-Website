@@ -15,7 +15,6 @@ export async function POST(req) {
                 { status: 400 }
             );
         }
-
         return NextResponse.json(
             {
                 success: true,

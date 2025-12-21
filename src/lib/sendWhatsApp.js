@@ -1,95 +1,137 @@
+// export async function sendWhatsApp(order) {
+//     try {
+//         const PHONE_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
+//         const TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
+
+//         const orderDate = new Date()
+//             .toLocaleDateString("en-IN")
+//             .split("/")
+//             .join("-");
+
+//         const itemsText = order.items
+//             .map(i => `${i.name} x ${i.qty}`)
+//             .join("\n");
+
+//         const ownerNumber = process.env.WHATSAPP_OWNER_NUMBER;
+//         const customerNumber = `91${order.customer.phone}`;
+
+//         const buildPayload = (to) => ({
+//             messaging_product: "whatsapp",
+//             to,
+//             type: "template",
+//             template: {
+//                 name: "order_confirmation_utility_v1",
+//                 language: { code: "en_US" },
+//                 components: [{
+//                     type: "body",
+//                     parameters: [
+//                         { type: "text", text: order.orderId },             // {{1}}
+//                         { type: "text", text: order.customer.name },       // {{2}}
+//                         { type: "text", text: order.customer.phone },      // {{3}}
+//                         { type: "text", text: order.customer.payment },    // {{4}}
+//                         { type: "text", text: order.customer.train },      // {{5}}
+//                         { type: "text", text: order.customer.pnr },        // {{6}}
+//                         { type: "text", text: `${order.customer.coach}/${order.customer.seat}` }, // {{7}}
+//                         { type: "text", text: orderDate },                 // {{8}}
+//                         { type: "text", text: itemsText },                 // {{9}}
+//                         { type: "text", text: order.price.subtotal },      // {{10}}
+//                         { type: "text", text: order.price.discount },      // {{11}}
+//                         { type: "text", text: order.price.gst },           // {{12}}
+//                         { type: "text", text: order.price.total },         // {{13}}
+//                         { type: "text", text: order.price.total }          // {{14}}
+//                     ]
+//                 }]
+//             }
+//         });
+
+//         const url = `https://graph.facebook.com/v19.0/${PHONE_ID}/messages`;
+//         const headers = {
+//             Authorization: `Bearer ${TOKEN}`,
+//             "Content-Type": "application/json"
+//         };
+
+//         // OWNER
+//         await fetch(url, { method: "POST", headers, body: JSON.stringify(buildPayload(ownerNumber)) });
+
+//         // CUSTOMER
+//         await fetch(url, { method: "POST", headers, body: JSON.stringify(buildPayload(customerNumber)) });
+
+//         return { success: true };
+
+//     } catch (err) {
+//         console.error("WhatsApp Error:", err);
+//         return { success: false };
+//     }
+// }
+
 
 export async function sendWhatsApp(order) {
     try {
-        const MODE = process.env.WHATSAPP_MODE;
-        const receiverNumber = MODE === "LIVE" ? process.env.WHATSAPP_CLIENT_NUMBER : process.env.WHATSAPP_TEST_NUMBER;
+        const PHONE_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
+        const TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
 
-        const itemsText = order.items.map((i, idx) => `${idx + 1}. ${i.name} x ${i.qty} = ₹${i.total}`).join("\n");
+        const orderDate = new Date().toLocaleDateString("en-IN");
 
-        // Payload
-        // const payload = {
-        //     messaging_product: "whatsapp",
-        //     to: receiverNumber, // 91xxxxxxxxxx
-        //     type: "template",
-        //     template: {
-        //         name: "order_confirmation_v2",
-        //         language: {
-        //             code: "en_US"
-        //         },
-        //         components: [
-        //             {
-        //                 type: "body",
-        //                 parameters: [
-        //                     { type: "text", text: order.customer.name },
-        //                     { type: "text", text: order.customer.phone },
-        //                     { type: "text", text: order.orderId },
-        //                     { type: "text", text: itemsText },
-        //                     { type: "text", text: String(order.price.subtotal) },
-        //                     { type: "text", text: String(order.price.discount) },
-        //                     { type: "text", text: String(order.price.gst) },
-        //                     { type: "text", text: String(order.price.total) },
-        //                     { type: "text", text: order.customer.payment }
-        //                 ]
-        //             }
-        //         ]
-        //     }
-        // };
+        const itemsText = order.items
+            .map(i => `• ${i.name} x ${i.qty}`)
+            .join("\n");
 
-        const payload = {
+        const ownerNumber = process.env.WHATSAPP_OWNER_NUMBER;
+        const customerNumber = `91${order.customer.phone}`;
+
+        const buildTextPayload = (to) => ({
             messaging_product: "whatsapp",
-            to: receiverNumber,
+            to,
             type: "text",
             text: {
-              body: `✅ New Order Received!
-          
-          Name: ${order.customer.name}
-          Phone: ${order.customer.phone}
-          Order ID: ${order.orderId}
-          
-          Items:
-          ${itemsText}
-          
-          Subtotal: ₹${order.price.subtotal}
-          Discount: ₹${order.price.discount}
-          GST: ₹${order.price.gst}
-          Total: ₹${order.price.total}
-          
-          Payment Mode: ${order.customer.payment}
-          
-          🙏 Thank you for choosing Agarwal Rabdiwala`
+                body: `✅ *Order Confirmed New Order Notification*
+
+🆔 Order ID: ${order.orderId}
+👤 Name: ${order.customer.name}
+📞 Phone: ${order.customer.phone}
+Payment Type: ${order.customer.payment}
+🚆 Train: ${order.customer.train}
+🪑 Coach/Seat: ${order.customer.coach}/${order.customer.seat}
+🎟️ PNR: ${order.customer.pnr}
+📅 Arrival Date: ${orderDate}
+
+🍱 *Menu Items*
+${itemsText}
+
+💰 Order Total: ₹${order.price.subtotal}
+🏷️ Discount: ₹${order.price.discount}
+🧾 GST (5%): ₹${order.price.gst}
+💵 *Final Amount: ₹${order.price.total}*
+💵 *Amount To Collect: ₹${order.price.total}*
+
+Customer Note: provide salt with food`
             }
-          };
+        });
 
-        // const payload = {
-        //     messaging_product: "whatsapp",
-        //     to: receiverNumber, // +91XXXXXXXXXX (tumhara verified number)
-        //     type: "template",
-        //     template: {
-        //         name: "jasper_market_plain_text_v1",
-        //         language: {
-        //             code: "en_US",
-        //         },
-        //     },
-        // };
+        const url = `https://graph.facebook.com/v19.0/${PHONE_ID}/messages`;
+        const headers = {
+            Authorization: `Bearer ${TOKEN}`,
+            "Content-Type": "application/json",
+        };
 
-        // Fetch
-        const res = await fetch(
-            `https://graph.facebook.com/v19.0/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`,
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            }
-        );
+        // SEND TO OWNER
+        await fetch(url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(buildTextPayload(ownerNumber)),
+        });
 
-        const data = await res.json();
-        console.log("WhatsApp response:", data);
+        // SEND TO CUSTOMER
+        await fetch(url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(buildTextPayload(customerNumber)),
+        });
 
-    } catch (error) {
-        console.log(`Error sending whatsapp message: ${error}`);
-        return;
+        return { success: true };
+
+    } catch (err) {
+        console.error("WhatsApp Error:", err);
+        return { success: false };
     }
 }
