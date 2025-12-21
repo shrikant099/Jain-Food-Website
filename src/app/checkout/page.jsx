@@ -206,6 +206,11 @@ export default function CheckoutPage() {
         body: JSON.stringify(orderData),
       });
 
+      if (!res.status === 200) {
+        console.log(`Failed to send message Whatsapp`);
+        return;
+      }
+
       const data = await res.json();
 
       setStatus("success");
