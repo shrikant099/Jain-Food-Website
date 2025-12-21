@@ -87,20 +87,29 @@ export async function sendWhatsApp(order) {
                 body: `✅ *Order Confirmed New Order Notification*
 
 🆔 Order ID: ${order.orderId}
+
 👤 Name: ${order.customer.name}
+
 📞 Phone: ${order.customer.phone}
-Payment Type: ${order.customer.payment}
+
+$Payment Type: ${order.customer.payment}
+
 🚆 Train: ${order.customer.train}
+
 🪑 Coach/Seat: ${order.customer.coach}/${order.customer.seat}
+
 🎟️ PNR: ${order.customer.pnr}
+
 📅 Arrival Date: ${orderDate}
 
 🍱 *Menu Items*
 ${itemsText}
 
 💰 Order Total: ₹${order.price.subtotal}
+
 🏷️ Discount: ₹${order.price.discount}
 🧾 GST (5%): ₹${order.price.gst}
+
 💵 *Final Amount: ₹${order.price.total}*
 💵 *Amount To Collect: ₹${order.price.total}*
 
