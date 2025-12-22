@@ -235,25 +235,18 @@ export default function CheckoutPage() {
 
   // ================= PHONEPE PAYMENT =================
   const handlePhonePePayment = async () => {
-    if (
-      !form.name ||
-      !form.phone ||
-      !form.train ||
-      !form.pnr ||
-      !form.coach ||
-      !form.seat
-    ) {
+    if (!form.name || !form.phone || !form.train || !form.pnr || !form.coach || !form.seat) {
       setStatus("error");
       return;
     }
-
-    if (total.toFixed(0) < 99) {
+  
+    if (total < 99) {
       setStatus("lessThan99");
       return;
     }
-
+  
     const orderId = generateOrderId();
-
+  
     const pendingOrder = {
       customer: {
         name: form.name,
@@ -275,18 +268,12 @@ export default function CheckoutPage() {
       orderId,
       orderDate: new Date().toLocaleString("en-IN"),
     };
-
-    // UX purpose only
-    sessionStorage.setItem(
-      "pendingPhonePeOrder",
-      JSON.stringify(pendingOrder)
-    );
-
+  
+    sessionStorage.setItem("pendingPhonePeOrder", JSON.stringify(pendingOrder));
     setStatus("loading");
-
+  
     try {
-      // 🔥 ONLY THIS — SERVER WILL REDIRECT
-      await fetch("/api/phonepe/pay", {
+      const res = await fetch("/api/phonepe/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -295,16 +282,21 @@ export default function CheckoutPage() {
           orderId,
         }),
       });
-
-      // ❌ yahan kuch aur mat likhna
-      // ❌ res.json() mat karo
-      // ❌ window.location.href mat lagao
-
+  
+      const data = await res.json();
+  
+      if (data?.data?.instrumentResponse?.redirectInfo?.url) {
+        window.location.href =
+          data.data.instrumentResponse.redirectInfo.url;
+      } else {
+        setStatus("paymentError");
+      }
     } catch (err) {
       console.error(err);
       setStatus("paymentError");
     }
   };
+  
 
 
 
