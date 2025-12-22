@@ -233,75 +233,95 @@ export default function CheckoutPage() {
   };
 
 
-  // ================= PHONEPE PAYMENT =================
-  const handlePhonePePayment = async () => {
-    if (!form.name || !form.phone || !form.train || !form.pnr || !form.coach || !form.seat) {
-      setStatus("error");
+// ================= PHONEPE PAYMENT (V2) =================
+const handlePhonePePayment = async () => {
+  // ✅ basic validation
+  if (
+    !form.name ||
+    !form.phone ||
+    !form.train ||
+    !form.pnr ||
+    !form.coach ||
+    !form.seat
+  ) {
+    setStatus("error");
+    return;
+  }
+
+  if (Number(total) < 99) {
+    setStatus("lessThan99");
+    return;
+  }
+
+  const orderId = generateOrderId();
+
+  // ✅ SAME structure (as you want)
+  const pendingOrder = {
+    customer: {
+      name: form.name,
+      phone: form.phone,
+      train: form.train,
+      pnr: form.pnr,
+      coach: form.coach,
+      seat: form.seat,
+      payment: "PHONEPE",
+      note: form.note,
+    },
+    items,
+    price: {
+      subtotal: subtotal.toFixed(0),
+      discount: discount.toFixed(0),
+      gst: gstAmount.toFixed(0),
+      total: total.toFixed(0),
+    },
+    orderId,
+    orderDate: new Date().toLocaleString("en-IN"),
+  };
+
+  // ✅ session me save (important)
+  sessionStorage.setItem(
+    "pendingPhonePeOrder",
+    JSON.stringify(pendingOrder)
+  );
+
+  setStatus("loading");
+
+  try {
+    const res = await fetch("/api/phonepe/pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: Number(total.toFixed(0)),
+        mobile: form.phone,
+        orderId,
+      }),
+    });
+
+    const data = await res.json();
+
+    // ❌ agar backend se fail aaye
+    if (!data || data.success === false) {
+      console.error("PhonePe API Error:", data);
+      setStatus("paymentError");
       return;
     }
-  
-    if (total < 99) {
-      setStatus("lessThan99");
-      return;
-    }
-  
-    const orderId = generateOrderId();
-  
-    const pendingOrder = {
-      customer: {
-        name: form.name,
-        phone: form.phone,
-        train: form.train,
-        pnr: form.pnr,
-        coach: form.coach,
-        seat: form.seat,
-        payment: "PHONEPE",
-        note: form.note,
-      },
-      items,
-      price: {
-        subtotal: subtotal.toFixed(0),
-        discount: discount.toFixed(0),
-        gst: gstAmount.toFixed(0),
-        total: total.toFixed(0),
-      },
-      orderId,
-      orderDate: new Date().toLocaleString("en-IN"),
-    };
-  
-    sessionStorage.setItem("pendingPhonePeOrder", JSON.stringify(pendingOrder));
-    setStatus("loading");
-  
-    try {
-      const res = await fetch("/api/phonepe/pay", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: total.toFixed(0),
-          mobile: form.phone,
-          orderId,
-        }),
-      });
-  
-      const data = await res.json();
-  
-if (!data.success) {
-  console.error("PhonePe Error:", data);
-  setStatus("paymentError");
-  return;
-}
-      if (data?.data?.instrumentResponse?.redirectInfo?.url) {
-        window.location.href =
-          data.data.instrumentResponse.redirectInfo.url;
-      } else {
-        setStatus("paymentError");
-      }
-    } catch (err) {
-      console.error(err);
+
+    // ✅ PhonePe redirect (V2)
+    const redirectUrl =
+      data?.data?.instrumentResponse?.redirectInfo?.url;
+
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    } else {
+      console.error("Redirect URL missing:", data);
       setStatus("paymentError");
     }
-  };
-  
+  } catch (err) {
+    console.error("PhonePe frontend error:", err);
+    setStatus("paymentError");
+  }
+};
+
 
 
 

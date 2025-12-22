@@ -1,74 +1,75 @@
-import crypto from "crypto";
 import { NextResponse } from "next/server";
+
+let cachedToken = null;
+let tokenExpiry = 0;
+
+async function getPhonePeToken() {
+    const now = Date.now();
+
+    if (cachedToken && now < tokenExpiry) {
+        return cachedToken;
+    }
+
+    const res = await fetch(
+        "https://api.phonepe.com/apis/identity-manager/v1/oauth/token",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                grant_type: "client_credentials",
+                client_id: process.env.PHONEPE_CLIENT_ID,
+                client_secret: process.env.PHONEPE_CLIENT_SECRET,
+                client_version: process.env.PHONEPE_CLIENT_VERSION,
+            }),
+        }
+    );
+
+    const data = await res.json();
+
+    cachedToken = data.access_token;
+    tokenExpiry = Date.now() + data.expires_in * 1000;
+
+    return cachedToken;
+}
 
 export async function POST(req) {
     try {
         const { amount, mobile, orderId } = await req.json();
 
-        if (!amount || !mobile || !orderId) {
-            return NextResponse.json(
-                { success: false, message: "Missing fields" },
-                { status: 400 }
-            );
-        }
+        const accessToken = await getPhonePeToken();
 
         const payload = {
-            merchantId: process.env.PHONEPE_MERCHANT_ID,
             merchantTransactionId: orderId,
+            amount: amount * 100,
             merchantUserId: mobile,
-            amount: Number(amount) * 100,
             redirectUrl: process.env.PHONEPE_REDIRECT_URL,
-            redirectMode: "GET",
+            redirectMode: "GET", // 🔥 IMPORTANT
             callbackUrl: process.env.PHONEPE_CALLBACK_URL,
             paymentInstrument: {
                 type: "PAY_PAGE",
             },
         };
 
-        const base64Payload = Buffer.from(
-            JSON.stringify(payload)
-        ).toString("base64");
-
-        const checksum = crypto
-            .createHash("sha256")
-            .update(base64Payload + "/pg/v1/pay" + process.env.PHONEPE_SALT_KEY)
-            .digest("hex");
-
-        const xVerify =
-            checksum + "###" + process.env.PHONEPE_SALT_INDEX;
-
-        const response = await fetch(
-            "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+        const res = await fetch(
+            "https://api.phonepe.com/apis/pg/checkout/v2/pay",
             {
                 method: "POST",
                 headers: {
+                    Authorization: `Bearer ${accessToken}`,
                     "Content-Type": "application/json",
-                    "X-VERIFY": xVerify,
                 },
-                body: JSON.stringify({ request: base64Payload }),
+                body: JSON.stringify(payload),
             }
         );
 
-        const data = await response.json();
-
-        console.log("PHONEPE RAW RESPONSE:", data);
-
-        if (!data?.data?.instrumentResponse?.redirectInfo?.url) {
-            return NextResponse.json(
-                { success: false, phonepe: data },
-                { status: 400 }
-            );
-        }
-
-        return NextResponse.json({
-            success: true,
-            data: data.data,
-        });
-
+        const data = await res.json();
+        return NextResponse.json(data);
     } catch (err) {
-        console.error("PHONEPE ERROR:", err);
+        console.error("PhonePe Pay Error:", err);
         return NextResponse.json(
-            { success: false, message: "Server error" },
+            { success: false, error: "PhonePe V2 payment failed" },
             { status: 500 }
         );
     }

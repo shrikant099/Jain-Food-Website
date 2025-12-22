@@ -11,9 +11,9 @@ export default function PaymentStatusPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const code = params.get("code");
+    const code = params.get("code") || params.get("status");
 
-    if (code === "PAYMENT_SUCCESS") {
+    if (code === "PAYMENT_SUCCESS" || code === "SUCCESS") {
       dispatch(clearCart());
       router.replace("/thank-you");
     } else {
