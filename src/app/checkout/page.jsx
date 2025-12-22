@@ -233,7 +233,6 @@ export default function CheckoutPage() {
   };
 
 
-
   // ================= PHONEPE PAYMENT =================
   const handlePhonePePayment = async () => {
     if (
@@ -277,7 +276,7 @@ export default function CheckoutPage() {
       orderDate: new Date().toLocaleString("en-IN"),
     };
 
-    // frontend UX ke liye
+    // UX purpose only
     sessionStorage.setItem(
       "pendingPhonePeOrder",
       JSON.stringify(pendingOrder)
@@ -286,7 +285,8 @@ export default function CheckoutPage() {
     setStatus("loading");
 
     try {
-      const res = await fetch("/api/phonepe/pay", {
+      // 🔥 ONLY THIS — SERVER WILL REDIRECT
+      await fetch("/api/phonepe/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -296,20 +296,15 @@ export default function CheckoutPage() {
         }),
       });
 
-      const data = await res.json();
+      // ❌ yahan kuch aur mat likhna
+      // ❌ res.json() mat karo
+      // ❌ window.location.href mat lagao
 
-      if (data?.data?.instrumentResponse?.redirectInfo?.url) {
-        window.location.href =
-          data.data.instrumentResponse.redirectInfo.url;
-      } else {
-        setStatus("paymentError");
-      }
     } catch (err) {
       console.error(err);
       setStatus("paymentError");
     }
   };
-
 
 
 

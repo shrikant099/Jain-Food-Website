@@ -23,19 +23,20 @@ export async function POST(req) {
         if (paymentData.code === "PAYMENT_SUCCESS") {
             const orderId = paymentData.merchantTransactionId;
 
-            // ✅ YAHAN FUTURE ME:
+            console.log("✅ PAYMENT SUCCESS:", orderId);
+
+            // 🔥 YAHAN FUTURE ME:
             // - DB me order mark PAID
             // - WhatsApp send
             // - Invoice generate
-
-            console.log("PAYMENT SUCCESS:", orderId);
 
             return NextResponse.json({ success: true });
         }
 
         return NextResponse.json({ success: false });
 
-    } catch (error) {
+    } catch (err) {
+        console.error("Callback error:", err);
         return NextResponse.json(
             { error: "Callback error" },
             { status: 500 }
