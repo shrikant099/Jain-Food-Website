@@ -3,34 +3,17 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
     try {
-
-        if (process.env.PHONEPE_TEST_MODE === "true") {
-            return NextResponse.json({
-                success: true,
-                data: {
-                    instrumentResponse: {
-                        redirectInfo: {
-                            url: "/payment-status?code=PAYMENT_SUCCESS"
-                        }
-                    }
-                }
-            });
-        }
-        const { amount, mobile } = await req.json();
-
-        const transactionId = "TXN" + Date.now();
+        const { amount, mobile, orderId } = await req.json();
 
         const payload = {
             merchantId: process.env.PHONEPE_MERCHANT_ID,
-            merchantTransactionId: transactionId,
+            merchantTransactionId: orderId, // 🔑 SAME AS ORDER ID
             merchantUserId: mobile,
-            amount: amount * 100, // paise
+            amount: amount * 100,
             redirectUrl: process.env.PHONEPE_REDIRECT_URL,
             redirectMode: "POST",
             callbackUrl: process.env.PHONEPE_CALLBACK_URL,
-            paymentInstrument: {
-                type: "PAY_PAGE",
-            },
+            paymentInstrument: { type: "PAY_PAGE" },
         };
 
         const base64Payload = Buffer
@@ -45,8 +28,7 @@ export async function POST(req) {
             .update(stringToSign)
             .digest("hex");
 
-        const xVerify =
-            checksum + "###" + process.env.PHONEPE_SALT_INDEX;
+        const xVerify = checksum + "###" + process.env.PHONEPE_SALT_INDEX;
 
         const response = await fetch(
             `${process.env.PHONEPE_BASE_URL}/pg/v1/pay`,
@@ -61,13 +43,12 @@ export async function POST(req) {
         );
 
         const data = await response.json();
-        return NextResponse.json({
-            success: true,
-            transactionId,
-            ...data
-        });
+        return NextResponse.json({ success: true, ...data });
 
     } catch (error) {
-        return NextResponse.json({ error: `Error Phone payment: ${error}` || "Something Went Wrong" }, { status: 500 })
+        return NextResponse.json(
+            { error: "PhonePe payment error" },
+            { status: 500 }
+        );
     }
 }

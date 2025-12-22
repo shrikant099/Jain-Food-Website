@@ -2,10 +2,6 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-    if (process.env.PHONEPE_TEST_MODE === "true") {
-        console.log("🧪 MOCK CALLBACK RECEIVED");
-        return NextResponse.json({ success: true });
-    }
     try {
         const rawBody = await req.text();
         const body = JSON.parse(rawBody);
@@ -18,12 +14,31 @@ export async function POST(req) {
             .update(payload + process.env.PHONEPE_SALT_KEY)
             .digest("hex");
 
-        if (checksumReceived === checksumCalculated) {
-            // Payment Verified 
-            return NextResponse.json({ message: "Payment verify succesfull", success: true }, { status: 200 })
+        if (checksumReceived !== checksumCalculated) {
+            return NextResponse.json({ success: false }, { status: 400 });
         }
-        return NextResponse.json({ success: false, message: "Payment not verifyied failed !!" }, { status: 400 });
+
+        const paymentData = body.response;
+
+        if (paymentData.code === "PAYMENT_SUCCESS") {
+            const orderId = paymentData.merchantTransactionId;
+
+            // ✅ YAHAN FUTURE ME:
+            // - DB me order mark PAID
+            // - WhatsApp send
+            // - Invoice generate
+
+            console.log("PAYMENT SUCCESS:", orderId);
+
+            return NextResponse.json({ success: true });
+        }
+
+        return NextResponse.json({ success: false });
+
     } catch (error) {
-        return NextResponse.json({ error: `Errror request callback: ${error}` || "Something Went Wrong" }, { status: 500 })
+        return NextResponse.json(
+            { error: "Callback error" },
+            { status: 500 }
+        );
     }
 }

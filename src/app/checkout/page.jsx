@@ -54,9 +54,7 @@ const coupons = [
 
 let orderCounter = 1;
 function generateOrderId() {
-  const id = `#AR07344${orderCounter}`;
-  orderCounter += 1;
-  return id;
+  return `#AR${orderCounter++}`;
 }
 
 
@@ -234,7 +232,9 @@ export default function CheckoutPage() {
     }
   };
 
-  // Phone Pay Payment 
+
+
+  // ================= PHONEPE PAYMENT =================
   const handlePhonePePayment = async () => {
     if (
       !form.name ||
@@ -253,7 +253,8 @@ export default function CheckoutPage() {
       return;
     }
 
-    // 🔑 IMPORTANT: order data temporary save
+    const orderId = generateOrderId();
+
     const pendingOrder = {
       customer: {
         name: form.name,
@@ -265,23 +266,18 @@ export default function CheckoutPage() {
         payment: "PHONEPE",
         note: form.note,
       },
-      items: items.map((item) => ({
-        name: item.name,
-        qty: item.qty,
-        price: item.price,
-        total: item.price * item.qty,
-      })),
+      items,
       price: {
         subtotal: subtotal.toFixed(0),
         discount: discount.toFixed(0),
         gst: gstAmount.toFixed(0),
         total: total.toFixed(0),
       },
-      orderId: generateOrderId(),
+      orderId,
       orderDate: new Date().toLocaleString("en-IN"),
     };
 
-    // 🔐 temporary store
+    // frontend UX ke liye
     sessionStorage.setItem(
       "pendingPhonePeOrder",
       JSON.stringify(pendingOrder)
@@ -296,6 +292,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           amount: total.toFixed(0),
           mobile: form.phone,
+          orderId,
         }),
       });
 
@@ -312,6 +309,7 @@ export default function CheckoutPage() {
       setStatus("paymentError");
     }
   };
+
 
 
 
