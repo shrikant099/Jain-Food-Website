@@ -285,6 +285,11 @@ export default function CheckoutPage() {
   
       const data = await res.json();
   
+if (!data.success) {
+  console.error("PhonePe Error:", data);
+  setStatus("paymentError");
+  return;
+}
       if (data?.data?.instrumentResponse?.redirectInfo?.url) {
         window.location.href =
           data.data.instrumentResponse.redirectInfo.url;
