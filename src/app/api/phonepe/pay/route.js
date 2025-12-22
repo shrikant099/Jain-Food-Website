@@ -7,18 +7,18 @@ export async function POST(req) {
 
         if (!amount || !mobile || !orderId) {
             return NextResponse.json(
-                { success: false, message: "Missing required fields" },
+                { success: false, message: "Missing fields" },
                 { status: 400 }
             );
         }
 
         const payload = {
             merchantId: process.env.PHONEPE_MERCHANT_ID,
-            merchantTransactionId: orderId, // unique
+            merchantTransactionId: orderId,
             merchantUserId: mobile,
-            amount: Number(amount) * 100, // paise
+            amount: Number(amount) * 100,
             redirectUrl: process.env.PHONEPE_REDIRECT_URL,
-            redirectMode: "GET", // 🔥 MUST BE GET
+            redirectMode: "GET",
             callbackUrl: process.env.PHONEPE_CALLBACK_URL,
             paymentInstrument: {
                 type: "PAY_PAGE",
@@ -45,26 +45,17 @@ export async function POST(req) {
                     "Content-Type": "application/json",
                     "X-VERIFY": xVerify,
                 },
-                body: JSON.stringify({
-                    request: base64Payload,
-                }),
+                body: JSON.stringify({ request: base64Payload }),
             }
         );
 
         const data = await response.json();
 
-        // 🔍 DEBUG (important)
-        console.log("PHONEPE RESPONSE:", data);
+        console.log("PHONEPE RAW RESPONSE:", data);
 
-        if (
-            !data?.data?.instrumentResponse?.redirectInfo?.url
-        ) {
+        if (!data?.data?.instrumentResponse?.redirectInfo?.url) {
             return NextResponse.json(
-                {
-                    success: false,
-                    message: "PhonePe redirect missing",
-                    phonepe: data,
-                },
+                { success: false, phonepe: data },
                 { status: 400 }
             );
         }
@@ -77,7 +68,7 @@ export async function POST(req) {
     } catch (err) {
         console.error("PHONEPE ERROR:", err);
         return NextResponse.json(
-            { success: false, message: "PhonePe server error" },
+            { success: false, message: "Server error" },
             { status: 500 }
         );
     }
