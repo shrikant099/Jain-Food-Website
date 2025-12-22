@@ -11,7 +11,7 @@ export async function POST(req) {
       merchantUserId: mobile,
       amount: Number(amount) * 100, // paise
       redirectUrl: process.env.PHONEPE_REDIRECT_URL,
-      redirectMode: "POST",
+      redirectMode: "GET",
       callbackUrl: process.env.PHONEPE_CALLBACK_URL,
       paymentInstrument: {
         type: "PAY_PAGE",
