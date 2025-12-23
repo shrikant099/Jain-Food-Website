@@ -54,7 +54,7 @@ const coupons = [
 
 let orderCounter = 1;
 function generateOrderId() {
-  return `#AR${orderCounter++}`;
+  return `AR${orderCounter++}`;
 }
 
 
