@@ -5,11 +5,11 @@ export async function POST(req) {
   try {
     const { amount, mobile, orderId } = await req.json();
 
-    const accessToken = await getPhonePeToken(); // ✅ SAFE TOKEN
+    const accessToken = await getPhonePeToken();
 
     const payload = {
       merchantTransactionId: orderId,
-      amount: amount * 100, // paise
+      amount: amount * 100,
       merchantUserId: mobile,
       redirectUrl: process.env.PHONEPE_REDIRECT_URL,
       redirectMode: "GET",
@@ -24,7 +24,7 @@ export async function POST(req) {
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `O-Bearer ${accessToken}`, // 🔥 FIX
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
