@@ -33,6 +33,7 @@ export async function POST(req) {
     );
 
     const data = await res.json();
+    console.log("PHONEPE PAY RESPONSE:", data);
     return NextResponse.json(data);
 
   } catch (err) {

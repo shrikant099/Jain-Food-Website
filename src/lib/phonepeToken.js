@@ -25,7 +25,7 @@ export async function getPhonePeToken() {
   );
 
   const data = await res.json();
-
+  console.log("PHONEPE TOKEN RESPONSE:", data);
   if (!data.access_token || !data.expires_at) {
     throw new Error("Invalid PhonePe token response");
   }
