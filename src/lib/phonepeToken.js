@@ -6,12 +6,10 @@ let tokenExpiry = 0;
 export async function getPhonePeToken() {
   const now = Date.now();
 
-  // ✅ valid token hai
   if (cachedToken && now < tokenExpiry) {
     return cachedToken;
   }
 
-  // 🔄 new token lao
   const res = await fetch(
     "https://api.phonepe.com/apis/identity-manager/v1/oauth/token",
     {
@@ -30,13 +28,14 @@ export async function getPhonePeToken() {
 
   const data = await res.json();
 
-  if (!data.access_token || !data.expires_at) {
+  if (!data.encrypted_access_token || !data.expires_at) {
     throw new Error("Invalid PhonePe token response");
   }
 
-  cachedToken = data.access_token;
+  // ✅ VERY IMPORTANT
+  cachedToken = data.encrypted_access_token;
 
-  // ⏳ expires_at is epoch ms → buffer 1 min
+  // epoch ms – 1 min buffer
   tokenExpiry = data.expires_at - 60_000;
 
   return cachedToken;
