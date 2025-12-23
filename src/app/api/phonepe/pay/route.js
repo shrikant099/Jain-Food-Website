@@ -1,3 +1,4 @@
+// app/api/phonepe/pay/route.js
 import { NextResponse } from "next/server";
 import { getPhonePeToken } from "@/lib/phonepeToken";
 
@@ -9,7 +10,7 @@ export async function POST(req) {
 
     const payload = {
       merchantTransactionId: orderId,
-      amount: amount * 100,
+      amount: amount * 100, // paiseee
       merchantUserId: mobile,
       redirectUrl: process.env.PHONEPE_REDIRECT_URL,
       redirectMode: "GET",
@@ -24,7 +25,7 @@ export async function POST(req) {
       {
         method: "POST",
         headers: {
-          Authorization: `O-Bearer ${accessToken}`, // 🔥 FIX
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
@@ -33,6 +34,7 @@ export async function POST(req) {
 
     const data = await res.json();
     return NextResponse.json(data);
+
   } catch (err) {
     console.error("PhonePe Pay Error:", err);
     return NextResponse.json(

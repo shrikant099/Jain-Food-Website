@@ -1,5 +1,3 @@
-// lib/phonepeToken.js
-
 let cachedToken = null;
 let tokenExpiry = 0;
 
@@ -28,15 +26,12 @@ export async function getPhonePeToken() {
 
   const data = await res.json();
 
-  if (!data.encrypted_access_token || !data.expires_at) {
+  if (!data.access_token || !data.expires_at) {
     throw new Error("Invalid PhonePe token response");
   }
 
-  // ✅ VERY IMPORTANT
-  cachedToken = data.encrypted_access_token;
-
-  // epoch ms – 1 min buffer
-  tokenExpiry = data.expires_at - 60_000;
+  cachedToken = data.access_token;
+  tokenExpiry = data.expires_at - 60_000; // 1 min bufferrrrr
 
   return cachedToken;
 }

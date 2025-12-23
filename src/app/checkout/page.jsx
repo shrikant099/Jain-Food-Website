@@ -52,10 +52,10 @@ const coupons = [
 ];
 
 
-let orderCounter = 1;
 function generateOrderId() {
-  return `AR${orderCounter++}`;
+  return `AR_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
 }
+
 
 
 export default function CheckoutPage() {
