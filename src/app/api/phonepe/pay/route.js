@@ -4,14 +4,15 @@ export async function POST(req) {
   try {
     const { amount, mobile, orderId } = await req.json();
 
-    // 🔹 ALWAYS get fresh token
+    // 1️⃣ Get fresh token
     const tokenRes = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/phonepe/token`,
       { method: "POST" }
     );
-
     const tokenData = await tokenRes.json();
-    const accessToken = tokenData.access_token;
+
+    // 🔥 IMPORTANT CHANGE HERE
+    const encryptedToken = tokenData.encrypted_access_token;
 
     const payload = {
       merchantTransactionId: orderId,
@@ -31,14 +32,14 @@ export async function POST(req) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`, // 🔥 V2 AUTH
+          // 🔥 THIS IS THE KEY FIX
+          Authorization: `O-Bearer ${encryptedToken}`,
         },
         body: JSON.stringify(payload),
       }
     );
 
     const data = await res.json();
-    console.log(`Data: ${data}`)
     return NextResponse.json(data);
 
   } catch (err) {
