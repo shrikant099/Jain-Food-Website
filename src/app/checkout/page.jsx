@@ -53,8 +53,13 @@ const coupons = [
 
 
 function generateOrderId() {
-  return `AR_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+  let last = Number(sessionStorage.getItem("lastOrderNo")) || 0;
+  last = (last % 99) + 1; // 01–99 loop
+  sessionStorage.setItem("lastOrderNo", last);
+
+  return `AR${String(last).padStart(2, "0")}`;
 }
+
 
 
 
