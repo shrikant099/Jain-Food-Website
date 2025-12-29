@@ -11,19 +11,32 @@ export default function PaymentStatusPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const code = params.get("code") || params.get("status");
+    const merchantOrderId = params.get("merchantOrderId");
 
-    if (code === "PAYMENT_SUCCESS" || code === "SUCCESS") {
-      dispatch(clearCart());
-      router.replace("/thank-you");
-    } else {
+    if (!merchantOrderId) {
       router.replace("/checkout");
+      return;
     }
+
+    // 🔥 VERIFY PAYMENT FROM BACKEND
+    fetch(`/api/phonepe/status?orderId=${merchantOrderId}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.state === "COMPLETED") {
+          dispatch(clearCart());
+          router.replace("/thank-you");
+        } else {
+          router.replace("/checkout");
+        }
+      })
+      .catch(() => {
+        router.replace("/checkout");
+      });
   }, []);
 
   return (
     <p className="text-center py-20 text-lg">
-      Verifying payment...
+      Verifying payment, please wait...
     </p>
   );
 }
