@@ -277,9 +277,8 @@ export default function CheckoutPage() {
       orderDate: new Date().toLocaleString("en-IN"),
     };
 
-    // ✅ session me save (important)
     sessionStorage.setItem(
-      "pendingPhonePeOrder",
+      "orderData",
       JSON.stringify(pendingOrder)
     );
 
