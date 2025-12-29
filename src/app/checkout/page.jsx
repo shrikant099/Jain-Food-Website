@@ -297,13 +297,14 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
+      console.log(`Data: ${data}`);
 
-      if (data.success) {
-        window.location.href =
-          data.data.instrumentResponse.redirectInfo.url;
-      } else {
-        alert("Payment failed");
-      }
+      // if (data.success) {
+      //   window.location.href =
+      //     data.data.instrumentResponse.redirectInfo.url;
+      // } else {
+      //   alert("Payment failed");
+      // }
       // // ❌ agar backend se fail aaye
       // if (!data || data.success === false) {
       //   console.error("PhonePe API Error:", data);
