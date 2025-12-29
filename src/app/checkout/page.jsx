@@ -248,10 +248,10 @@ export default function CheckoutPage() {
       return;
     }
 
-    if (Number(total) < 99) {
-      setStatus("lessThan99");
-      return;
-    }
+    // if (Number(total) < 99) {
+    //   setStatus("lessThan99");
+    //   return;
+    // }
 
     const orderId = generateOrderId();
 
@@ -297,39 +297,12 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
-      // console.log("Data:", JSON.stringify(data, null, 2));
       // ✅ REDIRECT USER TO PHONEPE
       if (data.redirectUrl) {
         window.location.href = data.redirectUrl;
       } else {
         alert("Payment URL not received");
       }
-
-      // if (data.success) {
-      //   window.location.href =
-      //     data.data.instrumentResponse.redirectInfo.url;
-      // } else {
-      //   alert("Payment failed");
-      // }
-      // // ❌ agar backend se fail aaye
-      // if (!data || data.success === false) {
-      //   console.error("PhonePe API Error:", data);
-      //   setStatus("paymentError");
-      //   return;
-      // }
-
-      // // ✅ PhonePe redirect (V2)
-      // const redirectUrl =
-      //   data?.data?.instrumentResponse?.redirectInfo?.url;
-
-      // if (redirectUrl) {
-      //   window.location.href = redirectUrl;
-      // } else {
-      //   console.error("Redirect URL missing:", data);
-      //   setStatus("paymentError");
-      // }
-
-
     } catch (err) {
       console.error("PhonePe frontend error:", err);
       setStatus("paymentError");
