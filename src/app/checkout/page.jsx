@@ -297,7 +297,13 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
-      console.log(`Data: ${data}`);
+      console.log("Data:", JSON.stringify(data, null, 2));
+      // ✅ REDIRECT USER TO PHONEPE
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      } else {
+        alert("Payment URL not received");
+      }
 
       // if (data.success) {
       //   window.location.href =
