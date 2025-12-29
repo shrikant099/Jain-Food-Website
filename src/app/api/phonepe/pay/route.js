@@ -14,16 +14,28 @@ export async function POST(req) {
     // 🔥 IMPORTANT CHANGE HERE
     const encryptedToken = tokenData.encrypted_access_token;
 
+
+
     const payload = {
-      merchantTransactionId: orderId,
+      // merchantTransactionId: orderId,
+      // amount: amount * 100,
+      // merchantUserId: mobile,
+      // redirectUrl: process.env.PHONEPE_REDIRECT_URL,
+      // redirectMode: "GET",
+      // callbackUrl: process.env.PHONEPE_CALLBACK_URL,
+      // paymentInstrument: {
+      //   type: "PAY_PAGE",
+      // },
+
+      merchantOrderId: orderId,
       amount: amount * 100,
-      merchantUserId: mobile,
-      redirectUrl: process.env.PHONEPE_REDIRECT_URL,
-      redirectMode: "GET",
-      callbackUrl: process.env.PHONEPE_CALLBACK_URL,
-      paymentInstrument: {
-        type: "PAY_PAGE",
-      },
+      paymentFlow: {
+        type: "PG_CHECKOUT",
+        message: "Payment message used for collect requests",
+        merchantUrls: {
+          redirectUrl: "https://agarwalrabdiwala.in/payment-status"
+        }
+      }
     };
 
     const res = await fetch(
