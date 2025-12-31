@@ -53,15 +53,8 @@ const coupons = [
 
 
 function generateOrderId() {
-  let last = Number(sessionStorage.getItem("lastOrderNo")) || 0;
-  last = (last % 99) + 1; // 01–99 loop
-  sessionStorage.setItem("lastOrderNo", last);
-
-  return `AR${String(last).padStart(2, "0")}`;
+  return `AR${Math.floor(100 + Math.random() * 900)}`;
 }
-
-
-
 
 export default function CheckoutPage() {
   const cart = useSelector(selectCartItems);
