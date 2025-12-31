@@ -97,10 +97,10 @@ export default function ContactSection() {
               <p>
                 ✉️ <b>Email:</b>{" "}
                 <a
-                  href="mailto:sanjaysinghal265@gmail.com"
+                  href="mailto:agarwalrabiwala@gmail.com"
                   className="text-orange-600 font-semibold"
                 >
-                  sanjaysinghal265@gmail.com
+                  agarwalrabdiwala@gmail.com
                 </a>
               </p>
             </div>
