@@ -110,15 +110,15 @@ export default function CheckoutPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   // COD Payment 
+  const itemsText = items
+    .map(
+      (item, index) =>
+        `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
+    )
+    .join("\n");
   const submitOrder = async (e) => {
     e.preventDefault();
 
-    const itemsText = items
-      .map(
-        (item, index) =>
-          `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
-      )
-      .join("\n");
 
 
     if (
