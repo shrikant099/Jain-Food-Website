@@ -85,37 +85,37 @@ export const menuCategories = [
         items: [
             {
                 name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
-                desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
+                desc: "seasonal veg + dal fry/dal tadka + rice + 3 pcs chapati+ gulab jamun+ salad + pickle",
                 price: 800,
                 img: "/menu/thalis/veg special thali.png"
             },
             {
                 name: "Veg Special Thali (5 Nos)",
-                desc: "Paneer butter masala + mix veg + dal fry/tadka + jeera rice + 3 butter chapati + curd + salad + pickle + gulab jamun",
+                desc: "paneer butter masala + mix veg + dal fry/dal tadka + jeera rice + 3 pcs butter chapati + curd + salad + pickle + gulab jamun",
                 price: 1150,
                 img: "/menu/thalis/Veg mini thali.png"
             },
             {
                 name: "Aloo Paratha Curd Combo (5 Nos)",
-                desc: "2pc aloo paratha + curd + salad + pickle",
+                desc: "aloo paratha 2pc + curd + salad + pickle",
                 price: 450,
                 img: "/menu/thalis/maharaja thali.png"
             },
             {
                 name: "Mini Thali (3 Nos) + 3Pc Gulab Jamun",
-                desc: "Seasonal veg + dal fry/tadka + rice + 3 chapati + gulab jamun + salad + pickle",
+                desc: "seasonal veg + dal fry/dal tadka + rice + 3 pcs chapati+ gulab jamun+ salad + pickle",
                 price: 480,
                 img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Jain Mini Thali (5 Nos) + 5Pc Gulab Jamun",
-                desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
+                desc: "channa masala + dal fry/dal tadka + rice + 3 pcs chapati + salad + pickle",
                 price: 800,
                 img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Jain Special Thali (3 Nos)",
-                desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
+                desc: "shahi paneer +channa masala + dal fry + jeera rice + 3 pcs butter chapati + curd + salad + pickle + papad + gulab jamun",
                 price: 1200,
                 img: "/menu/thalis/maharaja thali.png"
             }
@@ -128,31 +128,31 @@ export const menuCategories = [
         items: [
             {
                 name: "Veg Mini Thali",
-                desc: "Seasonal veg + dal fry/tadka + rice + chapati + gulab jamun + salad + pickle",
+                desc: "seasonal veg + dal fry/dal tadka + rice + 3 pcs chapati+ gulab jamun+ salad + pickle",
                 price: 179,
                 img: "/menu/thalis/Veg mini thali.png"
             },
             {
                 name: "Jain Mini Thali",
-                desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
+                desc: "channa masala + dal fry/dal tadka + rice + 3 pcs chapati + salad + pickle",
                 price: 179,
                 img: "/menu/thalis/jain mini thali.png"
             },
             {
                 name: "Special Thali",
-                desc: "Paneer butter masala + mix veg + dal fry + jeera rice + butter chapati + curd + salad + pickle + gulab jamun",
+                desc: "paneer butter masala + mix veg + dal fry/dal tadka + jeera rice + 3 pcs butter chapati + curd + salad + pickle + gulab jamun",
                 price: 249,
                 img: "/menu/thalis/veg special thali.png"
             },
             {
                 name: "Jain Special Thali",
-                desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
+                desc: "shahi paneer +channa masala + dal fry + jeera rice + 3 pcs butter chapati + curd + salad + pickle + papad + gulab jamun",
                 price: 259,
                 img: "/menu/thalis/jain special thali.png"
             },
             {
                 name: "Maharaja Thali",
-                desc: "Paneer butter masala + mix veg + jeera rice + dal fry + butter chapati + gulab jamun + papad + salad + pickle",
+                desc: "paneer butter masala+ mix veg + jeera rice + dal fry/dal tadka + 4 pcs butter chapati + gulab jamun + papad + salad + pickle",
                 price: 279,
                 img: "/menu/thalis/maharaja thali.png"
             }
