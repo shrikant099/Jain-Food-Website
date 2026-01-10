@@ -50,7 +50,7 @@ export default function ContactPage() {
           {/* LEFT – MAP */}
           <div className="rounded-2xl overflow-hidden shadow-lg border">
             <iframe
-              src="https://www.google.com/maps?q=Agarwal%20Rabdiwala%20Abu%20Road&output=embed"
+             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d367.9871527307733!2d72.78441783511123!3d24.480993220499993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395d28bcc46cca67%3A0x9ee4112bc43376e4!2sAgarwal%20Rabdiwala%20%E2%80%93%20IRCTC%20Food%20Delivery%20Abu%20Road!5e1!3m2!1sen!2sin!4v1768028099542!5m2!1sen!2sin" 
               width="100%"
               height="100%"
               loading="lazy"

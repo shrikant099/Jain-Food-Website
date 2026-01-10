@@ -221,9 +221,17 @@ export default function CheckoutPage() {
         note: ""
       });
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
+      // 🔐 SESSION ME SET
+      sessionStorage.setItem(
+        "gtm_purchase_data",
+        JSON.stringify(orderData)
+      );
+      // 🔐 FLAG RESET (NEW ORDER KE LIYE)
+      sessionStorage.setItem("gtm_purchase_fired", "false");
+
       dispatch(clearCart());
 
-      // router.push("/thank-you")
+      router.push("/thank-you")
     } catch (error) {
       console.log(`Error Place Order: ${error}`);
       setStatus("error");
@@ -279,6 +287,15 @@ export default function CheckoutPage() {
       "orderData",
       JSON.stringify(pendingOrder)
     );
+
+    // 🔐 SESSION ME SET
+    sessionStorage.setItem(
+      "gtm_purchase_data",
+      JSON.stringify(pendingOrder)
+    );
+    // 🔐 FLAG RESET (NEW ORDER KE LIYE)
+    sessionStorage.setItem("gtm_purchase_fired", "false");
+
 
     setStatus("loading");
 

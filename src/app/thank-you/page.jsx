@@ -9,11 +9,43 @@ import ThankYouHeader from "./components/ThankYouHeader";
 export default function ThankYouPage() {
     const [order, setOrder] = useState(null);
 
+    /* =========================
+       1️⃣ LOAD ORDER DATA
+    ========================= */
     useEffect(() => {
         const storedOrder = sessionStorage.getItem("orderData");
         if (storedOrder) {
             setOrder(JSON.parse(storedOrder));
         }
+    }, []);
+
+    /* =========================
+       2️⃣ GTM PURCHASE FIRE
+    ========================= */
+    useEffect(() => {
+        const gtmData = sessionStorage.getItem("gtm_purchase_data");
+        const alreadyFired = sessionStorage.getItem("gtm_purchase_fired");
+
+        if (!gtmData) return;
+        if (alreadyFired === "true") return;
+
+        const parsed = JSON.parse(gtmData);
+
+        const orderId = parsed.orderId;
+        const totalAmount = Number(parsed.price.total);
+
+        // ✅ FIRE GTM EVENT
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "purchase_success",
+            order_id: orderId,
+            value: totalAmount,
+            currency: "INR",
+        });
+
+        console.log("GTM PURCHASE FIRED", orderId, totalAmount);
+        // 🔒 prevent duplicate fire
+        sessionStorage.setItem("gtm_purchase_fired", "true");
     }, []);
 
     if (!order) {
@@ -23,6 +55,7 @@ export default function ThankYouPage() {
             </div>
         );
     }
+
 
     return (
         <>
