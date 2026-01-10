@@ -143,31 +143,28 @@ export default function CheckoutPage() {
 
 
       //  Sending Order Detail on Email
-      await emailjs.send(
-        EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID_ORDER,
-        {
-          name: form.name,
-          phone: form.phone,
-          train: form.train,
-          pnr: form.pnr,
-          coach: form.coach,
-          seat: form.seat,
-          payment: form.payment.toUpperCase(),
-          note: form.note || "No special instructions",
+      // await emailjs.send(
+      //   EMAIL_SERVICE_ID,
+      //   EMAIL_TEMPLATE_ID_ORDER,
+      //   {
+      //     name: form.name,
+      //     phone: form.phone,
+      //     train: form.train,
+      //     pnr: form.pnr,
+      //     coach: form.coach,
+      //     seat: form.seat,
+      //     payment: form.payment.toUpperCase(),
+      //     note: form.note || "No special instructions",
 
-          // Order Details
-          items: itemsText,
-          subtotal: subtotal.toFixed(0),
-          discount: discount.toFixed(0),
-          gst: gstAmount.toFixed(0),
-          total: total.toFixed(0),
-        },
-        PUBLIC_KEY
-      );
-
-
-      const orderId = generateOrderId();
+      //     // Order Details
+      //     items: itemsText,
+      //     subtotal: subtotal.toFixed(0),
+      //     discount: discount.toFixed(0),
+      //     gst: gstAmount.toFixed(0),
+      //     total: total.toFixed(0),
+      //   },
+      //   PUBLIC_KEY
+      // );
 
       // Order Object For Store Session Storage
       const orderData = {
@@ -193,50 +190,40 @@ export default function CheckoutPage() {
           gst: gstAmount.toFixed(0),
           total: total.toFixed(0),
         },
-        orderId,
+        orderId: generateOrderId(),
         orderDate: new Date().toLocaleString("en-IN"),
       }
 
 
-      try {
-        // ✅ WhatsApp
-        await fetch("/api/whatsapp/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderData),
-        });
+      // Fetch Whatsapp APi
+      const res = await fetch("/api/whatsapp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
-        // ✅ SMS (FULL DATA)
-        await fetch("/api/send-order-sms", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            orderId,
-            amount: total.toFixed(0),
-            phone: form.phone,
-          }),
-        });
-
-
-        setStatus("success");
-        setForm({
-          name: "",
-          phone: "",
-          pnr: "",
-          coach: "",
-          seat: "",
-          payment: "",
-          train: "",
-          note: ""
-        });
-        sessionStorage.setItem("orderData", JSON.stringify(orderData));
-        dispatch(clearCart());
-        router.push("/thank-you")
-      } catch (error) {
-        console.error(err);
-        setStatus("error");
+      if (!res.status === 200) {
+        console.log(`Failed to send message Whatsapp`);
+        return;
       }
 
+      const data = await res.json();
+      console.log(`Whatsapp Response: ${data}`)
+      setStatus("success");
+      setForm({
+        name: "",
+        phone: "",
+        pnr: "",
+        coach: "",
+        seat: "",
+        payment: "",
+        train: "",
+        note: ""
+      });
+      sessionStorage.setItem("orderData", JSON.stringify(orderData));
+      dispatch(clearCart());
+
+      // router.push("/thank-you")
     } catch (error) {
       console.log(`Error Place Order: ${error}`);
       setStatus("error");
@@ -259,10 +246,10 @@ export default function CheckoutPage() {
       return;
     }
 
-    if (Number(total) < 99) {
-      setStatus("lessThan99");
-      return;
-    }
+    // if (Number(total) < 99) {
+    //   setStatus("lessThan99");
+    //   return;
+    // }
 
     const orderId = generateOrderId();
 
@@ -306,31 +293,6 @@ export default function CheckoutPage() {
         }),
       });
 
-      if (!res.ok) return console.log(`Error Phone Pay payment`);
-
-      //  Sending Order Detail on Email
-      await emailjs.send(
-        EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID_ORDER,
-        {
-          name: form.name,
-          phone: form.phone,
-          train: form.train,
-          pnr: form.pnr,
-          coach: form.coach,
-          seat: form.seat,
-          payment: form.payment.toUpperCase(),
-          note: form.note || "No special instructions",
-
-          // Order Details
-          items: itemsText,
-          subtotal: subtotal.toFixed(0),
-          discount: discount.toFixed(0),
-          gst: gstAmount.toFixed(0),
-          total: total.toFixed(0),
-        },
-        PUBLIC_KEY
-      );
       const data = await res.json();
       // ✅ REDIRECT USER TO PHONEPE
       if (data.redirectUrl) {

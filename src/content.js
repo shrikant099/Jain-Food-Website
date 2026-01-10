@@ -84,6 +84,12 @@ export const menuCategories = [
         name: "Bulk 3/5 Thali",
         items: [
             {
+                name: "plain roti",
+                desc: "plain roti",
+                price: 1,
+                img: "/menu/thalis/veg special thali.png"
+            },
+            {
                 name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
                 desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
                 price: 800,
