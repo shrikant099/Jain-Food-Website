@@ -206,6 +206,18 @@ export default function CheckoutPage() {
           body: JSON.stringify(orderData),
         });
 
+        // ✅ SMS (FULL DATA)
+        await fetch("/api/send-order-sms", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderId,
+            amount: total.toFixed(0),
+            phone: form.phone,
+          }),
+        });
+
+
         setStatus("success");
         setForm({
           name: "",
