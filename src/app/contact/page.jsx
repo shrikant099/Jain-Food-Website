@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
+
 /* =========================
    SEO METADATA – CONTACT PAGE
 ========================= */
@@ -18,9 +19,11 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
+
+
+
       <AnnouncementBar />
       <Navbar />
-
       {/* =========================
           CONTACT PAGE CONTENT
       ========================= */}
