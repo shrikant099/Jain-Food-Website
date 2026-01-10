@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
     try {
         const order = await req.json();
+        console.log("Order:", JSON.stringify(order, null, 2))
         const result = await sendWhatsApp(order);
-   
+        console.log(`Result Whatsapp:`, result);
         // WhatsApp API error check
         if (result?.error) {
             return NextResponse.json(
