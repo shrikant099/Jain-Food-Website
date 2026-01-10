@@ -17,6 +17,7 @@ export async function POST() {
     }
   );
 
+  console.log(`Response Token: ${res}`)
   const data = await res.json();
   return NextResponse.json(data);
 }

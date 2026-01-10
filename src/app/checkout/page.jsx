@@ -294,8 +294,11 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
+      console.log(`Data ${data.redirectUrl}`)
+      console.log(`Data ${data}`)
       // ✅ REDIRECT USER TO PHONEPE
-      if (data.redirectUrl) {
+      if (data?.redirectUrl) {
+        // ✅ THIS IS THE MAIN FIX
         window.location.href = data.redirectUrl;
       } else {
         alert("Payment URL not received");
