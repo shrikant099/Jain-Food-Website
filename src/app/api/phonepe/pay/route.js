@@ -6,7 +6,7 @@ export async function POST(req) {
 
     // 1️⃣ GET TOKEN
     const tokenRes = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/phonepe/token`,
+      `https://agarwalrabdiwala.in/api/phonepe/token`,
       { method: "POST" }
     );
 

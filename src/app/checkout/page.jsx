@@ -294,7 +294,7 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
-      console.log(`Data ${data.redirectUrl}`)
+      console.log(`Data redirect url ${data.redirectUrl}`)
       console.log(`Data ${data}`)
       // ✅ REDIRECT USER TO PHONEPE
       if (data?.redirectUrl) {
