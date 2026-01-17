@@ -142,10 +142,10 @@ export default function CheckoutPage() {
     try {
 
 
-       Sending Order Detail on Email
+      //  Sending Order Detail on Email
       await emailjs.send(
         EMAIL_SERVICE_ID,
-        EMAIL_TEMPLATE_ID_ORDER,
+        "template_6954v9j",
         {
           name: form.name,
           phone: form.phone,
