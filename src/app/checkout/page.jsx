@@ -142,29 +142,29 @@ export default function CheckoutPage() {
     try {
 
 
-      //  Sending Order Detail on Email
-      // await emailjs.send(
-      //   EMAIL_SERVICE_ID,
-      //   EMAIL_TEMPLATE_ID_ORDER,
-      //   {
-      //     name: form.name,
-      //     phone: form.phone,
-      //     train: form.train,
-      //     pnr: form.pnr,
-      //     coach: form.coach,
-      //     seat: form.seat,
-      //     payment: form.payment.toUpperCase(),
-      //     note: form.note || "No special instructions",
+       Sending Order Detail on Email
+      await emailjs.send(
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID_ORDER,
+        {
+          name: form.name,
+          phone: form.phone,
+          train: form.train,
+          pnr: form.pnr,
+          coach: form.coach,
+          seat: form.seat,
+          payment: form.payment.toUpperCase(),
+          note: form.note || "No special instructions",
 
-      //     // Order Details
-      //     items: itemsText,
-      //     subtotal: subtotal.toFixed(0),
-      //     discount: discount.toFixed(0),
-      //     gst: gstAmount.toFixed(0),
-      //     total: total.toFixed(0),
-      //   },
-      //   PUBLIC_KEY
-      // );
+          // Order Details
+          items: itemsText,
+          subtotal: subtotal.toFixed(0),
+          discount: discount.toFixed(0),
+          gst: gstAmount.toFixed(0),
+          total: total.toFixed(0),
+        },
+        PUBLIC_KEY
+      );
 
       // Order Object For Store Session Storage
       const orderData = {
