@@ -9,6 +9,7 @@ import { addItem, removeItem } from "@/features/cart/cartSlice";
 import { selectCartItems } from "@/features/cart/selector";
 import { menuCategories } from "@/content";
 import MenuHeader from "./MenuHeader";
+
 export default function MenuFAQ() {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);

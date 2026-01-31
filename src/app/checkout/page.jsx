@@ -140,8 +140,6 @@ export default function CheckoutPage() {
 
     setStatus("loading");
     try {
-
-
       //  Sending Order Detail on Email
       await emailjs.send(
         EMAIL_SERVICE_ID,
@@ -194,7 +192,6 @@ export default function CheckoutPage() {
         orderDate: new Date().toLocaleString("en-IN"),
       }
 
-
       // Fetch Whatsapp APi
       const res = await fetch("/api/whatsapp/send", {
         method: "POST",
@@ -202,13 +199,14 @@ export default function CheckoutPage() {
         body: JSON.stringify(orderData),
       });
 
-      if (!res.status === 200) {
-        console.log(`Failed to send message Whatsapp`);
+      if (res.status !== 200) {
+        const err = await res.json();
+        console.error("WhatsApp failed:", err);
         return;
       }
 
       const data = await res.json();
-      console.log(`Whatsapp Response: ${data}`)
+
       setStatus("success");
       setForm({
         name: "",
@@ -220,6 +218,8 @@ export default function CheckoutPage() {
         train: "",
         note: ""
       });
+
+
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
       // 🔐 SESSION ME SET
       sessionStorage.setItem(
@@ -231,7 +231,8 @@ export default function CheckoutPage() {
 
       dispatch(clearCart());
 
-      router.push("/thank-you")
+      router.push("/thank-you");
+
     } catch (error) {
       console.log(`Error Place Order: ${error}`);
       setStatus("error");

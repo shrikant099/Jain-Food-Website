@@ -10,14 +10,19 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem(state, action) {
+            if (Array.isArray(state.items)) {
+              state.items = {};
+            }
+          
             const item = action.payload;
             const key = item.name;
+          
             if (!state.items[key]) {
-                state.items[key] = { ...item, qty: 1 };
+              state.items[key] = { ...item, qty: 1 };
             } else {
-                state.items[key].qty += 1;
+              state.items[key].qty += 1;
             }
-        },
+          },
         removeItem(state, action) {
             const item = action.payload;
             const key = item.name;
