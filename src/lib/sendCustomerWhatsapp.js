@@ -1,4 +1,4 @@
-export async function sendWhatsApp(order) {
+export async function sendCustomerWhatsApp(order) {
     try {
         const payload = {
             customer_name: order.customer.name,
@@ -24,7 +24,7 @@ export async function sendWhatsApp(order) {
         };
 
         const res = await fetch(
-            "https://app.zoepact.in/webhook/whatsapp-workflow/244812.321784.309554.1770013231",
+            "https://app.zoepact.in/webhook/whatsapp-workflow/244812.321784.309555.1770013258",
             {
                 method: "POST",
                 headers: {
@@ -40,7 +40,7 @@ export async function sendWhatsApp(order) {
         return {
             status: res.status,
             ok: res.ok,
-            response: text || "Zoepact webhook hit successfully",
+            response: text || "Zoepact Customer webhook hit successfully",
         };
     } catch (error) {
         return { error: error.message };

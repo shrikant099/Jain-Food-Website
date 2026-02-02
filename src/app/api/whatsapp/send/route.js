@@ -1,17 +1,24 @@
+import { sendCustomerWhatsApp } from "@/lib/sendCustomerWhatsapp";
 import { sendWhatsApp } from "@/lib/sendWhatsApp";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
     try {
         const order = await req.json();
-        console.log("Order:", JSON.stringify(order, null, 2));
 
-        const result = await sendWhatsApp(order);
-        console.log("Zoepact Result:", result);
+        const [adminResult, customerResult] = await Promise.all([
+            sendWhatsApp(order),
+            sendCustomerWhatsApp(order),
+        ]);
 
-        if (result?.error) {
+        // Check errror
+        if (adminResult?.error || customerResult?.error) {
             return NextResponse.json(
-                { success: false, error: result.error },
+                {
+                    success: false,
+                    adminError: adminResult?.error,
+                    customerError: customerResult?.error,
+                },
                 { status: 400 }
             );
         }
@@ -19,8 +26,9 @@ export async function POST(req) {
         return NextResponse.json(
             {
                 success: true,
-                message: "WhatsApp message sent successfully",
-                result,
+                message: "Both WhatsApp messages sent successfully",
+                adminResult,
+                customerResult,
             },
             { status: 200 }
         );
