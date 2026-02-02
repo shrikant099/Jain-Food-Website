@@ -1,5 +1,11 @@
 export async function sendCustomerWhatsApp(order) {
     try {
+        const itemsText = order.items
+            .map(
+                (i, idx) =>
+                    `${idx + 1}. ${i.name} × ${i.qty} = ₹${i.price * i.qty}`
+            )
+            .join("\n");
         const payload = {
             customer_name: order.customer.name,
             phone: `91${order.customer.phone}`,
@@ -8,12 +14,7 @@ export async function sendCustomerWhatsApp(order) {
             pnr: order.customer.pnr,
             coach: order.customer.coach,
             seat: order.customer.seat,
-
-            items: order.items.map((i) => ({
-                name: i.name,
-                qty: i.qty,
-                price: i.price,
-            })),
+            items: itemsText,
             subtotal: order.price.subtotal,
             discount: order.price.discount,
             gst: order.price.gst,
