@@ -1,12 +1,7 @@
 export async function sendWhatsApp(order) {
     try {
-        const itemsText = order.items
-            .map(
-                (i, idx) =>
-                    `${idx + 1}. ${i.name} × ${i.qty} = ₹${i.price * i.qty}`
-            )
-            .join("\n");
-            
+        const itemsText = order.items.map((i, idx) => `${idx + 1}. ${i.name} × ${i.qty} = ₹${i.price * i.qty}`).join(", ");  
+
         const payload = {
             customer_name: order.customer.name,
             phone: `91${order.customer.phone}`,
@@ -26,7 +21,7 @@ export async function sendWhatsApp(order) {
         };
 
         const res = await fetch(
-            "https://app.zoepact.in/webhook/whatsapp-workflow/244812.321784.309554.1770013231",
+            "https://app.zoepact.in/webhook/whatsapp-workflow/244812.321784.309554.1770465603",
             {
                 method: "POST",
                 headers: {
@@ -48,3 +43,5 @@ export async function sendWhatsApp(order) {
         return { error: error.message };
     }
 };
+
+
