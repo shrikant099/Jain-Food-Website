@@ -298,35 +298,6 @@ export default function CheckoutPage() {
     setStatus("loading");
 
     try {
-      const itemsText = items
-        .map(
-          (item, index) =>
-            `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
-        )
-        .join("\n");
-      //  Sending Order Detail on Email
-      await emailjs.send(
-        EMAIL_SERVICE_ID,
-        "template_6954v9j",
-        {
-          name: form.name,
-          phone: form.phone,
-          train: form.train,
-          pnr: form.pnr,
-          coach: form.coach,
-          seat: form.seat,
-          payment: form.payment.toUpperCase(),
-          note: form.note || "No special instructions",
-
-          // Order Details
-          items: itemsText,
-          subtotal: subtotal.toFixed(0),
-          discount: discount.toFixed(0),
-          gst: gstAmount.toFixed(0),
-          total: total.toFixed(0),
-        },
-        PUBLIC_KEY
-      );
       const res = await fetch("/api/phonepe/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
