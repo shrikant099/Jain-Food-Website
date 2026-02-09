@@ -7,8 +7,9 @@ import ThankYouHeader from "./components/ThankYouHeader";
 import { sendCustomerWhatsApp } from "@/lib/sendCustomerWhatsapp";
 import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
 import { sendWhatsApp } from "@/lib/sendWhatsApp";
+import emailjs from "@emailjs/browser";
 
-export default async function ThankYouPage() {
+export default function ThankYouPage() {
     const [order, setOrder] = useState(null);
 
     // send email
