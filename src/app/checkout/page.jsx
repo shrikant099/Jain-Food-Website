@@ -298,6 +298,7 @@ export default function CheckoutPage() {
     setStatus("loading");
 
     try {
+      const orderId = generateOrderId();
       const res = await fetch("/api/phonepe/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
