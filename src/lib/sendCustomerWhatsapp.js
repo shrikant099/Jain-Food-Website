@@ -2,6 +2,7 @@ export async function sendCustomerWhatsApp(order) {
     try {
         const itemsText = order.items.map((i, idx) => `${idx + 1}. ${i.name} × ${i.qty} = ₹${i.price * i.qty}`).join(", ");
 
+        const totalAmmountForMessage = order.customer.payment === "ONLINE-PRE-PAID" ? 0 : order.price.total
         const payload = {
             customer_name: order.customer.name,
             phone: `91${order.customer.phone}`,
@@ -14,7 +15,7 @@ export async function sendCustomerWhatsApp(order) {
             subtotal: order.price.subtotal,
             discount: order.price.discount,
             gst: order.price.gst,
-            total_amount: order.price.total,
+            total_amount: totalAmmountForMessage,
             payment_method: order.customer.payment,
             order_date: order.orderDate,
             message: `Hi ${order.customer.name}, your Jain food order (${order.orderId}) has been confirmed. Total ₹${order.price.total}. Thank you!`,
