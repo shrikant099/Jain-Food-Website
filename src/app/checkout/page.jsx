@@ -282,10 +282,10 @@ export default function CheckoutPage() {
       return;
     }
 
-    if (Number(total) < 99) {
-      setStatus("lessThan99");
-      return;
-    }
+    // if (Number(total) < 99) {
+    //   setStatus("lessThan99");
+    //   return;
+    // }
 
     const orderData = buildOrderData("ONLINE-PRE-PAID");
 
