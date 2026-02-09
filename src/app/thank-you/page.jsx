@@ -3,25 +3,96 @@
 import { useEffect, useState } from "react";
 import { CheckCircle } from "lucide-react";
 import OrderStatusCard from "./components/OrderStatusCard";
-import MenuHeader from "@/components/MenuHeader";
 import ThankYouHeader from "./components/ThankYouHeader";
+import { sendCustomerWhatsApp } from "@/lib/sendCustomerWhatsapp";
+import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
+import { sendWhatsApp } from "@/lib/sendWhatsApp";
 
-export default function ThankYouPage() {
+export default async function ThankYouPage() {
     const [order, setOrder] = useState(null);
 
-    /* =========================
-       1️⃣ LOAD ORDER DATA
-    ========================= */
+    // send email
+    useEffect(() => {
+        if (!order) return;
+
+        const alreadySent = sessionStorage.getItem("email_sent");
+        if (alreadySent === "true") return;
+
+        const sendEmail = async () => {
+            try {
+                const itemsText = order.items
+                    .map((i, idx) => `${idx + 1}. ${i.name} x ${i.qty} = ₹${i.total}`)
+                    .join("\n");
+
+                await emailjs.send(
+                    EMAIL_SERVICE_ID,
+                    EMAIL_TEMPLATE_ID_ORDER,
+                    {
+                        name: order.customer.name,
+                        phone: order.customer.phone,
+                        train: order.customer.train,
+                        pnr: order.customer.pnr,
+                        coach: order.customer.coach,
+                        seat: order.customer.seat,
+                        payment: order.customer.payment,
+                        note: order.customer.note || "No special instructions",
+                        items: itemsText,
+                        subtotal: order.price.subtotal,
+                        discount: order.price.discount,
+                        gst: order.price.gst,
+                        total: order.price.total,
+                    },
+                    PUBLIC_KEY
+                );
+
+                sessionStorage.setItem("email_sent", "true");
+                console.log(" Email sent after payment success");
+            } catch (err) {
+                console.error(" Email failed:", err);
+            }
+        };
+
+        sendEmail();
+    }, [order]);
+
+    // send whatsap
+    useEffect(() => {
+        if (!order) return;
+
+        const alreadySent = sessionStorage.getItem("wa_sent");
+        if (alreadySent === "true") return;
+
+        const sendWhatsApps = async () => {
+            try {
+                console.log(" Sending WhatsApp messages...");
+
+                await Promise.all([
+                    sendCustomerWhatsApp(order),
+                    sendWhatsApp(order),
+                ]);
+
+                sessionStorage.setItem("wa_sent", "true");
+
+                console.log("WhatsApp sent to customer + vendor");
+            } catch (err) {
+                console.error(" WhatsApp send failed", err);
+            }
+        };
+
+        sendWhatsApps();
+    }, [order]);
+
+
+
     useEffect(() => {
         const storedOrder = sessionStorage.getItem("orderData");
+        console.log(`Stored Order Items: ${storedOrder}`)
+
         if (storedOrder) {
             setOrder(JSON.parse(storedOrder));
         }
     }, []);
 
-    /* =========================
-       2️⃣ GTM PURCHASE FIRE
-    ========================= */
     useEffect(() => {
         const gtmData = sessionStorage.getItem("gtm_purchase_data");
         const alreadyFired = sessionStorage.getItem("gtm_purchase_fired");
@@ -34,7 +105,7 @@ export default function ThankYouPage() {
         const orderId = parsed.orderId;
         const totalAmount = Number(parsed.price.total);
 
-        // ✅ FIRE GTM EVENT
+        //  FIRE GTM EVENT
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "purchase_success",
@@ -56,7 +127,76 @@ export default function ThankYouPage() {
         );
     }
 
+    // send order details after success phonepe payment success
+    // const itemsText = order.items.map((i, idx) => `${idx + 1}. ${i.name} × ${i.qty} = ₹${i.price * i.qty}`).join(", ");
 
+    // const vendorPayloadSendToWhatsapp = {
+    //     customer_name: order.customer.name,
+    //     phone: `91${order.customer.phone}`,
+    //     order_id: order.orderId,
+    //     train: order.customer.train,
+    //     pnr: order.customer.pnr,
+    //     coach: order.customer.coach,
+    //     seat: order.customer.seat,
+    //     items: itemsText,
+    //     subtotal: order.price.subtotal,
+    //     discount: order.price.discount,
+    //     gst: order.price.gst,
+    //     total_amount: order.price.total,
+    //     payment_method: order.customer.payment,
+    //     order_date: order.orderDate,
+    //     message: `Hi ${order.customer.name}, your Jain food order (${order.orderId}) has been confirmed. Total ₹${order.price.total}. Thank you!`,
+    // }
+    // try {
+    //     // this api call for vendor 
+    //     const res = await fetch(
+    //         "https://app.zoepact.in/webhook/whatsapp-workflow/244812.321784.309554.1770465603",
+    //         {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(vendorPayloadSendToWhatsapp),
+    //         }
+    //     );
+
+    //     //  JSON assume mat karo
+    //     const text = await res.text();
+
+    //     return {
+    //         status: res.status,
+    //         ok: res.ok,
+    //         response: text || "Zoepact webhook hit successfully",
+    //     };
+    // } catch (error) {
+    //     console.log(`Error sending order details on whatsapp: ${error}`);
+    //     alert("Something went wrong please try again later")
+    // }
+
+    // send to customer 
+    // try {
+    //     const customerSendWhatsAppMessagePayload = {
+    //         customer_name: order.customer.name,
+    //         phone: `91${order.customer.phone}`,
+    //         order_id: order.orderId,
+    //         train: order.customer.train,
+    //         pnr: order.customer.pnr,
+    //         coach: order.customer.coach,
+    //         seat: order.customer.seat,
+    //         items: itemsText,
+    //         subtotal: order.price.subtotal,
+    //         discount: order.price.discount,
+    //         gst: order.price.gst,
+    //         total_amount: order.price.total,
+    //         payment_method: order.customer.payment,
+    //         order_date: order.orderDate,
+    //         message: `Hi ${order.customer.name}, your Jain food order (${order.orderId}) has been confirmed. Total ₹${order.price.total}. Thank you!`,
+    //     }
+    //     await sendCustomerWhatsApp(customerSendWhatsAppMessagePayload)
+
+    // } catch (error) {
+    //     console.log(`Error to send order details to customer on whatsapp: ${error}`)
+    // }
     return (
         <>
             <ThankYouHeader />

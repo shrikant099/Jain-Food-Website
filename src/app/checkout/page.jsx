@@ -173,7 +173,7 @@ export default function CheckoutPage() {
           pnr: form.pnr,
           coach: form.coach,
           seat: form.seat,
-          payment: form.payment.toUpperCase(),
+          payment: "COD",
           note: form.note
         },
         items: items.map((item) => ({
@@ -219,7 +219,7 @@ export default function CheckoutPage() {
         note: ""
       });
 
-      
+
 
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
       // 🔐 SESSION ME SET
@@ -242,8 +242,34 @@ export default function CheckoutPage() {
 
 
   // ================= PHONEPE PAYMENT (V2) =================
+  const buildOrderData = (paymentMethod) => ({
+    customer: {
+      name: form.name,
+      phone: form.phone,
+      train: form.train,
+      pnr: form.pnr,
+      coach: form.coach,
+      seat: form.seat,
+      payment: paymentMethod,
+      note: form.note,
+    },
+    items: items.map((item) => ({
+      name: item.name,
+      qty: item.qty,
+      price: item.price,
+      total: item.price * item.qty,
+    })),
+    price: {
+      subtotal: subtotal.toFixed(0),
+      discount: discount.toFixed(0),
+      gst: gstAmount.toFixed(0),
+      total: total.toFixed(0),
+    },
+    orderId: generateOrderId(),
+    orderDate: new Date().toLocaleString("en-IN"),
+  });
+
   const handlePhonePePayment = async () => {
-    // ✅ basic validation
     if (
       !form.name ||
       !form.phone ||
@@ -256,52 +282,51 @@ export default function CheckoutPage() {
       return;
     }
 
-    // if (Number(total) < 99) {
-    //   setStatus("lessThan99");
-    //   return;
-    // }
+    if (Number(total) < 99) {
+      setStatus("lessThan99");
+      return;
+    }
 
-    const orderId = generateOrderId();
+    const orderData = buildOrderData("ONLINE-PRE-PAID");
 
-    const pendingOrder = {
-      customer: {
-        name: form.name,
-        phone: form.phone,
-        train: form.train,
-        pnr: form.pnr,
-        coach: form.coach,
-        seat: form.seat,
-        payment: "PHONEPE",
-        note: form.note,
-      },
-      items,
-      price: {
-        subtotal: subtotal.toFixed(0),
-        discount: discount.toFixed(0),
-        gst: gstAmount.toFixed(0),
-        total: total.toFixed(0),
-      },
-      orderId,
-      orderDate: new Date().toLocaleString("en-IN"),
-    };
-
-    sessionStorage.setItem(
-      "orderData",
-      JSON.stringify(pendingOrder)
-    );
-
-    // 🔐 SESSION ME SET
-    sessionStorage.setItem(
-      "gtm_purchase_data",
-      JSON.stringify(pendingOrder)
-    );
-    // 🔐 FLAG RESET (NEW ORDER KE LIYE)
+    sessionStorage.setItem("orderData", JSON.stringify(orderData));
+    sessionStorage.setItem("gtm_purchase_data", JSON.stringify(orderData));
     sessionStorage.setItem("gtm_purchase_fired", "false");
-
+    sessionStorage.setItem("email_sent" ,"false");
+    sessionStorage.setItem("wa_sent", "false")
 
     setStatus("loading");
 
     try {
+      const itemsText = items
+        .map(
+          (item, index) =>
+            `${index + 1}. ${item.name} x ${item.qty} = ₹${item.price * item.qty}`
+        )
+        .join("\n");
+      //  Sending Order Detail on Email
+      await emailjs.send(
+        EMAIL_SERVICE_ID,
+        "template_6954v9j",
+        {
+          name: form.name,
+          phone: form.phone,
+          train: form.train,
+          pnr: form.pnr,
+          coach: form.coach,
+          seat: form.seat,
+          payment: form.payment.toUpperCase(),
+          note: form.note || "No special instructions",
+
+          // Order Details
+          items: itemsText,
+          subtotal: subtotal.toFixed(0),
+          discount: discount.toFixed(0),
+          gst: gstAmount.toFixed(0),
+          total: total.toFixed(0),
+        },
+        PUBLIC_KEY
+      );
       const res = await fetch("/api/phonepe/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -313,11 +338,9 @@ export default function CheckoutPage() {
       });
 
       const data = await res.json();
-      console.log(`Data redirect url ${data.redirectUrl}`)
-      console.log(`Data ${data}`)
-      // ✅ REDIRECT USER TO PHONEPE
+      //  REDIRECT USER TO PHONEPE
       if (data?.redirectUrl) {
-        // ✅ THIS IS THE MAIN FIX
+        //  THIS IS THE MAIN FIX
         window.location.href = data.redirectUrl;
       } else {
         alert("Payment URL not received");
