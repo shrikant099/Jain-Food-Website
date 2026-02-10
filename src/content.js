@@ -1,7 +1,6 @@
 // Home 6 melas itmems
 export const meals = [
     { name: "Veg Mini Thali", price: 179, img: "/home/Veg-Mini-thali.png", desc: "1 Sabji + Dal + Rice + 4 Roti + Salad" },
-    { name: "testing", price: 1, img: "", desc: "" },
     { name: "Paneer Butter Masala", price: 290, img: "/home/paneer-butter-masala.png", desc: "Creamy paneer gravy served fresh (400ml)" },
     { name: "Veg Biryani", price: 162, img: "/home/veg-biryani-with-raita.png", desc: "Aromatic biryani cooked Jain friendly  (400ml)" },
     { name: "Chilli Paneer", price: 300, img: "/home/chilli-paneer.png", desc: "Paneer tossed in spicy Jain sauce  (400ml)" },
