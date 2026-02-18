@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectCartItems } from "@/features/cart/selector";
 import { clearCart, addItem, removeItem } from "@/features/cart/cartSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
 import { useRouter } from "next/navigation";
@@ -51,12 +51,60 @@ const coupons = [
   },
 ];
 
+/**
+ * - Order Time Window
+ */
+const ORDER_START_HOUR = 9; // testing
+const ORDER_END_HOUR = 22;
+const ORDER_TIME_TEXT = "9 AM – 10 PM";
+
+function isOrderingOpen() {
+  const now = new Date();
+
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+
+  console.log("DEBUG TIME:", hour, minute);
+
+  const current = hour * 60 + minute;
+  const start = ORDER_START_HOUR * 60;
+  const end = ORDER_END_HOUR * 60;
+
+  console.log("DEBUG RANGE:", current, start, end);
+
+  return current >= start && current < end;
+}
 
 function generateOrderId() {
   return `AR${Math.floor(100 + Math.random() * 900)}`;
 }
 
 export default function CheckoutPage() {
+  // Order Time state
+  const [orderOpen, setOrderOpen] = useState(false);
+  console.log("orderOpen:", orderOpen);
+
+  useEffect(() => {
+    const update = () => {
+      const open = isOrderingOpen();
+      console.log("SET orderOpen:", open);
+      setOrderOpen(open);
+    };
+    update(); // first run
+    const timer = setInterval(update, 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Alert after 10pm and before 9am 
+  function guardOrderWindow() {
+    if (!isOrderingOpen()) {
+      setPaymentError("Ordering available daily between 9 AM and 10 PM");
+      return false;
+    }
+    return true;
+  }
+
+
   const cart = useSelector(selectCartItems);
   const dispatch = useDispatch();
   const items = Object.values(cart);
@@ -112,6 +160,7 @@ export default function CheckoutPage() {
   // COD Payment 
   const submitOrder = async (e) => {
     e.preventDefault();
+    if (!guardOrderWindow()) return;
 
     const itemsText = items
       .map(
@@ -222,12 +271,12 @@ export default function CheckoutPage() {
 
 
       sessionStorage.setItem("orderData", JSON.stringify(orderData));
-      // 🔐 SESSION ME SET
+      //  SESSION ME SET
       sessionStorage.setItem(
         "gtm_purchase_data",
         JSON.stringify(orderData)
       );
-      // 🔐 FLAG RESET (NEW ORDER KE LIYE)
+      // FLAG RESET (NEW ORDER KE LIYE)
       sessionStorage.setItem("gtm_purchase_fired", "false");
 
       dispatch(clearCart());
@@ -270,6 +319,7 @@ export default function CheckoutPage() {
   });
 
   const handlePhonePePayment = async () => {
+    if (!guardOrderWindow()) return;
     if (
       !form.name ||
       !form.phone ||
@@ -292,7 +342,7 @@ export default function CheckoutPage() {
     sessionStorage.setItem("orderData", JSON.stringify(orderData));
     sessionStorage.setItem("gtm_purchase_data", JSON.stringify(orderData));
     sessionStorage.setItem("gtm_purchase_fired", "false");
-    sessionStorage.setItem("email_sent" ,"false");
+    sessionStorage.setItem("email_sent", "false");
     sessionStorage.setItem("wa_sent", "false")
 
     setStatus("loading");
@@ -332,6 +382,12 @@ export default function CheckoutPage() {
         ← Back to Menu
       </a>
 
+      {!orderOpen && (
+        <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-300 text-red-700 font-semibold text-center">
+          🚫 Ordering closed now.
+          Available daily <b>{ORDER_TIME_TEXT}</b>  Please come back tomorrow after 9 AM
+        </div>
+      )}
       <h1 className="text-3xl md:text-5xl font-extrabold text-center">
         Checkout
       </h1>
@@ -585,7 +641,7 @@ export default function CheckoutPage() {
                 handlePhonePePayment();
               }
             }}
-            disabled={status === "loading"}
+            disabled={status === "loading" || !orderOpen}
             className={`w-full mt-6 bg-orange-600 text-white py-3 rounded-xl font-bold ${status === "loading"
               ? "bg-orange-400 cursor-not-allowed"
               : ""
