@@ -82,7 +82,6 @@ function generateOrderId() {
 export default function CheckoutPage() {
   // Order Time state
   const [orderOpen, setOrderOpen] = useState(false);
-  console.log("orderOpen:", orderOpen);
 
   useEffect(() => {
     const update = () => {
@@ -171,12 +170,12 @@ export default function CheckoutPage() {
 
 
     if (
-      !form.name ||
-      !form.phone ||
-      !form.train ||
-      !form.pnr ||
-      !form.coach ||
-      !form.seat
+      !form.name.trim() ||
+      form.phone.trim().length !== 10 ||
+      !form.train.trim() ||
+      !form.pnr.trim() ||
+      !form.coach.trim() ||
+      !form.seat.trim()
     ) {
       setStatus("error");
       return;
@@ -332,10 +331,10 @@ export default function CheckoutPage() {
       return;
     }
 
-    // if (Number(total) < 99) {
-    //   setStatus("lessThan99");
-    //   return;
-    // }
+    if (Number(total) < 99) {
+      setStatus("lessThan99");
+      return;
+    }
 
     const orderData = buildOrderData("ONLINE-PRE-PAID");
 
