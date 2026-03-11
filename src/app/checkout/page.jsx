@@ -589,6 +589,21 @@ export default function CheckoutPage() {
 
 
           </div>
+          <div>
+            <label className="font-semibold block mb-1">
+              Select Station
+            </label>
+
+            <select
+              name="station"
+              value={form.station}
+              onChange={handleChange}
+              className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500 outline-none"
+            >
+              <option value="">Select Station</option>
+              <option value="Abu Road">Abu Road</option>
+            </select>
+          </div>
 
           {/* OPTIONAL INSTRUCTION / NOTE */}
           <div className="">
