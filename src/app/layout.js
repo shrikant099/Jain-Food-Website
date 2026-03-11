@@ -6,7 +6,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import CartPopup from "@/components/CartPopup";
 import OrderFloatingButton from "@/components/OrderFloatingButton";
 import Script from "next/script";
-
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -233,6 +233,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

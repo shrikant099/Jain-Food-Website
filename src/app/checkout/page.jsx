@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
 import { useRouter } from "next/navigation";
-
+import {toast} from "react-hot-toast"
 const coupons = [
   {
     title: "10% OFF on Train Food Orders",
@@ -150,7 +150,8 @@ export default function CheckoutPage() {
     coach: "",
     seat: "",
     payment: "cod",
-    note: ""
+    note: "",
+    station: "",
   });
 
   const handleChange = (e) =>
@@ -181,6 +182,10 @@ export default function CheckoutPage() {
       return;
     }
 
+    if (!form.station) {
+      toast.error("Please select station. It is required.");
+      return;
+    }
     if (total.toFixed(0) < 99) {
       setStatus("lessThan99");
       return;
