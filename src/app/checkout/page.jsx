@@ -63,14 +63,10 @@ function isOrderingOpen() {
 
   const hour = now.getHours();
   const minute = now.getMinutes();
-
-  console.log("DEBUG TIME:", hour, minute);
-
   const current = hour * 60 + minute;
   const start = ORDER_START_HOUR * 60;
   const end = ORDER_END_HOUR * 60;
 
-  console.log("DEBUG RANGE:", current, start, end);
 
   return current >= start && current < end;
 }
@@ -541,59 +537,67 @@ export default function CheckoutPage() {
         <div className="bg-white border rounded-2xl shadow-lg p-6">
           <h2 className="text-xl font-bold mb-4">Passenger Details</h2>
 
-          <div className="grid gap-4">
-            <Input
-              label="Full Name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-            />
-            <Input
-              label="Mobile Number"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              maxLength={10}
-              pattern={/[^0-9]/g}
-            />
-            <Input
-              label="Train Number"
-              name="train"
-              value={form.train}
-              onChange={handleChange}
-              maxLength={5}
-              pattern={/[^0-9]/g}
-            />
+          <div className="grid gap-3">
 
-            <Input
-              label="PNR Number"
-              name="pnr"
-              value={form.pnr}
-              onChange={handleChange}
-              maxLength={10}
-              pattern={/[^0-9]/g}
-            />
+  <Input
+    label="Full Name"
+    name="name"
+    value={form.name}
+    onChange={handleChange}
+  />
 
-            <Input
-              label="Coach"
-              name="coach"
-              value={form.coach}
-              onChange={handleChange}
-              maxLength={5}
-              pattern={/[^a-zA-Z0-9]/g}
-            />
+  <Input
+    label="Mobile Number"
+    name="phone"
+    value={form.phone}
+    onChange={handleChange}
+    maxLength={10}
+    pattern={/[^0-9]/g}
+  />
 
-            <Input
-              label="Seat"
-              name="seat"
-              value={form.seat}
-              onChange={handleChange}
-              maxLength={3}
-              pattern={/[^0-9]/g}
-            />
+  {/* Train + PNR same row */}
+  <div className="grid grid-cols-2 gap-3">
+    <Input
+      label="Train Number"
+      name="train"
+      value={form.train}
+      onChange={handleChange}
+      maxLength={5}
+      pattern={/[^0-9]/g}
+    />
 
+    <Input
+      label="PNR Number"
+      name="pnr"
+      value={form.pnr}
+      onChange={handleChange}
+      maxLength={10}
+      pattern={/[^0-9]/g}
+    />
+  </div>
 
-          </div>
+  {/* Coach + Seat same row */}
+  <div className="grid grid-cols-2 gap-3">
+    <Input
+      label="Coach"
+      name="coach"
+      value={form.coach}
+      onChange={handleChange}
+      maxLength={5}
+      pattern={/[^a-zA-Z0-9]/g}
+    />
+
+    <Input
+      label="Seat"
+      name="seat"
+      value={form.seat}
+      onChange={handleChange}
+      maxLength={3}
+      pattern={/[^0-9]/g}
+    />
+  </div>
+
+</div>
           <div>
             <label className="font-semibold block mb-1">
               Select Station
