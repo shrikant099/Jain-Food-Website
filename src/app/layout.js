@@ -7,6 +7,7 @@ import CartPopup from "@/components/CartPopup";
 import OrderFloatingButton from "@/components/OrderFloatingButton";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
+import {Analytics} from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -234,6 +235,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <Toaster position="top-right" />
+        <Analytics/>
       </body>
     </html>
   );
