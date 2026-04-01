@@ -189,10 +189,25 @@ export default function CheckoutPage() {
 
     setStatus("loading");
     try {
+      console.log({
+        name: form.name,
+        phone: form.phone,
+        train: form.train,
+        pnr: form.pnr,
+        coach: form.coach,
+        seat: form.seat,
+        payment: form.payment.toUpperCase(),
+        note: form.note || "No special instructions",
+        items: itemsText,
+        subtotal: subtotal.toFixed(0),
+        discount: discount.toFixed(0),
+        gst: gstAmount.toFixed(0),
+        total: total.toFixed(0),
+      });
       //  Sending Order Detail on Email
       await emailjs.send(
         EMAIL_SERVICE_ID,
-        "template_6954v9j",
+       EMAIL_TEMPLATE_ID_ORDER,
         {
           name: form.name,
           phone: form.phone,
@@ -202,7 +217,7 @@ export default function CheckoutPage() {
           seat: form.seat,
           payment: form.payment.toUpperCase(),
           note: form.note || "No special instructions",
-
+          email: "order@agarwalradhiwala.com", // IMPORTANT
           // Order Details
           items: itemsText,
           subtotal: subtotal.toFixed(0),
