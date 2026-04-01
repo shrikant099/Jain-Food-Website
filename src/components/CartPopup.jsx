@@ -4,11 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 import { selectCartCount, selectCartTotal } from "@/features/cart/selector";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function CartPopup() {
     const count = useSelector(selectCartCount);
     const total = useSelector(selectCartTotal);
+    const pathName = usePathname();
 
+    if(pathName === "/checkout") return null;
     // Popup should show ONLY when items > 0
     if (count === 0) return null;
 
