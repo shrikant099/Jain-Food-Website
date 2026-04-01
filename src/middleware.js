@@ -1,15 +1,26 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+
+const rateLimit = new Map();
 
 export function middleware(request) {
-    const isAdmin = request.cookies.get("admin");
+  const ip = request.headers.get('x-forwarded-for') || 'unknown';
+  const now = Date.now();
+  const windowMs = 60 * 1000; // 1 minute
+  const maxRequests = 60; // 60 requests per minute per IP
 
-    // if (!isAdmin) {
-    //     return NextResponse.redirect(new URL("/", request.url))
-    // }
+  const userRequests = rateLimit.get(ip) || [];
+  const recentRequests = userRequests.filter(time => now - time < windowMs);
 
-    return NextResponse.next();
+  if (recentRequests.length >= maxRequests) {
+    return new NextResponse('Too Many Requests', { status: 429 });
+  }
+
+  recentRequests.push(now);
+  rateLimit.set(ip, recentRequests);
+
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/admin/:path*"],
+  matcher: '/api/:path*', // Sirf API routes pe lagao
 };
