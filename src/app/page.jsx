@@ -11,6 +11,7 @@ import HowToOrder from "@/components/HowToOrder";
 import LiveOrdersCarousel from "@/components/LiveOrdersCarousel";
 import BestSellerMeals from "@/components/MealsSection";
 import Navbar from "@/components/Navbar";
+import OfferPopup from "@/components/OfferPopup";
 import OfferToast from "@/components/OfferToast";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -18,6 +19,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 export default function Home() {
   return (
     <>
+    <OfferPopup/>
     <AnnouncementBar />
     <Navbar />
     <Hero />
