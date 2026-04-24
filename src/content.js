@@ -80,79 +80,79 @@ export const reviews = [
 /// Alll Menu Items With Category And Price
 export const menuCategories = [
     // ---------------- BULK THALI ----------------
-    {
-        name: "Bulk 3/5 Thali",
-        items: [
-            {
-                name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
-                desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
-                price: 800,
-                img: "/menu/thalis/veg special thali.png"
-            },
-            {
-                name: "Veg Special Thali (5 Nos)",
-                desc: "Paneer butter masala + mix veg + dal fry/tadka + jeera rice + 3 butter chapati + curd + salad + pickle + gulab jamun",
-                price: 1150,
-                img: "/menu/thalis/Veg mini thali.png"
-            },
-            {
-                name: "Aloo Paratha Curd Combo (5 Nos)",
-                desc: "2pc aloo paratha + curd + salad + pickle",
-                price: 450,
-                img: "/menu/thalis/maharaja thali.png"
-            },
-            {
-                name: "Mini Thali (3 Nos) + 3Pc Gulab Jamun",
-                desc: "Seasonal veg + dal fry/tadka + rice + 3 chapati + gulab jamun + salad + pickle",
-                price: 480,
-                img: "/menu/thalis/jain special thali.png"
-            },
-            {
-                name: "Jain Mini Thali (5 Nos) + 5Pc Gulab Jamun",
-                desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
-                price: 800,
-                img: "/menu/thalis/jain special thali.png"
-            },
-            {
-                name: "Jain Special Thali (3 Nos)",
-                desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
-                price: 1200,
-                img: "/menu/thalis/maharaja thali.png"
-            }
-        ]
-    },
+    // {
+    //     name: "Bulk 3/5 Thali",
+    //     items: [
+    //         {
+    //             name: "Mini Thali (5 Nos) + 5Pc Gulab Jamun",
+    //             desc: "Seasonal veg + dal fry/tadka+rice+3 chapati + gulab jamun + salad + pickle",
+    //             price: 800,
+    //             img: "/menu/thalis/veg special thali.png"
+    //         },
+    //         {
+    //             name: "Veg Special Thali (5 Nos)",
+    //             desc: "Paneer butter masala + mix veg + dal fry/tadka + jeera rice + 3 butter chapati + curd + salad + pickle + gulab jamun",
+    //             price: 1150,
+    //             img: "/menu/thalis/Veg mini thali.png"
+    //         },
+    //         {
+    //             name: "Aloo Paratha Curd Combo (5 Nos)",
+    //             desc: "2pc aloo paratha + curd + salad + pickle",
+    //             price: 450,
+    //             img: "/menu/thalis/maharaja thali.png"
+    //         },
+    //         {
+    //             name: "Mini Thali (3 Nos) + 3Pc Gulab Jamun",
+    //             desc: "Seasonal veg + dal fry/tadka + rice + 3 chapati + gulab jamun + salad + pickle",
+    //             price: 480,
+    //             img: "/menu/thalis/jain special thali.png"
+    //         },
+    //         {
+    //             name: "Jain Mini Thali (5 Nos) + 5Pc Gulab Jamun",
+    //             desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
+    //             price: 800,
+    //             img: "/menu/thalis/jain special thali.png"
+    //         },
+    //         {
+    //             name: "Jain Special Thali (3 Nos)",
+    //             desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
+    //             price: 1200,
+    //             img: "/menu/thalis/maharaja thali.png"
+    //         }
+    //     ]
+    // },
 
     // ---------------- THALIS ----------------
     {
         name: "Thalis",
         items: [
             {
-                name: "Veg Mini Thali",
-                desc: "Seasonal veg + dal fry/tadka + rice + chapati + gulab jamun + salad + pickle",
+                name: "Jain Mini Thali",
+                desc: "Dal Fry 100gm, Chana Masala 100gm, Plain Rice 150gm, Butter chapati (3-nos) 100gm, Pickle & Salad",
                 price: 179,
                 img: "/menu/thalis/Veg mini thali.png"
             },
             {
-                name: "Jain Mini Thali",
-                desc: "Channa masala + dal fry/tadka + rice + chapati + salad + pickle",
+                name: "Mini Thali Regular",
+                desc: "Dal Fry 100gm, Mix veg 100gm, Plain Rice 150gm, Butter chapati (3-nos) 100gm, Pickle & Salad",
                 price: 179,
                 img: "/menu/thalis/jain mini thali.png"
             },
             {
-                name: "Special Thali",
-                desc: "Paneer butter masala + mix veg + dal fry + jeera rice + butter chapati + curd + salad + pickle + gulab jamun",
+                name: "Veg Thali Special",
+                desc: "Dal Fry 100gm, Jeera Rice 150gm, Mix Veg 100gm, Shahi Paneer 100gm, Butter Roti (3-nos) 100gm, curd 75ml, Sweet 25gm, Salad & Achar",
                 price: 249,
                 img: "/menu/thalis/veg special thali.png"
             },
             {
-                name: "Jain Special Thali",
-                desc: "Shahi paneer + channa + dal fry + jeera rice + butter chapati + curd + salad + pickle + papad + gulab jamun",
+                name: "Jain Veg Thali",
+                desc: "Dal Fry 100gm, Jeera Rice 150gm, Chana Masala 100gm, Shahi Paneer 100gm, Butter Roti (3-nos) 100gm, curd 74ml, Sweet 25gm, Salad & Achar",
                 price: 259,
                 img: "/menu/thalis/jain special thali.png"
             },
             {
-                name: "Maharaja Thali",
-                desc: "Paneer butter masala + mix veg + jeera rice + dal fry + butter chapati + gulab jamun + papad + salad + pickle",
+                name: "Veg Maharaja Thali",
+                desc: "Dal Fry 100gm, Jeera Rice 150gm, Mix Veg 100gm, Paneer Butter Masala 100gm, Butter Roti (4-nos) 100gm, curd 75ml, Sweet 25gm, Papad, Salad & Achar",
                 price: 279,
                 img: "/menu/thalis/maharaja thali.png"
             }

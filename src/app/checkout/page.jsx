@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID_ORDER, PUBLIC_KEY } from "@/keys";
 import { useRouter } from "next/navigation";
-import {toast} from "react-hot-toast"
+import {toast} from "react-hot-toast";
 const coupons = [
   {
     title: "10% OFF on Train Food Orders",
@@ -654,7 +654,7 @@ export default function CheckoutPage() {
 
 
           <h3 className="mt-6 font-semibold">Payment Method</h3>
-
+              <div className="flex w-full items-center justify-around gap-6 mt-2">
           <PaymentOption
             label="Cash On Delivery (COD)"
             value="cod"
@@ -670,6 +670,7 @@ export default function CheckoutPage() {
             selected={form.payment}
             onChange={handleChange}
           />
+              </div>
 
           <button
             onClick={(e) => {
@@ -789,13 +790,14 @@ function PaymentOption({
   return (
     <label
       onClick={disabled ? onDisabledClick : undefined}
-      className={`flex items-center gap-3 border px-3 py-2 rounded-lg mt-2
+      className={`gap-3 border px-3 py-2 rounded-lg mt-2
       ${disabled
           ? "opacity-50 bg-gray-100"
           : "hover:bg-orange-50 cursor-pointer"
         }`}
     >
       <input
+      className="flex-shrink-0"
         type="radio"
         name="payment"
         value={value}
