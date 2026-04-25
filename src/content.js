@@ -159,97 +159,100 @@ export const menuCategories = [
         ]
     },
 
-    // ---------------- COMBOS ----------------
-    {
-        name: "Combos",
-        items: [
-            {
-                name: "Dal Fry Thali With Roti",
-                desc: "Dal fry + roti + salad + pickle",
-                price: 171,
-                img: "/menu/combos/dal-tadka-with-roti.png"
-            },
-            {
-                name: "Dal Fry Thali With Rice",
-                desc: "Dal fry + jeera rice + salad + pickle",
-                price: 171,
-                img: "/menu/combos/dal-fry-with-jeera-rice.png"
-            },
-            {
-                name: "Chana Masala Thali With Roti",
-                desc: "Channa + roti + salad + pickle",
-                price: 181,
-                img: "/menu/combos/channa-masala-with-roti.png"
-            },
-            {
-                name: "Chana Masala Thali With Rice",
-                desc: "Channa + jeera rice + salad + pickle",
-                price: 181,
-                img: "/menu/combos/chole-masala-with-rice.png"
-            },
-
-            {
-                name: "Shahi Paneer + Roti",
-                desc: "Shahi paneer + 3 roti + salad + pickle",
-                price: 219,
-                img: "/menu/combos/shahi-paneer-with-roti.png"
-            },
-            {
-                name: "Shahi Paneer + Rice",
-                desc: "Shahi paneer + jeera rice + salad + pickle",
-                price: 219,
-                img: "/menu/combos/shahi-paneer-with-rice.png"
-            },
-            {
-                name: "Curd Rice Combo",
-                desc: "Curd Rice",
-                price: 149,
-                img: "/menu/combos/curd-rice.png"
-            },
-            {
-                name: "Aloo Paratha + Curd",
-                desc: "Aloo paratha 2pc + curd + salad + pickle",
-                price: 100,
-                img: "/menu/combos/Aloo-paratha-with-curd.png"
-            },
-
-            // Paneer comboss
-            {
-                name: "Paneer Butter Masala + Roti",
-                desc: "Paneer butter masala + roti + salad + pickle",
-                price: 219,
-                img: "/menu/combos/paneer-butter-masala-with-roti.png"
-            },
-            {
-                name: "Paneer Chilly + Fried Rice",
-                desc: "Paneer chilly + fried rice",
-                price: 240,
-                img: "/menu/combos/paneer-chilli-and-fried-rice.png"
-            },
-            {
-                name: "Paneer Chilly + Noodles",
-                desc: "Paneer chilly + noodles",
-                price: 240,
-                img: "/menu/combos/paneer-chilli-and-noodles.png"
-            }
-        ]
-    },
+  // ---------------- COMBOS ----------------
+{
+    name: "Thali Combos",
+    items: [
+        {
+            name: "Dal Fry Thali With Roti",
+            desc: "Dal Fry + Butter Roti (6-Nos), Salad & Achar",
+            price: 180,
+            img: "/menu/combos/dal-tadka-with-roti.png"
+        },
+        {
+            name: "Dal Fry Thali With Rice",
+            desc: "Dal Fry + Rice 300gm, Salad & Achar",
+            price: 180,
+            img: "/menu/combos/dal-fry-with-jeera-rice.png"
+        },
+        {
+            name: "Chana Masala Thali With Roti",
+            desc: "Chana Masala + Butter Roti (6-Nos), Salad & Achar",
+            price: 190,
+            img: "/menu/combos/channa-masala-with-roti.png"
+        },
+        {
+            name: "Chana Masala Thali With Rice",
+            desc: "Chana Masala + Rice 300 gm, Salad & Achar",
+            price: 190,
+            img: "/menu/combos/chole-masala-with-rice.png"
+        },
+        {
+            name: "Shahi Paneer + Roti",
+            desc: "Shahi Paneer + Butter Roti (6-Nos), Salad & Achar",
+            price: 230,
+            img: "/menu/combos/shahi-paneer-with-roti.png"
+        },
+        {
+            name: "Shahi Paneer + Rice",
+            desc: "Shahi Paneer + Rice 300 gm, Salad & Achar",
+            price: 230,
+            img: "/menu/combos/shahi-paneer-with-rice.png"
+        },
+        {
+            name: "Curd Rice Combo",
+            desc: "Dahi 200 gm + Rice 300gm, Salad & Achar",
+            price: 156,
+            img: "/menu/combos/curd-rice.png"
+        },
+        {
+            name: "Kadhai Paneer + Roti",
+            desc: "Kadhai Paneer + Butter Chapati Tawa (6-Nos)",
+            price: 230,
+            img: "/menu/combos/Aloo-paratha-with-curd.png"
+        },
+        {
+            name: "Mutter Paneer + Roti",
+            desc: "Mutter Paneer + Butter Chapati Tawa (6-Nos)",
+            price: 230,
+            img: "/menu/combos/paneer-butter-masala-with-roti.png"
+        },
+        {
+            name: "Paneer Butter Masala + Roti",
+            desc: "Paneer Butter Masala + Butter Chapati Tawa (6-Nos)",
+            price: 230,
+            img: "/menu/combos/paneer-butter-masala-with-roti.png"
+        },
+        {
+            name: "Paneer Chilly + Fried Rice",
+            desc: "Paneer chilly + fried rice",
+            price: 240,
+            img: "/menu/combos/paneer-chilli-and-fried-rice.png"
+        },
+        {
+            name: "Paneer Chilly + Noodles",
+            desc: "Paneer chilly + noodles",
+            price: 240,
+            img: "/menu/combos/paneer-chilli-and-noodles.png"
+        }
+    ]
+},
 
     // ---------------- MAIN COURSE ----------------
     {
         name: "Main Course",
         items: [
-            { name: "Paneer Butter Masala", desc: "500ml", price: 290, img: "/menu/main-course/Paneer-masala.png" },
-            { name: "Matar Paneer", desc: "500ml", price: 290, img: "/menu/main-course/matar paneer.png" },
-            { name: "Palak Paneer", desc: "500ml", price: 290, img: "/menu/main-course/Palak-Paneer.png" },
-            { name: "Shahi Paneer", desc: "500ml", price: 290, img: "/menu/main-course/shahi paneer.png" },
-            { name: "Mix Veg", desc: "500ml", price: 190, img: "/menu/main-course/shahi paneer.png" },
-            { name: "Chana Masala", desc: "500ml", price: 190, img: "/menu/main-course/aloo-chole.png" },
-            { name: "Aloo Dum", desc: "500ml", price: 190, img: "/menu/main-course/aloo dum.png" },
-            { name: "Aloo Jeera", desc: "500ml", price: 162, img: "/menu/main-course/jeera aloo.png" },
-            { name: "Aloo Matar", desc: "500ml", price: 190, img: "/menu/main-course/aloo matar.png" },
-            { name: "Dal Fry", desc: "500ml", price: 162, img: "/menu/main-course/dal fry.png" },
-            { name: "Dal Makhani", desc: "500ml", price: 170, img: "/menu/main-course/dal makhni.png" }
+            { name: "Paneer Butter Masala", desc: "Paneer Butter Masala (400 Gms)", price: 305, img: "/menu/main-course/Paneer-masala.png" },
+            { name: "Matar Paneer", desc: "Mutter Paneer (400 Gms)", price: 305, img: "/menu/main-course/matar paneer.png" },
+            { name: "Palak Paneer", desc: "Palak Paneer (400 Gms)", price: 305, img: "/menu/main-course/Palak-Paneer.png" },
+            { name: "Shahi Paneer", desc: "Shahi Paneer (400 Gms)", price: 305, img: "/menu/main-course/shahi paneer.png" },
+            { name: "Mix Veg", desc: "Mix Veg (400 Gms)", price: 200, img: "/menu/main-course/shahi paneer.png" },
+            { name: "Chana Masala", desc: "Channa Masala (400 Gms)", price: 200, img: "/menu/main-course/aloo-chole.png" },
+            { name: "Aloo Dum", desc: "Aloo Masala Gravy (400 Gms)", price: 200, img: "/menu/main-course/aloo dum.png" },
+            { name: "Aloo Jeera", desc: "Jeera Aloo Dry (400 Gms)", price: 170, img: "/menu/main-course/jeera aloo.png" },
+            { name: "Aloo Matar", desc: "Aloo Mutter (400 Gms)", price: 200, img: "/menu/main-course/aloo matar.png" },
+            { name: "Dal Fry", desc: "Dal Fry (400 Gms)", price: 170, img: "/menu/main-course/dal fry.png" },
+            { name: "Dal Makhani", desc: "Dal Tadka (400 Gms)", price: 200, img: "/menu/main-course/dal makhni.png" }
         ]
     },
 
@@ -257,11 +260,10 @@ export const menuCategories = [
     {
         name: "Roti / Naan / Paratha",
         items: [
-            { name: "Tawa Roti", desc: "1pc", price: 12, img: "/menu/roti/tawa-roti.png" },
-            { name: "Butter Tawa Roti", desc: "1pc", price: 15, img: "/menu/roti/tawa-butter-roti.png" },
+            { name: "Plain Roti", desc: "1pc", price: 13, img: "/menu/roti/tawa-roti.png" },
+            { name: "Tawa Butter Roti", desc: "1pc", price: 16, img: "/menu/roti/tawa-butter-roti.png" },
             { name: "Butter Paratha", desc: "1pc", price: 35, img: "/menu/roti/butter-paratha.png" },
-            { name: "Tawa Paratha", desc: "1pc", price: 24, img: "/menu/roti/tawa-paratha.png" },
-            { name: "Aloo Paratha", desc: "1pc", price: 65, img: "/menu/roti/tawa-roti.png" }
+            { name: "Plain Paratha", desc: "1pc", price: 25, img: "/menu/roti/tawa-paratha.png" },
         ]
     },
 
@@ -269,12 +271,12 @@ export const menuCategories = [
     {
         name: "Rice & Biryani",
         items: [
-            { name: "Plain Rice", desc: "500ml", price: 100, img: "/menu/rice-biryani/plain-rice.png" },
-            { name: "Jeera Rice", desc: "500ml", price: 129, img: "/menu/rice-biryani/jeera-rice.png" },
-            { name: "Veg Pulao", desc: "500ml", price: 162, img: "/menu/rice-biryani/veg-pulao.png" },
-            { name: "Masala Khichdi", desc: "500ml", price: 180, img: "/menu/rice-biryani/masala-khichdi.png" },
+            { name: "Plain Rice", desc: "300gm", price: 105, img: "/menu/rice-biryani/plain-rice.png" },
+            { name: "Jeera Rice", desc: "300gm", price: 135, img: "/menu/rice-biryani/jeera-rice.png" },
+            { name: "Veg Pulao", desc: "300gm with curd 75ml", price: 170, img: "/menu/rice-biryani/veg-pulao.png" },
+            { name: "Dal Khichadi Masala", desc: "Dal Khichadi Masala (300gm) with curd 75ml", price: 180, img: "/menu/rice-biryani/masala-khichdi.png" },
             { name: "Plain Khichdi", desc: "500ml", price: 160, img: "/menu/rice-biryani/plain-khichdi.png" },
-            { name: "Veg Biryani With Raita", desc: "500ml", price: 165, img: "/menu/rice-biryani/veg-biryani-with-raita.png" }
+            { name: "Veg Biryani", desc: "300gm with 75ml curd", price: 170, img: "/menu/rice-biryani/veg-biryani-with-raita.png" }
         ]
     },
 
@@ -282,8 +284,8 @@ export const menuCategories = [
     {
         name: "Curd & Raita",
         items: [
-            { name: "Curd", desc: "250ml", price: 62, img: "/menu/curd-raita/plain curd.png" },
-            { name: "Veg Raita", desc: "250ml", price: 80, img: "/menu/curd-raita/Veg raita.png" },
+            { name: "Plain Curd", desc: "400gm", price: 65, img: "/menu/curd-raita/plain curd.png" },
+            { name: "Veg Raita", desc: "400gm", price: 85, img: "/menu/curd-raita/Veg raita.png" },
             { name: "Butter Milk", desc: "500ml", price: 45, img: "/menu/curd-raita/butter milk.png" }
         ]
     },
@@ -305,32 +307,52 @@ export const menuCategories = [
         name: "Chinese",
         items: [
             { name: "Veg Noodles", desc: "500ml", price: 140, img: "/menu/chinese/veg-noodles.png" },
-            { name: "Veg Manchurian", desc: "500ml", price: 200, img: "/menu/chinese/veg-manchurian.png" },
-            { name: "Chilli Paneer", desc: "500ml", price: 300, img: "/menu/chinese/chilly-paneer.png" },
-            { name: "Veg Fried Rice", desc: "500ml", price: 167, img: "/menu/chinese/veg-fried-rice.png" },
-            { name: "Manchurian Fried Rice", desc: "500ml", price: 248, img: "/menu/chinese/manchurian-fried-rice.png" },
-            { name: "Paneer Fried Rice", desc: "500ml", price: 248, img: "/menu/chinese/paneer-fried-rice.png" }
+            { name: "Veg Manchurian", desc: "400gm", price: 210, img: "/menu/chinese/veg-manchurian.png" },
+            { name: "Chilli Paneer", desc: "400gm", price: 315, img: "/menu/chinese/chilly-paneer.png" },
+            { name: "Veg Fried Rice", desc: "400gm", price: 175, img: "/menu/chinese/veg-fried-rice.png" },
+            { name: "Manchurian Fried Rice", desc: "400gm", price: 260, img: "/menu/chinese/manchurian-fried-rice.png" },
+            { name: "Paneer Fried Rice", desc: "400gm", price: 260, img: "/menu/chinese/paneer-fried-rice.png" }
         ]
     },
 
-    // ---------------- SANDWICH & BURGER ----------------
-    {
-        name: "Sandwich & Burgers",
-        items: [
-            { name: "Veg Grill Sandwich", desc: "3 slice", price: 119, img: "/menu/sandwich-burger/Veg Grill Sandwich.png" },
-            { name: "Aloo Masala Sandwich", desc: "3 slice", price: 100, img: "/menu/sandwich-burger/Aloo masala sandwich.png" },
-            { name: "Veg Cheese Grill Sandwich", desc: "3 slice", price: 119, img: "/menu/sandwich-burger/Veg cheese grill sandwich.png" },
-            { name: "Aloo Tikki Veg Burger", desc: "1pc", price: 100, img: "/menu/sandwich-burger/Aloo tiki veg burger.png" }
-        ]
-    },
+  // ---------------- SANDWICH & BURGER ----------------
+{
+    name: "Sandwich & Burgers",
+    items: [
+        {
+            name: "Veg Grill Sandwich",
+            desc: "Veg. Sandwich Grill (3 Slice)",
+            price: 105,
+            img: "/menu/sandwich-burger/Veg Grill Sandwich.png"
+        },
+        {
+            name: "Aloo Masala Sandwich",
+            desc: "Aloo Masala Sandwich Grill (3 Slice)",
+            price: 105,
+            img: "/menu/sandwich-burger/Aloo masala sandwich.png"
+        },
+        {
+            name: "Veg Cheese Grill Sandwich",
+            desc: "Veg. Cheese Grill Sandwich (3 Slice)",
+            price: 125,
+            img: "/menu/sandwich-burger/Veg cheese grill sandwich.png"
+        },
+        {
+            name: "Aloo Tikki Veg Burger",
+            desc: "Aloo Tikki Veg. Burger (1 Pcs.)",
+            price: 105,
+            img: "/menu/sandwich-burger/Aloo tiki veg burger.png"
+        }
+    ]
+},
 
     // ---------------- PIZZA ----------------
     {
         name: "Pizza",
         items: [
-            { name: "Veg Paneer Cheese Pizza", desc: "8 inches", price: 248, img: "/menu/pizza-burger/Veg-Paneer-Cheese-Pizza.png" },
-            { name: "Veg Cheese Pizza", desc: "8 inches", price: 229, img: "/menu/pizza-burger/Veg-Cheese-Pizza.png" },
-            { name: "Onion Capsicum Cheese Pizza", desc: "8 inches", price: 229, img: "/menu/pizza-burger/Onion-Capsicum-Cheese-Pizza.png" }
+            { name: "Veg Paneer Cheese Pizza", desc: "8 inches", price: 260, img: "/menu/pizza-burger/Veg-Paneer-Cheese-Pizza.png" },
+            { name: "Veg Cheese Pizza", desc: "8 inches", price: 240, img: "/menu/pizza-burger/Veg-Cheese-Pizza.png" },
+            { name: "Onion Capsicum Cheese Pizza", desc: "8 inches", price: 240, img: "/menu/pizza-burger/Onion-Capsicum-Cheese-Pizza.png" }
         ]
     },
 
@@ -339,9 +361,9 @@ export const menuCategories = [
         name: "Sweet · Papad · Salad",
         items: [
             { name: "Rasagulla", desc: "2pc", price: 45, img: "/menu/salad-papad/Rasagulla.png" },
-            { name: "Green Salad", desc: "1pc", price: 58, img: "/menu/salad-papad/Green salad.png" },
-            { name: "Roasted Papad", desc: "1pc", price: 19, img: "/menu/salad-papad/Roasted Papad.png" },
-            { name: "Papad Fry", desc: "1pc", price: 29, img: "/menu/salad-papad/Fry Papad.png" }
+            { name: "Green Salad", desc: "300gm", price: 60, img: "/menu/salad-papad/Green salad.png" },
+            { name: "Roasted Papad", desc: "1pc", price: 20, img: "/menu/salad-papad/Roasted Papad.png" },
+            { name: "Fry Papad", desc: "1pc", price: 30, img: "/menu/salad-papad/Fry Papad.png" }
         ]
     },
 
